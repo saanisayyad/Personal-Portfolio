@@ -7,7 +7,7 @@ import {
 
 import protect from "../middleware/authMiddleware.js";
 import upload from "../middleware/upload.js";
-import uploadResume from "../middleware/resumeUpload.js"
+
 const router = express.Router();
 
 // PUBLIC

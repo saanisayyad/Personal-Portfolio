@@ -52,6 +52,9 @@ export const updateProfile =
         
         instagram:
           req.body.instagram,
+
+        resume:
+          req.body.resume,
       }
 
       // PROFILE IMAGE
@@ -83,44 +86,6 @@ export const updateProfile =
           req.files
             .profileImage[0]
             .filename
-      }
-
-      // RESUME PDF
-      if (
-        req.files?.resume
-      ) {
-
-        // Delete old resume
-        if (
-          existingProfile?.
-          resume
-        ) {
-
-          const oldResumePath =
-            path.join(
-              process.cwd(),
-              existingProfile
-                .resume
-            )
-
-          if (
-            fs.existsSync(
-              oldResumePath
-            )
-          ) {
-
-            fs.unlinkSync(
-              oldResumePath
-            )
-          }
-        }
-
-        updatedData.resume =
-          `/uploads/resumes/${
-            req.files
-              .resume[0]
-              .filename
-          }`
       }
 
       const updatedProfile =

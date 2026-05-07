@@ -58,7 +58,7 @@ const Navbar = () => {
           >
 
             <h1 className="text-2xl md:text-3xl font-black tracking-tight bg-gradient-to-r from-white via-pink-300 to-orange-300 bg-clip-text text-transparent">
-              MDS.
+              MDS
             </h1>
 
             <div className="absolute -bottom-1 left-0 w-0 h-[2px] bg-gradient-to-r from-pink-500 to-orange-500 transition-all duration-300 group-hover:w-full" />

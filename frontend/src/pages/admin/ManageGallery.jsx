@@ -57,7 +57,7 @@ const ManageGallery = () => {
   };
 
   const handleDelete = async (id) => {
-    if (!window.confirm("Delete this masterpiece?")) return;
+    if (!window.confirm("Delete this image?")) return;
     try {
       await deleteGalleryImage(id);
       setGallery(gallery.filter(item => item._id !== id));

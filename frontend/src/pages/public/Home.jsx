@@ -234,7 +234,7 @@ const Home = () => {
               {profile.resume && (
 
                 <a
-                  href={`http://localhost:5000${profile.resume}`}
+                  href={profile.resume}
                   target="_blank"
                   rel="noreferrer"
                   className="group inline-flex items-center justify-center gap-3 px-7 py-4 rounded-full bg-gradient-to-r from-pink-500 to-orange-500 font-semibold hover:scale-105 transition-all duration-300 shadow-lg shadow-pink-500/20"
@@ -283,9 +283,9 @@ const Home = () => {
                 className="relative object-cover rounded-full border border-white/10 shadow-2xl
                 w-44 h-44
                 sm:w-56 sm:h-56
-                md:w-[300px] md:h-[300px]
-                lg:w-[360px] lg:h-[360px]
-                xl:w-[420px] xl:h-[420px]"
+                md:w-75 md:h-75
+                lg:w-90 lg:h-90
+                xl:w-105 xl:h-105"
               />
 
             </div>
