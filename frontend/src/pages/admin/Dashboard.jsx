@@ -6,6 +6,14 @@ const Dashboard = () => {
       <h1 className="text-5xl font-bold mb-8">Dashboard</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <Link to="/">
+          <div className="bg-zinc-900 p-8 rounded-2xl">
+            <h2 className="text-2xl font-semibold mb-3">Home</h2>
+
+            <p className="text-gray-400">View your portfolio</p>
+          </div>
+        </Link>
+
         <Link to="/admin/profile">
           <div className="bg-zinc-900 p-8 rounded-2xl">
             <h2 className="text-2xl font-semibold mb-3">Profile</h2>
