@@ -14,7 +14,7 @@ const router = express.Router();
 router.get("/", getImages);
 
 // PROTECTED
-router.post("/", protect, upload.single("image"), uploadImage);
+router.post("/", protect, upload.array("image", 20), uploadImage);
 router.delete("/:id", protect, deleteImage);
 
 export default router;

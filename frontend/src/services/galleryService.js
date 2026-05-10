@@ -1,59 +1,38 @@
-import API from "./api"
+import API from "./api";
 
-export const getGalleryImages =
-  async () => {
+export const getGalleryImages = async () => {
+  const res = await API.get("/gallery");
+  return res.data;
+};
 
-    const res =
-      await API.get(
-        "/gallery"
-      )
+export const uploadGalleryImage = async (formData) => {
+  const token = localStorage.getItem("token");
 
-    return res.data
-  }
+  const res = await API.post(
+    "/gallery",
+    formData,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "multipart/form-data",
+      },
+    }
+  );
 
-export const uploadGalleryImage =
-  async (data) => {
+  return res.data;
+};
 
-    const token =
-      localStorage.getItem(
-        "token"
-      )
+export const deleteGalleryImage = async (id) => {
+  const token = localStorage.getItem("token");
 
-    const res =
-      await API.post(
-        "/gallery",
-        data,
-        {
-          headers: {
-            Authorization:
-              `Bearer ${token}`,
-            "Content-Type":
-              "multipart/form-data",
-          },
-        }
-      )
+  const res = await API.delete(
+    `/gallery/${id}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
 
-    return res.data
-  }
-
-export const deleteGalleryImage =
-  async (id) => {
-
-    const token =
-      localStorage.getItem(
-        "token"
-      )
-
-    const res =
-      await API.delete(
-        `/gallery/${id}`,
-        {
-          headers: {
-            Authorization:
-              `Bearer ${token}`,
-          },
-        }
-      )
-
-    return res.data
-  }
+  return res.data;
+};
