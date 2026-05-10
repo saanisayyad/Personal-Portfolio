@@ -46,8 +46,8 @@ const Home = () => {
 
   return (
     <section className="relative min-h-screen overflow-hidden text-white">
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-screen flex items-center py-28 md:py-20">
-        <div className="grid lg:grid-cols-2 gap-12 md:gap-16 lg:gap-20 xl:gap-28 items-center w-full">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-screen flex items-center py-16 sm:py-20 md:py-24">
+        <div className="grid lg:grid-cols-2 gap-10 md:gap-14 lg:gap-20 items-center w-full">
           {/* LEFT CONTENT */}
           <motion.div
             initial={{
@@ -216,16 +216,16 @@ const Home = () => {
 
               {/* Ring */}
               <div className="absolute inset-0 rounded-full border border-white/10 scale-110" />
-              
+
               {/* Image */}
               <TiltedCard
                 imageSrc={profile.profileImage}
                 altText={profile.name}
                 captionText={profile.name}
-                containerHeight="420px"
-                containerWidth="420px"
-                imageHeight="420px"
-                imageWidth="420px"
+                containerHeight="min(80vw, 420px)"
+                containerWidth="min(80vw, 420px)"
+                imageHeight="min(80vw, 420px)"
+                imageWidth="min(80vw, 420px)"
                 rotateAmplitude={12}
                 scaleOnHover={1.05}
                 showMobileWarning={false}
