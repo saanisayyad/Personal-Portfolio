@@ -13,16 +13,9 @@ export const uploadImage = async (req, res) => {
     const uploadedImages = [];
 
     for (const file of req.files) {
-      // Generate title from file name
-      const title = file.originalname
-        .replace(/\.[^/.]+$/, "")
-        .replace(/[-_]/g, " ")
-        .replace(/\b\w/g, (char) => char.toUpperCase());
-
       const image = await Gallery.create({
         imageUrl: file.path,
         public_id: file.filename,
-        title,
       });
 
       uploadedImages.push(image);
@@ -30,7 +23,6 @@ export const uploadImage = async (req, res) => {
 
     res.status(201).json(uploadedImages);
   } catch (error) {
-    console.error(error);
     res.status(500).json({
       message: error.message,
     });
@@ -55,7 +47,9 @@ export const getImages = async (req, res) => {
 // DELETE IMAGE
 export const deleteImage = async (req, res) => {
   try {
-    const image = await Gallery.findById(req.params.id);
+    const image = await Gallery.findById(
+      req.params.id
+    );
 
     if (!image) {
       return res.status(404).json({
@@ -64,7 +58,9 @@ export const deleteImage = async (req, res) => {
     }
 
     if (image.public_id) {
-      await cloudinary.uploader.destroy(image.public_id);
+      await cloudinary.uploader.destroy(
+        image.public_id
+      );
     }
 
     await image.deleteOne();
@@ -73,7 +69,6 @@ export const deleteImage = async (req, res) => {
       message: "Image deleted",
     });
   } catch (error) {
-    console.error(error);
     res.status(500).json({
       message: error.message,
     });

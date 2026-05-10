@@ -8,9 +8,7 @@ const gallerySchema = new mongoose.Schema({
   public_id: {
     type: String
   },
-  title: {
-    type: String
-  }
+  
 }, { timestamps: true });
 
 export default mongoose.model("Gallery", gallerySchema);

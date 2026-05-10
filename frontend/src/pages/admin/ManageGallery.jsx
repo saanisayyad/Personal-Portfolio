@@ -215,11 +215,9 @@ const ManageGallery = () => {
                     </div>
                   </div>
 
-                  <div className="p-5">
-                    <h2 className="font-bold text-lg truncate">
-                      {item.title}
-                    </h2>
-                  </div>
+                  <div className="p-4 text-sm text-zinc-500">
+  Uploaded successfully
+</div>
                 </div>
               ))}
             </div>
