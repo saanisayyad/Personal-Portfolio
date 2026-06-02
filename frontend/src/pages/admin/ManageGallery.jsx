@@ -12,6 +12,7 @@ import {
   uploadGalleryImage,
   deleteGalleryImage,
 } from "../../services/galleryService";
+import ProgressiveImage from "../../components/ui/ProgressiveImage";
 
 const ManageGallery = () => {
   const [images, setImages] = useState([]);
@@ -197,8 +198,13 @@ const ManageGallery = () => {
                   className="group bg-zinc-900/40 border border-zinc-800/50 rounded-3xl overflow-hidden"
                 >
                   <div className="relative aspect-[16/10] overflow-hidden">
-                    <img
-                      src={item.imageUrl}
+                    <ProgressiveImage
+                      src={
+                              item.imageUrl.replace(
+                                "/upload/",
+                                "/upload/f_auto,q_auto,w_800/"
+                              )
+                            }
                       alt={item.title}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
