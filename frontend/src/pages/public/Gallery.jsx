@@ -222,7 +222,10 @@ const Gallery = () => {
                         <div className="overflow-hidden rounded-[2rem]">
                           <ProgressiveImage
                             src={
-                              item.imageUrl
+                              item.imageUrl.replace(
+                                "/upload/",
+                                "/upload/f_auto,q_auto,w_800/"
+                              )
                             }
                             alt={
                               item.title

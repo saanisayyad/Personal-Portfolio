@@ -34,12 +34,12 @@ const Navbar = () => {
       path: "/qualifications",
     },
     {
-      name: "Gallery",
-      path: "/gallery",
-    },
-    {
       name: "Notes",
       path: "/notes",
+    },
+    {
+      name: "Gallery",
+      path: "/gallery",
     },
   ]
 
