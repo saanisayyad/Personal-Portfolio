@@ -19,12 +19,12 @@ import {
 } from "lucide-react"
 
 import {
-  getNoteById,
+  getNoteBySlug,
 } from "../../services/noteService"
 
 const NoteDetails = () => {
 
-  const { id } =
+  const { slug } =
     useParams()
 
   const [note, setNote] =
@@ -40,7 +40,7 @@ const NoteDetails = () => {
       try {
 
         const data =
-          await getNoteById(id)
+          await getNoteBySlug(slug)
 
         setNote(data)
 

@@ -27,5 +27,4 @@ const storage =
 
 const upload =
   multer({ storage })
-
 export default upload

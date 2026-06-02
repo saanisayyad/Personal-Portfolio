@@ -145,7 +145,7 @@ const Notes = () => {
                 >
 
                   <Link
-                    to={`/notes/${note._id}`}
+                    to={`/notes/${note.slug}`}
                   >
 
                     <GlassCard className="h-full p-7">

@@ -11,12 +11,12 @@ export const getNotes =
     return res.data
   }
 
-export const getNoteById =
-  async (id) => {
+export const getNoteBySlug =
+  async (slug) => {
 
     const res =
       await API.get(
-        `/notes/${id}`
+        `/notes/${slug}`
       )
 
     return res.data

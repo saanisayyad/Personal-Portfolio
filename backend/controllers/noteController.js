@@ -1,12 +1,28 @@
 import Note from "../models/Note.js";
+import slugify from "slugify";
 
 // CREATE NOTE
 export const createNote = async (req, res) => {
   try {
-    const note = await Note.create(req.body);
+    const { title, content } = req.body;
+
+    const slug = slugify(title, {
+      lower: true,
+      strict: true,
+      trim: true,
+    });
+
+    const note = await Note.create({
+      title,
+      content,
+      slug,
+    });
+
     res.status(201).json(note);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({
+      message: error.message,
+    });
   }
 };
 
@@ -21,29 +37,66 @@ export const getNotes = async (req, res) => {
 };
 
 // GET SINGLE NOTE
-export const getNoteById = async (req, res) => {
+export const getNoteBySlug = async (
+  req,
+  res
+) => {
   try {
-    const note = await Note.findById(req.params.id);
+    const note = await Note.findOne({
+      slug: req.params.slug,
+    });
+
+    if (!note) {
+      return res.status(404).json({
+        message: "Note not found",
+      });
+    }
+
     res.json(note);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({
+      message: error.message,
+    });
   }
 };
 
 // UPDATE NOTE
-export const updateNote = async (req, res) => {
+export const updateNote = async (
+  req,
+  res
+) => {
   try {
-    const note = await Note.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true }
-    );
+    const { title, content } =
+      req.body;
+
+    const updatedData = {
+      title,
+      content,
+    };
+
+    if (title) {
+      updatedData.slug =
+        slugify(title, {
+          lower: true,
+          strict: true,
+          trim: true,
+        });
+    }
+
+    const note =
+      await Note.findByIdAndUpdate(
+        req.params.id,
+        updatedData,
+        { new: true }
+      );
+
     res.json(note);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({
+      message: error.message,
+    });
   }
 };
-
 // DELETE NOTE
 export const deleteNote = async (req, res) => {
   try {

@@ -40,7 +40,7 @@ const App = () => {
 
           <Route path="notes" element={<Notes />} />
 
-          <Route path="notes/:id" element={<NoteDetails />} />
+          <Route path="notes/:slug" element={<NoteDetails />} />
         </Route>
 
         {/* Admin Routes */}
