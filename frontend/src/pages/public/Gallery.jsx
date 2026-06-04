@@ -37,6 +37,28 @@ const Gallery = () => {
     fetchImages();
   }, []);
 
+  useEffect(() => {
+  if (!selectedImage) return;
+
+  const handleEsc = (e) => {
+    if (e.key === "Escape") {
+      setSelectedImage(null);
+    }
+  };
+
+  window.addEventListener(
+    "keydown",
+    handleEsc
+  );
+
+  return () => {
+    window.removeEventListener(
+      "keydown",
+      handleEsc
+    );
+  };
+}, [selectedImage]);
+
   return (
     <section className="min-h-screen text-white py-28 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
@@ -68,99 +90,7 @@ const Gallery = () => {
           </div>
         ) : (
           <>
-            {/* MOBILE LAYOUT */}
-            <div className="block sm:hidden">
-              <div className="grid grid-cols-2 gap-3 auto-rows-[140px]">
-                {images.map((item, index) => {
-                  let cardClass = "col-span-1 row-span-1";
-
-                  const patternIndex = index % 6;
-
-                  if (patternIndex === 0) {
-                    cardClass = "col-span-2 row-span-2";
-                  } else if (patternIndex === 3 || patternIndex === 4) {
-                    cardClass = "col-span-1 row-span-2";
-                  } else if (patternIndex === 5) {
-                    cardClass = "col-span-2 row-span-1";
-                  }
-
-                  return (
-                    <motion.div
-                      key={item._id}
-                      initial={{
-                        opacity: 0,
-                        y: 20,
-                      }}
-                      whileInView={{
-                        opacity: 1,
-                        y: 0,
-                      }}
-                      viewport={{
-                        once: true,
-                      }}
-                      transition={{
-                        duration: 0.5,
-                        delay: index * 0.04,
-                      }}
-                      className={cardClass}
-                    >
-                      <div
-                        onClick={() => setSelectedImage(item)}
-                        className="
-                          relative
-                          w-full
-                          h-full
-                          rounded-3xl
-                          overflow-hidden
-                          cursor-pointer
-                          group
-                          shadow-xl
-                          active:scale-[0.98]
-                          transition-transform
-                          duration-300
-                        "
-                      >
-                        <ProgressiveImage
-                          src={item.imageUrl}
-                          alt={item.title}
-                          className="
-                            w-full
-                            h-full
-                            object-cover
-                            transition-transform
-                            duration-700
-                            group-hover:scale-110
-                          "
-                        />
-
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-
-                        {patternIndex === 0 && (
-                          <div className="absolute top-3 left-3">
-                            <span className="px-3 py-1 rounded-full bg-cyan-500/90 text-white text-[10px] font-semibold uppercase tracking-wider">
-                              Featured
-                            </span>
-                          </div>
-                        )}
-
-                        <div className="absolute bottom-0 left-0 right-0 p-3">
-                          <p
-                            className={`text-white font-semibold line-clamp-2 ${
-                              patternIndex === 0 ? "text-lg" : "text-xs"
-                            }`}
-                          >
-                            {item.title}
-                          </p>
-                        </div>
-                      </div>
-                    </motion.div>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* DESKTOP LAYOUT */}
-            <div className="hidden sm:block sm:columns-2 lg:columns-3 gap-5 space-y-5">
+            <div className="columns-3 gap-5 space-y-5">
               {images.map((item, index) => (
                 <motion.div
                   key={item._id}
@@ -236,6 +166,7 @@ const Gallery = () => {
             exit={{
               opacity: 0,
             }}
+              onClick={() => setSelectedImage(null)}
             className="fixed inset-0 z-50 bg-black/90 backdrop-blur-xl flex items-center justify-center p-4"
           >
             <button
@@ -262,6 +193,7 @@ const Gallery = () => {
                 type: "spring",
                 damping: 20,
               }}
+              onClick={(e) => e.stopPropagation()}
               className="
   w-full
   max-w-7xl

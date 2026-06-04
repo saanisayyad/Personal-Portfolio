@@ -4,7 +4,6 @@ import MainLayout from "./layouts/MainLayout";
 import ProtectedRoute from "./components/ProtectedRoutes";
 // Public Pages
 import Home from "./pages/public/Home";
-import About from "./pages/public/About";
 import Gallery from "./pages/public/Gallery";
 import Notes from "./pages/public/Notes";
 import NoteDetails from "./pages/public/NoteDetails";
@@ -22,6 +21,9 @@ import ManageLanguages from "./pages/admin/ManageLanguages";
 import ManageSkills from "./pages/admin/ManageSkills";
 import ManageHobbies from "./pages/admin/ManageHobbies";
 import ScrollToTop from "./components/utils/ScrollToTop";
+import Projects from "./pages/public/Projects";
+import ManageProjects from "./pages/admin/ManageProjects";
+import ProjectDetails from "./pages/public/ProjectDetails";
 
 const App = () => {
   return (
@@ -32,7 +34,9 @@ const App = () => {
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Home />} />
 
-          <Route path="about" element={<About />} />
+          <Route path="projects" element={<Projects />} />
+
+          <Route path="projects/:slug" element={<ProjectDetails />} />
 
           <Route path="/qualifications" element={<Qualifications />} />
 
@@ -57,6 +61,8 @@ const App = () => {
           <Route path="dashboard" element={<Dashboard />} />
 
           <Route path="profile" element={<ManageProfile />} />
+          
+          <Route path="projects" element={<ManageProjects />} />
 
           <Route path="education" element={<ManageEducation />} />
 

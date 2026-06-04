@@ -12,6 +12,7 @@ import educationRoutes from "./routes/educationRoutes.js";
 import skillRoutes from "./routes/skillRoutes.js";
 import languageRoutes from "./routes/languageRoutes.js";
 import hobbyRoutes from "./routes/hobbyRoutes.js";
+import projectRoutes from "./routes/projectRoutes.js";
 
 import path from "path";
 
@@ -55,6 +56,7 @@ app.use("/api/education", educationRoutes);
 app.use("/api/languages", languageRoutes);
 app.use("/api/skills", skillRoutes);
 app.use("/api/hobbies", hobbyRoutes);
+app.use("/api/projects", projectRoutes);
 app.use("/uploads", express.static("uploads"));
 // test route
 app.get("/", (req, res) => {

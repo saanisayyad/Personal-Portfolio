@@ -22,6 +22,14 @@ const Dashboard = () => {
           </div>
         </Link>
 
+        <Link to="/admin/projects">
+          <div className="bg-zinc-900 p-8 rounded-2xl">
+            <h2 className="text-2xl font-semibold mb-3">Projects</h2>
+
+            <p className="text-gray-400">Create and manage projects</p>
+          </div>
+        </Link>
+
         <Link to="/admin/gallery">
           <div className="bg-zinc-900 p-8 rounded-2xl">
             <h2 className="text-2xl font-semibold mb-3">Gallery</h2>
