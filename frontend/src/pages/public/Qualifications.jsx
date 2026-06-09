@@ -265,7 +265,7 @@ const Qualifications = () => {
 
           </p>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 text-justify">
 
             {skills.map(
               (skill, index) => (
@@ -441,7 +441,7 @@ const Qualifications = () => {
 
           </p>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 text-justify">
 
             {hobbies.map(
               (hobby, index) => (
