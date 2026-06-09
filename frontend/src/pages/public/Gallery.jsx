@@ -90,7 +90,7 @@ const Gallery = () => {
           </div>
         ) : (
           <>
-            <div className="columns-3 gap-5 space-y-5">
+            <div className="columns-2 lg:columns-3 gap-5 space-y-5">
               {images.map((item, index) => (
                 <motion.div
                   key={item._id}
