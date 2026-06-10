@@ -63,7 +63,9 @@ const Footer = () => {
 
   return (
 
-    <footer className="
+    <footer
+    id = "footer"
+    className="
     relative
     mt-10
     border-t border-zinc-800

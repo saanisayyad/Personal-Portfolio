@@ -24,6 +24,7 @@ import ScrollToTop from "./components/utils/ScrollToTop";
 import Projects from "./pages/public/Projects";
 import ManageProjects from "./pages/admin/ManageProjects";
 import ProjectDetails from "./pages/public/ProjectDetails";
+import ChatBot from "./components/ChatBot";
 
 const App = () => {
   return (
@@ -77,6 +78,7 @@ const App = () => {
           <Route path="notes" element={<ManageNotes />} />
         </Route>
       </Routes>
+      <ChatBot />
     </BrowserRouter>
   );
 };
