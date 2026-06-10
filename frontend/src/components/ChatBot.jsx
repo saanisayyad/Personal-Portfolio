@@ -136,7 +136,7 @@ const ChatBot = () => {
     whileTap={{ scale: 0.9 }}
     onClick={() => setIsOpen(true)}
     className="
-      fixed bottom-5 right-5 z-50
+      fixed bottom-7 right-5 z-50
       h-14 w-14
       rounded-full
       bg-gradient-to-r

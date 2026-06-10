@@ -140,7 +140,7 @@ const Footer = () => {
           </div>
 
           {/* RIGHT */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 md:pr-15">
 
             {profile?.github && (
 
