@@ -43,7 +43,7 @@ router.post("/", async (req, res) => {
 
     const hobbies = await Hobby.find();
 
-    const blogs = await Note.find()
+    const notes = await Note.find()
       .select("title slug");
 
     const portfolioContext = `
@@ -65,8 +65,8 @@ ${JSON.stringify(languages)}
 HOBBIES:
 ${JSON.stringify(hobbies)}
 
-BLOGS:
-${JSON.stringify(blogs)}
+NOTES:
+${JSON.stringify(notes)}
 `;
 
     const completion =

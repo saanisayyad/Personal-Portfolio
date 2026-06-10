@@ -16,7 +16,7 @@ const ChatBot = () => {
     {
       role: "assistant",
       content:
-        "👋 Hi! I'm Mohammad Saani's AI Assistant.\n\nAsk me about my projects, skills, education, experience, blogs, or contact information.",
+        "👋 Hi! I'm Mohammad Saani's AI Assistant.\n\nAsk me about my projects, skills, education, experience, notes, or contact information.",
     },
   ]);
 
@@ -120,7 +120,7 @@ const ChatBot = () => {
       {
         role: "assistant",
         content:
-          "👋 Hi! I'm Mohammad Saani's AI Assistant.\n\nAsk me about my projects, skills, education, experience, blogs, or contact information.",
+          "👋 Hi! I'm Mohammad Saani's AI Assistant.\n\nAsk me about my projects, skills, education, experience, notes, or contact information.",
       },
     ]);
   };
