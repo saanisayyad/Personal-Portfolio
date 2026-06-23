@@ -37,7 +37,20 @@ const Home = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen bg-[#09090b]">
-        <div className="w-14 h-14 border-4 border-t-pink-500 border-zinc-800 rounded-full animate-spin" />
+        <div className="text-center relative">
+          {/* Glow */}
+          <div className="absolute inset-0 blur-3xl bg-gradient-to-r from-pink-500/20 to-orange-500/20 rounded-full scale-150" />
+
+          <p className="relative text-4xl md:text-6xl font-black tracking-tight bg-gradient-to-r from-white via-pink-200 to-orange-300 bg-clip-text text-transparent">
+            Mohammadsaani Sayyad
+          </p>
+
+          <div className="w-32 h-[2px] mx-auto mt-4 bg-gradient-to-r from-transparent via-pink-500 to-transparent" />
+
+          <p className="mt-5 text-zinc-400 text-sm md:text-base tracking-[0.4em] uppercase animate-pulse">
+            Loading Portfolio...
+          </p>
+        </div>
       </div>
     );
   }
