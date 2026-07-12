@@ -29,7 +29,6 @@ const ChatBot = () => {
     "What projects have you built?",
     "What skills do you have?",
     "What is your education?",
-    "How can I contact you?",
   ];
 
   useEffect(() => {

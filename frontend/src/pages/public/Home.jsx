@@ -187,7 +187,7 @@ const Home = () => {
                   href={profile.linkedin}
                   target="_blank"
                   rel="noreferrer"
-                  className="group inline-flex items-center justify-center gap-3 px-7 py-4 rounded-full border border-zinc-700 bg-zinc-900/70 hover:bg-zinc-800 transition-all duration-300"
+                  className="group inline-flex items-center justify-center gap-3 px-7 py-4 rounded-full border border-zinc-700 bg-zinc-900/70 hover:scale-105 transition-all duration-300"
                 >
                   <FaLinkedin size={20} className="text-pink-400" />
                   LinkedIn

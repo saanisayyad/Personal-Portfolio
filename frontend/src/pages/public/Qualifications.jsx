@@ -107,20 +107,6 @@ const Qualifications = () => {
 
         {loading ? (
           <div className="space-y-20">
-            {/* Education Skeleton */}
-            <section>
-              <div className="h-8 w-48 bg-zinc-800 rounded animate-pulse mb-6" />
-
-              <div className="space-y-6">
-                {[...Array(3)].map((_, i) => (
-                  <div
-                    key={i}
-                    className="h-40 rounded-3xl border border-zinc-800 bg-zinc-900/40 animate-pulse"
-                  />
-                ))}
-              </div>
-            </section>
-
             {/* Skills Skeleton */}
             <section>
               <div className="h-8 w-32 bg-zinc-800 rounded animate-pulse mb-6" />
@@ -130,6 +116,20 @@ const Qualifications = () => {
                   <div
                     key={i}
                     className="h-72 rounded-3xl border border-zinc-800 bg-zinc-900/40 animate-pulse"
+                  />
+                ))}
+              </div>
+            </section>
+
+            {/* Education Skeleton */}
+            <section>
+              <div className="h-8 w-48 bg-zinc-800 rounded animate-pulse mb-6" />
+
+              <div className="space-y-6">
+                {[...Array(3)].map((_, i) => (
+                  <div
+                    key={i}
+                    className="h-40 rounded-3xl border border-zinc-800 bg-zinc-900/40 animate-pulse"
                   />
                 ))}
               </div>
@@ -165,6 +165,54 @@ const Qualifications = () => {
           </div>
         ) : (
           <>
+            {/* SKILLS */}
+            <section className="mb-32">
+              <SectionTitle title="Skills" />
+
+              <p className="text-zinc-500 mb-14 max-w-2xl leading-relaxed">
+                Technologies and tools I have used.
+              </p>
+
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 text-justify">
+                {skills.map((skill, index) => (
+                  <motion.div
+                    key={skill._id}
+                    initial={{
+                      opacity: 0,
+                      y: 40,
+                    }}
+                    whileInView={{
+                      opacity: 1,
+                      y: 0,
+                    }}
+                    viewport={{
+                      once: true,
+                    }}
+                    transition={{
+                      duration: 0.7,
+                      delay: index * 0.08,
+                    }}
+                  >
+                    <GlassCard className={cardStyles}>
+                      <div className={`${iconStyles} text-blue-400`}>
+                        <Code2 size={24} />
+                      </div>
+
+                      <h3 className="text-2xl font-bold text-white mb-4">
+                        {skill.name}
+                      </h3>
+
+                      <div className="w-16 h-1 rounded-full bg-blue-500/50 mb-5" />
+
+                      <p className="text-zinc-400 leading-relaxed text-sm mt-auto">
+                        {skill.description}
+                      </p>
+                    </GlassCard>
+                  </motion.div>
+                ))}
+              </div>
+            </section>
+            
             {/* EDUCATION */}
             <section className="mb-32">
               <SectionTitle title="Education" />
@@ -214,54 +262,6 @@ const Qualifications = () => {
                           {item.score}
                         </span>
                       </div>
-                    </GlassCard>
-                  </motion.div>
-                ))}
-              </div>
-            </section>
-
-            {/* SKILLS */}
-            <section className="mb-32">
-              <SectionTitle title="Skills" />
-
-              <p className="text-zinc-500 mb-14 max-w-2xl leading-relaxed">
-                Technologies and tools I have used.
-              </p>
-
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 text-justify">
-                {skills.map((skill, index) => (
-                  <motion.div
-                    key={skill._id}
-                    initial={{
-                      opacity: 0,
-                      y: 40,
-                    }}
-                    whileInView={{
-                      opacity: 1,
-                      y: 0,
-                    }}
-                    viewport={{
-                      once: true,
-                    }}
-                    transition={{
-                      duration: 0.7,
-                      delay: index * 0.08,
-                    }}
-                  >
-                    <GlassCard className={cardStyles}>
-                      <div className={`${iconStyles} text-blue-400`}>
-                        <Code2 size={24} />
-                      </div>
-
-                      <h3 className="text-2xl font-bold text-white mb-4">
-                        {skill.name}
-                      </h3>
-
-                      <div className="w-16 h-1 rounded-full bg-blue-500/50 mb-5" />
-
-                      <p className="text-zinc-400 leading-relaxed text-sm mt-auto">
-                        {skill.description}
-                      </p>
                     </GlassCard>
                   </motion.div>
                 ))}
