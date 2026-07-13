@@ -132,7 +132,7 @@ const Projects = () => {
                           {project.title}
                         </h3>
 
-                        <p className="text-zinc-400 text-sm leading-relaxed line-clamp-3 mb-4">
+                        <p className="text-zinc-400 text-sm text-justify leading-relaxed line-clamp-3 mb-4">
                           {project.shortDescription}
                         </p>
 

@@ -124,7 +124,7 @@ const ProjectDetails = () => {
           </h1>
 
           {/* Short Description */}
-          <p className="relative z-10 text-zinc-400 text-lg sm:text-xl mb-10 leading-relaxed">
+          <p className="relative z-10 text-zinc-400 text-justify text-lg sm:text-xl mb-10 leading-relaxed">
             {project.shortDescription}
           </p>
 
@@ -180,7 +180,7 @@ const ProjectDetails = () => {
           {/* Tech Stack */}
           {project.techStack?.length > 0 && (
             <div className="relative z-10 mb-10">
-              <h2 className="text-xl font-bold mb-5">Tech Stack</h2>
+              <h2 className="text-xl font-bold mb-5">Tech Arsenal</h2>
 
               <div className="flex flex-wrap gap-3">
                 {project.techStack.map((tech) => (
