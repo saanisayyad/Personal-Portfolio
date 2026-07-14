@@ -130,7 +130,7 @@ const Home = () => {
                 delay: 0.3,
                 duration: 0.7,
               }}
-              className="text-lg sm:text-xl md:text-2xl lg:text-2xl text-zinc-300 font-medium mb-8 leading-relaxed text-justify"
+              className="text-lg sm:text-xl md:text-2xl lg:text-2xl text-zinc-300 font-medium max-w-xl md:max-w-2xl mx-auto lg:mx-0 mb-8 leading-relaxed text-justify"
             >
               {profile.title}
             </motion.h2>
