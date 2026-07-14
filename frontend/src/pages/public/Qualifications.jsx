@@ -62,7 +62,7 @@ const Qualifications = () => {
     "w-14 h-14 rounded-2xl bg-zinc-800/70 border border-zinc-700 flex items-center justify-center mb-6";
 
   return (
-    <section className="relative min-h-screen text-white py-28 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <section className="relative min-h-screen text-white py-28 px-4 sm:px-6 lg:px-8">
       {/* BACKGROUND GLOWS */}
       <div
         className="

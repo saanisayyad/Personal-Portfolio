@@ -77,6 +77,7 @@ const Notes = () => {
           learnings, development notes
           and technical articles.
           "
+          icon = {FileText}
         />
 
         {loading ? (
