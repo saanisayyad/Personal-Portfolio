@@ -8,6 +8,9 @@ import Gallery from "./pages/public/Gallery";
 import Notes from "./pages/public/Notes";
 import NoteDetails from "./pages/public/NoteDetails";
 import Qualifications from "./pages/public/Qualifications";
+import Projects from "./pages/public/Projects";
+import ProjectDetails from "./pages/public/ProjectDetails";
+import ScrollToTop from "./components/utils/ScrollToTop";
 
 // Admin Pages
 import Login from "./pages/admin/Login";
@@ -20,10 +23,7 @@ import ManageEducation from "./pages/admin/ManageEducation";
 import ManageLanguages from "./pages/admin/ManageLanguages";
 import ManageSkills from "./pages/admin/ManageSkills";
 import ManageHobbies from "./pages/admin/ManageHobbies";
-import ScrollToTop from "./components/utils/ScrollToTop";
-import Projects from "./pages/public/Projects";
 import ManageProjects from "./pages/admin/ManageProjects";
-import ProjectDetails from "./pages/public/ProjectDetails";
 // import ChatBot from "./components/ChatBot";
 
 const App = () => {

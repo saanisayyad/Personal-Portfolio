@@ -36,7 +36,7 @@ const Home = () => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center min-h-screen bg-[#09090b]">
+      <div className="flex justify-center items-center min-h-screen">
         <div className="text-center relative">
           {/* Glow */}
           <div className="absolute inset-0 blur-3xl bg-gradient-to-r from-pink-500/20 to-orange-500/20 rounded-full scale-150" />

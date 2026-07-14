@@ -76,45 +76,97 @@ const Navbar = () => {
   "
           />
           {/* Logo */}
-          <NavLink to="/" className="relative group">
-            <h1 className="flex items-center text-2xl md:text-3xl font-black tracking-tight">
-              <span className="bg-gradient-to-r from-white via-pink-300 to-orange-300 bg-clip-text text-transparent">
-                MDS
-              </span>
-
-              <motion.span
-                animate={{
-                  scale: [1, 1.35, 1],
-                  opacity: [1, 0.5, 1],
+          <div className="flex items-center gap-3 select-none">
+            {/* Logo */}
+            <div className="relative w-14 h-14 flex items-center justify-center">
+              {/* Analytics Ring */}
+              <svg
+                className="absolute inset-0 animate-spin"
+                viewBox="0 0 100 100"
+                style={{
+                  animationDuration: "10s",
+                  animationTimingFunction: "linear",
                 }}
-                transition={{
-                  repeat: Infinity,
-                  duration: 2,
-                }}
-                className="ml-1 text-pink-500"
               >
-                ●
-              </motion.span>
-            </h1>
+                <defs>
+                  <linearGradient
+                    id="analyticsRing"
+                    x1="0%"
+                    y1="0%"
+                    x2="100%"
+                    y2="100%"
+                  >
+                    <stop offset="0%" stopColor="#06B6D4" />
+                    <stop offset="50%" stopColor="#3B82F6" />
+                    <stop offset="100%" stopColor="#8B5CF6" />
+                  </linearGradient>
+                </defs>
 
-            <div
-              className="
-    absolute
-    -bottom-1
-    left-0
-    h-[2px]
-    w-0
-    rounded-full
-    bg-gradient-to-r
-    from-pink-500
-    via-orange-400
-    to-pink-500
-    transition-all
-    duration-500
-    group-hover:w-full
-  "
-            />
-          </NavLink>
+                <circle
+                  cx="50"
+                  cy="50"
+                  r="47"
+                  fill="none"
+                  stroke="url(#analyticsRing)"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeDasharray="42 260"
+                />
+              </svg>
+
+              {/* Logo */}
+              <img
+                src="/logo.png"
+                alt="MDS Logo"
+                className="relative z-10 h-12 w-12 rounded-full object-cover"
+              />
+            </div>
+
+            {/* Right Side */}
+            <div className="flex flex-col justify-center">
+              {/* Animated Line Chart */}
+              <svg
+                width="55"
+                height="18"
+                viewBox="0 0 55 18"
+                className="overflow-visible"
+              >
+                <polyline
+                  fill="none"
+                  stroke="#22d3ee"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  points="2,14 12,10 22,13 34,5 52,8"
+                >
+                  <animate
+                    attributeName="points"
+                    dur="2.5s"
+                    repeatCount="indefinite"
+                    values="
+            2,14 12,10 22,13 34,5 52,8;
+            2,13 12,7 22,11 34,3 52,6;
+            2,14 12,10 22,13 34,5 52,8"
+                  />
+                </polyline>
+
+                {/* Pulsing Last Point */}
+                <circle cx="52" cy="8" r="2.5" fill="#22d3ee">
+                  <animate
+                    attributeName="r"
+                    values="2.5;4;2.5"
+                    dur="2s"
+                    repeatCount="indefinite"
+                  />
+                </circle>
+              </svg>
+
+              {/* Subtitle */}
+              <span className="mt-1 text-[10px] md:text-xs uppercase tracking-[0.35em] text-gray-400">
+                Data Analyst
+              </span>
+            </div>
+          </div>
 
           {/* Desktop Links */}
           <div className="hidden md:flex items-center gap-2">
