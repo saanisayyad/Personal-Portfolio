@@ -14,7 +14,7 @@ The project follows a **React + Vite frontend** and **Node.js + Express backend*
 - 🛠️ Dynamic management of skills, languages, hobbies, profile, education, gallery, notes, and projects
 - 🔐 Protected admin area with authentication
 - ☁️ Cloudinary integration for media uploads
-- 🔑 JWT-based authentication
+- 🔑 JWT-based authentication with one-hour token expiry
 - 🗄️ MongoDB database integration through Mongoose
 - ⚡ Smooth animations and interactive UI elements
 - 🌌 Particle effects and 3D visuals for a more immersive experience
@@ -112,6 +112,27 @@ The **backend** manages authentication, data operations, media uploads, and port
 
 The architecture keeps presentation, business logic, authentication, data models, and API routes separated for easier maintenance and future expansion.
 
+## 🔐 Authentication & Security
+
+The portfolio uses a **login-only authentication model** because it is a single-owner portfolio application.
+
+- Passwords are stored as bcrypt hashes rather than plain text.
+- JWT tokens are signed using the server-side `JWT_SECRET` environment variable.
+- JWTs expire after one hour.
+- Protected API routes require a valid Bearer token.
+- Tokens referencing a non-existent user are rejected.
+- Public self-registration is disabled, preventing visitors from creating accounts through the API.
+- Database and third-party service credentials are loaded through environment variables.
+- `.env` files are excluded from Git through `.gitignore`.
+
+### Admin Account
+
+The existing admin account is stored in the configured MongoDB database. Cloning this repository does **not** clone the database user or reveal the admin password.
+
+For a new deployment, create the intended admin user through a secure database/administrative setup process rather than exposing a public registration endpoint.
+
+> Never commit MongoDB connection strings, JWT secrets, Cloudinary credentials, API keys, passwords, or other production secrets to the repository.
+
 ## ⚙️ Getting Started
 
 ### 1. Clone the repository
@@ -144,10 +165,6 @@ npm run dev
 Create the required `.env` file in the backend and provide the database, authentication, Cloudinary, and other service credentials used by the application.
 
 > Never commit secrets or production credentials to the repository.
-
-## 🔐 Admin Access
-
-The application includes a protected admin section under `/admin` with authentication and content-management screens. Administrative routes are guarded through a protected-route flow before allowing access to dashboard functionality.
 
 ## 🎯 Purpose
 
