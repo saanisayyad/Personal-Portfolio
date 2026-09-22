@@ -96,19 +96,18 @@ const Projects = () => {
                       {/* IMAGE */}
                       <div className="relative overflow-hidden aspect-[16/10]">
                         <ProgressiveImage
-                          src={project.images?.[0]?.imageUrl?.replace(
-                            "/upload/",
-                            "/upload/f_auto,q_auto,w_800/",
-                          )}
+                          src={project.images?.[0]?.imageUrl}
                           alt={project.title}
+                          width={600}
+                          priority={index === 0}
                           className="
-            w-full
-            h-full
-            object-cover
-            transition-transform
-            duration-700
-            group-hover:scale-105
-          "
+                          w-full
+                          h-full
+                          object-cover
+                          transition-transform
+                          duration-700
+                          group-hover:scale-105
+                        "
                         />
 
                         {project.featured && (

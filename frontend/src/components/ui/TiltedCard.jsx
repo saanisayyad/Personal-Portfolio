@@ -30,20 +30,11 @@ export default function TiltedCard({
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
-  const rotateX = useSpring(
-    useMotionValue(0),
-    springValues
-  );
+  const rotateX = useSpring(useMotionValue(0), springValues);
 
-  const rotateY = useSpring(
-    useMotionValue(0),
-    springValues
-  );
+  const rotateY = useSpring(useMotionValue(0), springValues);
 
-  const scale = useSpring(
-    1,
-    springValues
-  );
+  const scale = useSpring(1, springValues);
 
   const opacity = useSpring(0);
 
@@ -55,87 +46,92 @@ export default function TiltedCard({
 
   const [lastY, setLastY] = useState(0);
 
-
   // --------------------------------------------------
   // OPTIMIZE CLOUDINARY IMAGE
   // --------------------------------------------------
 
-  const optimizedImageSrc =
-    imageSrc?.includes("res.cloudinary.com")
-      ? imageSrc.replace(
-          "/upload/",
-          "/upload/w_800,q_auto,f_auto,dpr_auto/"
-        )
-      : imageSrc;
+  const getOptimizedImageUrl = (url) => {
+    if (!url) return "";
 
+    // Not a Cloudinary image
+    if (!url.includes("res.cloudinary.com")) {
+      return url;
+    }
+
+    const uploadMarker = "/upload/";
+
+    const uploadIndex = url.indexOf(uploadMarker);
+
+    if (uploadIndex === -1) {
+      return url;
+    }
+
+    const afterUpload = url.slice(uploadIndex + uploadMarker.length);
+
+    // Existing Cloudinary transformations
+    const firstSegment = afterUpload.split("/")[0];
+
+    const hasTransformation =
+      firstSegment.includes("_") &&
+      (firstSegment.startsWith("w_") ||
+        firstSegment.startsWith("h_") ||
+        firstSegment.startsWith("c_") ||
+        firstSegment.startsWith("f_") ||
+        firstSegment.startsWith("q_") ||
+        firstSegment.startsWith("dpr_"));
+
+    // Don't add another transformation layer
+    if (hasTransformation) {
+      return url;
+    }
+
+    return (
+      url.slice(0, uploadIndex + uploadMarker.length) +
+      "w_600,q_auto,f_auto,dpr_auto/" +
+      afterUpload
+    );
+  };
+
+  const optimizedImageSrc = getOptimizedImageUrl(imageSrc);
 
   // --------------------------------------------------
   // MOUSE MOVEMENT
   // --------------------------------------------------
 
   function handleMouse(e) {
-
     if (!ref.current) return;
 
-    const rect =
-      ref.current.getBoundingClientRect();
+    const rect = ref.current.getBoundingClientRect();
 
-    const offsetX =
-      e.clientX -
-      rect.left -
-      rect.width / 2;
+    const offsetX = e.clientX - rect.left - rect.width / 2;
 
-    const offsetY =
-      e.clientY -
-      rect.top -
-      rect.height / 2;
+    const offsetY = e.clientY - rect.top - rect.height / 2;
 
+    const rotationX = (offsetY / (rect.height / 2)) * -rotateAmplitude;
 
-    const rotationX =
-      (offsetY / (rect.height / 2)) *
-      -rotateAmplitude;
-
-    const rotationY =
-      (offsetX / (rect.width / 2)) *
-      rotateAmplitude;
-
+    const rotationY = (offsetX / (rect.width / 2)) * rotateAmplitude;
 
     rotateX.set(rotationX);
     rotateY.set(rotationY);
 
+    x.set(e.clientX - rect.left);
 
-    x.set(
-      e.clientX -
-      rect.left
-    );
+    y.set(e.clientY - rect.top);
 
-    y.set(
-      e.clientY -
-      rect.top
-    );
+    const velocityY = offsetY - lastY;
 
-
-    const velocityY =
-      offsetY - lastY;
-
-    rotateFigcaption.set(
-      -velocityY * 0.6
-    );
+    rotateFigcaption.set(-velocityY * 0.6);
 
     setLastY(offsetY);
   }
 
-
   function handleMouseEnter() {
-
     scale.set(scaleOnHover);
 
     opacity.set(1);
   }
 
-
   function handleMouseLeave() {
-
     opacity.set(0);
 
     scale.set(1);
@@ -147,16 +143,13 @@ export default function TiltedCard({
     rotateFigcaption.set(0);
   }
 
-
   // --------------------------------------------------
   // RENDER
   // --------------------------------------------------
 
   return (
-
     <figure
       ref={ref}
-
       className="
         relative
         w-full
@@ -167,24 +160,17 @@ export default function TiltedCard({
         items-center
         justify-center
       "
-
       style={{
         height: containerHeight,
         width: containerWidth,
       }}
-
       onMouseMove={handleMouse}
-
       onMouseEnter={handleMouseEnter}
-
       onMouseLeave={handleMouseLeave}
     >
-
-
       {/* MOBILE WARNING */}
 
       {showMobileWarning && (
-
         <div
           className="
             absolute
@@ -195,24 +181,17 @@ export default function TiltedCard({
             sm:hidden
           "
         >
-
-          This effect is not optimized
-          for mobile. Check on desktop.
-
+          This effect is not optimized for mobile. Check on desktop.
         </div>
-
       )}
-
 
       {/* IMAGE CONTAINER */}
 
       <motion.div
-
         className="
           relative
           [transform-style:preserve-3d]
         "
-
         style={{
           width: imageWidth,
           height: imageHeight,
@@ -221,31 +200,14 @@ export default function TiltedCard({
           scale,
         }}
       >
-
         <motion.img
-
           src={optimizedImageSrc}
-
           alt={altText}
-
           width="800"
-
           height="800"
-
-          loading={
-            priority
-              ? "eager"
-              : "lazy"
-          }
-
-          fetchPriority={
-            priority
-              ? "high"
-              : "auto"
-          }
-
+          loading={priority ? "eager" : "lazy"}
+          fetchPriority={priority ? "high" : "auto"}
           decoding="async"
-
           className="
             absolute
             top-0
@@ -255,21 +217,17 @@ export default function TiltedCard({
             will-change-transform
             [transform:translateZ(0)]
           "
-
           style={{
             width: imageWidth,
             height: imageHeight,
           }}
         />
 
-
         {/* OVERLAY */}
 
-        {displayOverlayContent &&
-          overlayContent && (
-
-            <motion.div
-              className="
+        {displayOverlayContent && overlayContent && (
+          <motion.div
+            className="
                 absolute
                 top-0
                 left-0
@@ -277,23 +235,16 @@ export default function TiltedCard({
                 will-change-transform
                 [transform:translateZ(30px)]
               "
-            >
-
-              {overlayContent}
-
-            </motion.div>
-
-          )}
-
+          >
+            {overlayContent}
+          </motion.div>
+        )}
       </motion.div>
-
 
       {/* TOOLTIP */}
 
       {showTooltip && (
-
         <motion.figcaption
-
           className="
             pointer-events-none
             absolute
@@ -310,7 +261,6 @@ export default function TiltedCard({
             hidden
             sm:block
           "
-
           style={{
             x,
             y,
@@ -318,13 +268,9 @@ export default function TiltedCard({
             rotate: rotateFigcaption,
           }}
         >
-
           {captionText}
-
         </motion.figcaption>
-
       )}
-
     </figure>
   );
 }

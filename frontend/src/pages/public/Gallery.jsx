@@ -19,12 +19,6 @@ const Gallery = () => {
     try {
       const data = await getGalleryImages();
 
-      // preload first few images
-      data.slice(0, 4).forEach((img) => {
-        const image = new Image();
-        image.src = img.imageUrl;
-      });
-
       setImages(data);
     } catch (error) {
       console.log(error);
@@ -38,26 +32,20 @@ const Gallery = () => {
   }, []);
 
   useEffect(() => {
-  if (!selectedImage) return;
+    if (!selectedImage) return;
 
-  const handleEsc = (e) => {
-    if (e.key === "Escape") {
-      setSelectedImage(null);
-    }
-  };
+    const handleEsc = (e) => {
+      if (e.key === "Escape") {
+        setSelectedImage(null);
+      }
+    };
 
-  window.addEventListener(
-    "keydown",
-    handleEsc
-  );
+    window.addEventListener("keydown", handleEsc);
 
-  return () => {
-    window.removeEventListener(
-      "keydown",
-      handleEsc
-    );
-  };
-}, [selectedImage]);
+    return () => {
+      window.removeEventListener("keydown", handleEsc);
+    };
+  }, [selectedImage]);
 
   return (
     <section className="min-h-screen text-white py-28 px-4 sm:px-6 lg:px-8">
@@ -118,18 +106,17 @@ const Gallery = () => {
                     >
                       <div className="overflow-hidden rounded-[2rem]">
                         <ProgressiveImage
-                          src={item.imageUrl.replace(
-                            "/upload/",
-                            "/upload/f_auto,q_auto,w_800/",
-                          )}
+                          src={item.imageUrl}
                           alt={item.title}
+                          width={600}
+                          priority={index < 2}
                           className="
-                              w-full
-                              object-cover
-                              transition-transform
-                              duration-700
-                              group-hover:scale-110
-                            "
+    w-full
+    object-cover
+    transition-transform
+    duration-700
+    group-hover:scale-110
+  "
                         />
                       </div>
 
@@ -166,7 +153,7 @@ const Gallery = () => {
             exit={{
               opacity: 0,
             }}
-              onClick={() => setSelectedImage(null)}
+            onClick={() => setSelectedImage(null)}
             className="fixed inset-0 z-50 bg-black/90 backdrop-blur-xl flex items-center justify-center p-4"
           >
             <button
@@ -203,11 +190,9 @@ const Gallery = () => {
             >
               <div className="overflow-hidden rounded-[2rem] border border-white/10 shadow-2xl">
                 <ProgressiveImage
-                  src={selectedImage.imageUrl.replace(
-                    "/upload/",
-                    "/upload/f_auto,q_auto,w_1600/",
-                  )}
+                  src={selectedImage.imageUrl}
                   alt={selectedImage.title}
+                  width={1600}
                   className="
     w-full
     max-h-[85vh]
