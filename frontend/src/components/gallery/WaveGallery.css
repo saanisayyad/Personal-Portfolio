@@ -1,0 +1,498 @@
+.wave-gallery-wrapper {
+  position: relative;
+  width: 100%;
+  margin-top: 2.5rem;
+}
+
+/* Main stage */
+
+.wave-gallery {
+  position: relative;
+
+  width: 100%;
+  height: min(70vh, 680px);
+  min-height: 460px;
+
+  overflow: hidden;
+
+  perspective: 1400px;
+  transform-style: preserve-3d;
+
+  outline: none;
+
+  cursor: grab;
+
+  /*
+   * Prevent browser scroll handling from fighting
+   * with touch interaction.
+   */
+  touch-action: pan-y;
+
+  contain: layout paint style;
+
+  isolation: isolate;
+}
+
+.wave-gallery:active {
+  cursor: grabbing;
+}
+
+/*
+ * Very lightweight ambient glow.
+ * It is ONE element, not one per card.
+ */
+
+.wave-gallery__ambient {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  width: 45%;
+  height: 45%;
+
+  transform: translate(
+    -50%,
+    -50%
+  );
+
+  border-radius: 50%;
+
+  background: rgba(
+    110,
+    120,
+    255,
+    0.08
+  );
+
+  filter: blur(80px);
+
+  pointer-events: none;
+
+  z-index: 0;
+}
+
+/* Cards */
+
+.wave-gallery__card {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  width: clamp(
+    220px,
+    24vw,
+    330px
+  );
+
+  padding: 0;
+
+  border: 1px solid
+    rgba(255, 255, 255, 0.08);
+
+  border-radius: 26px;
+
+  overflow: hidden;
+
+  background: #111217;
+
+  color: white;
+
+  /*
+   * Only transform + opacity are animated.
+   */
+  will-change:
+    transform,
+    opacity;
+
+  transform:
+    translate3d(
+      -50%,
+      -50%,
+      0
+    );
+
+  /*
+   * Isolate each card into its own compositing
+   * layer.
+   */
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+
+  transform-style: preserve-3d;
+
+  /*
+   * No CSS transition on transform.
+   * The RAF loop controls it.
+   */
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+
+  cursor: pointer;
+
+  z-index: 1;
+}
+
+.wave-gallery__card.is-active {
+  border-color:
+    rgba(255, 255, 255, 0.2);
+
+  box-shadow:
+    0 30px 70px
+      rgba(0, 0, 0, 0.48),
+    0 0 35px
+      rgba(130, 140, 255, 0.08);
+}
+
+.wave-gallery__card:hover {
+  border-color:
+    rgba(255, 255, 255, 0.18);
+}
+
+/* Image */
+
+.wave-gallery__image {
+  position: relative;
+
+  width: 100%;
+
+  aspect-ratio: 4 / 5;
+
+  overflow: hidden;
+
+  background: #0c0d11;
+}
+
+.wave-gallery__image img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  /*
+   * Browser decodes asynchronously.
+   */
+  image-rendering: auto;
+
+  user-select: none;
+  pointer-events: none;
+
+  /*
+   * Don't use heavy filters here.
+   */
+  transition:
+    transform 400ms
+      cubic-bezier(
+        0.2,
+        0.8,
+        0.2,
+        1
+      );
+}
+
+.wave-gallery__card:hover
+.wave-gallery__image img {
+  transform: scale(1.035);
+}
+
+/* View overlay */
+
+.wave-gallery__view {
+  position: absolute;
+
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background:
+    linear-gradient(
+      180deg,
+      transparent 25%,
+      rgba(0, 0, 0, 0.55)
+    );
+
+  opacity: 0;
+
+  transition:
+    opacity 180ms ease;
+
+  pointer-events: none;
+}
+
+.wave-gallery__card:hover
+.wave-gallery__view {
+  opacity: 1;
+}
+
+.wave-gallery__view span {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 68px;
+  height: 68px;
+
+  border: 1px solid
+    rgba(255, 255, 255, 0.3);
+
+  border-radius: 50%;
+
+  background:
+    rgba(255, 255, 255, 0.08);
+
+  color: white;
+
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    monospace;
+
+  font-size: 9px;
+  letter-spacing: 0.15em;
+}
+
+/* Caption */
+
+.wave-gallery__caption {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  height: 58px;
+
+  padding: 0 17px;
+}
+
+.wave-gallery__index {
+  flex: none;
+
+  color:
+    rgba(255, 255, 255, 0.3);
+
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    monospace;
+
+  font-size: 10px;
+
+  letter-spacing: 0.1em;
+}
+
+.wave-gallery__title {
+  overflow: hidden;
+
+  color:
+    rgba(255, 255, 255, 0.86);
+
+  font-size: 13px;
+  font-weight: 500;
+
+  text-align: left;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Controls */
+
+.wave-gallery__controls {
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 22px;
+
+  margin-top: 4px;
+}
+
+.wave-gallery__controls button {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 42px;
+  height: 42px;
+
+  border: 1px solid
+    rgba(255, 255, 255, 0.1);
+
+  border-radius: 50%;
+
+  background:
+    rgba(255, 255, 255, 0.035);
+
+  color: rgba(
+    255,
+    255,
+    255,
+    0.8
+  );
+
+  font-size: 16px;
+
+  cursor: pointer;
+
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    transform 160ms ease;
+}
+
+.wave-gallery__controls button:hover {
+  background:
+    rgba(255, 255, 255, 0.08);
+
+  border-color:
+    rgba(255, 255, 255, 0.2);
+
+  transform: scale(1.05);
+}
+
+.wave-gallery__controls span {
+  display: flex;
+
+  gap: 8px;
+
+  min-width: 54px;
+
+  align-items: center;
+  justify-content: center;
+
+  color:
+    rgba(255, 255, 255, 0.42);
+
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    monospace;
+
+  font-size: 10px;
+
+  letter-spacing: 0.12em;
+}
+
+.wave-gallery__controls i {
+  color:
+    rgba(255, 255, 255, 0.18);
+
+  font-style: normal;
+}
+
+/* Hint */
+
+.wave-gallery__hint {
+  margin-top: 14px;
+
+  text-align: center;
+
+  color:
+    rgba(255, 255, 255, 0.2);
+
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    monospace;
+
+  font-size: 8px;
+
+  letter-spacing: 0.2em;
+}
+
+.wave-gallery__hint span {
+  margin: 0 5px;
+
+  color:
+    rgba(255, 255, 255, 0.12);
+}
+
+/* Tablet */
+
+@media (max-width: 900px) {
+  .wave-gallery {
+    height: 580px;
+  }
+
+  .wave-gallery__card {
+    width: 280px;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+  .wave-gallery {
+    height: 500px;
+    min-height: 420px;
+
+    perspective: 1000px;
+  }
+
+  .wave-gallery__card {
+    width: min(
+      68vw,
+      265px
+    );
+
+    border-radius: 22px;
+  }
+
+  .wave-gallery__caption {
+    height: 52px;
+
+    padding: 0 14px;
+  }
+
+  .wave-gallery__image {
+    aspect-ratio: 3 / 4;
+  }
+
+  .wave-gallery__hint {
+    display: none;
+  }
+
+  .wave-gallery__view span {
+    width: 58px;
+    height: 58px;
+  }
+}
+
+/*
+ * Accessibility / low-power mode.
+ */
+
+@media (prefers-reduced-motion: reduce) {
+  .wave-gallery__card,
+  .wave-gallery__image img,
+  .wave-gallery__controls button {
+    transition: none;
+  }
+
+  .wave-gallery__ambient {
+    display: none;
+  }
+}

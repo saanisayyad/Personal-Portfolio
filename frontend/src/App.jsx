@@ -1,36 +1,75 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+import { lazy, Suspense } from "react";
 import MainLayout from "./layouts/MainLayout";
 import ProtectedRoute from "./components/ProtectedRoutes";
+
 // Public Pages
-import Home from "./pages/public/Home";
-import Gallery from "./pages/public/Gallery";
-import Notes from "./pages/public/Notes";
-import NoteDetails from "./pages/public/NoteDetails";
-import Qualifications from "./pages/public/Qualifications";
-import Projects from "./pages/public/Projects";
-import ProjectDetails from "./pages/public/ProjectDetails";
+const Home = lazy(() => import("./pages/public/Home"));
+const Gallery = lazy(() => import("./pages/public/Gallery"));
+const Notes = lazy(() => import("./pages/public/Notes"));
+const NoteDetails = lazy(
+  () => import("./pages/public/NoteDetails")
+);
+const Qualifications = lazy(
+  () => import("./pages/public/Qualifications")
+);
+const Projects = lazy(
+  () => import("./pages/public/Projects")
+);
+const ProjectDetails = lazy(
+  () => import("./pages/public/ProjectDetails")
+);
 import ScrollToTop from "./components/utils/ScrollToTop";
 
 // Admin Pages
-import Login from "./pages/admin/Login";
-import Dashboard from "./pages/admin/Dashboard";
-import ManageGallery from "./pages/admin/ManageGallery";
-import ManageNotes from "./pages/admin/ManageNotes";
-import ManageProfile from "./pages/admin/ManageProfile";
+const Login = lazy(() => import("./pages/admin/Login"));
+const Dashboard = lazy(() => import("./pages/admin/Dashboard"));
+const ManageGallery = lazy(
+  () => import("./pages/admin/ManageGallery")
+);
+const ManageNotes = lazy(
+  () => import("./pages/admin/ManageNotes")
+);
+const ManageProfile = lazy(
+  () => import("./pages/admin/ManageProfile")
+);
 import AdminLayout from "./layouts/AdminLayout";
-import ManageEducation from "./pages/admin/ManageEducation";
-import ManageLanguages from "./pages/admin/ManageLanguages";
-import ManageSkills from "./pages/admin/ManageSkills";
-import ManageHobbies from "./pages/admin/ManageHobbies";
-import ManageProjects from "./pages/admin/ManageProjects";
-// import ChatBot from "./components/ChatBot";
+const ManageEducation = lazy(
+  () => import("./pages/admin/ManageEducation")
+);
+const ManageLanguages = lazy(
+  () => import("./pages/admin/ManageLanguages")
+);
+const ManageSkills = lazy(
+  () => import("./pages/admin/ManageSkills")
+);
+const ManageHobbies = lazy(
+  () => import("./pages/admin/ManageHobbies")
+);
+const ManageProjects = lazy(
+  () => import("./pages/admin/ManageProjects")
+);
+
+const PageLoader = () => {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-[#09090b] text-white">
+      <div className="flex flex-col items-center gap-4">
+        <div className="w-10 h-10 border-4 border-zinc-800 border-t-cyan-400 rounded-full animate-spin" />
+
+        <p className="text-sm text-zinc-500">
+          Loading...
+        </p>
+      </div>
+    </div>
+  );
+};
 
 const App = () => {
   return (
     <BrowserRouter>
       <ScrollToTop />
-      <Routes>
+      <Suspense fallback={<PageLoader />}>
+  <Routes>
         {/* Public Layout Routes */}
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Home />} />
@@ -78,7 +117,8 @@ const App = () => {
           <Route path="notes" element={<ManageNotes />} />
         </Route>
       </Routes>
-      {/* <ChatBot /> */}
+</Suspense>
+      
     </BrowserRouter>
   );
 };

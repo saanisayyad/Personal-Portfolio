@@ -17,14 +17,6 @@ const Projects = () => {
     try {
       const data = await getProjects();
 
-      // Preload first few images
-      data.slice(0, 4).forEach((project) => {
-        if (project.images?.[0]?.imageUrl) {
-          const image = new Image();
-          image.src = project.images[0].imageUrl;
-        }
-      });
-
       setProjects(data);
     } catch (error) {
       console.log(error);

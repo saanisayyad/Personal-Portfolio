@@ -116,9 +116,10 @@ const Navbar = () => {
 
               {/* Logo */}
               <img
-                src="/logo.png"
-                alt="MDS Logo"
-                className="relative z-10 h-12 w-12 rounded-full object-cover"
+              src="/logo.webp"
+              alt="Logo"
+              width="48"
+              height="48"
               />
             </div>
 

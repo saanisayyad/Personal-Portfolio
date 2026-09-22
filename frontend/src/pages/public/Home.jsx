@@ -4,64 +4,84 @@ import { motion } from "framer-motion";
 
 import { getProfile } from "../../services/profileService";
 
-import {
-  FaGithub,
-  FaLinkedin,
-  FaFile,
-  FaInstagram,
-  FaArrowRight,
-} from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaFile } from "react-icons/fa";
+
 import TiltedCard from "../../components/ui/TiltedCard";
 
+// --------------------------------------------------
+// FALLBACK PROFILE
+// --------------------------------------------------
+// This is what visitors see immediately while the
+// Render backend is waking up.
+//
+// If the API is unavailable, the portfolio still works.
+const FALLBACK_PROFILE = {
+  name: "Mohammadsaani Sayyad",
+
+  title: "Data Analyst | Computer Engineering Graduate",
+
+  bio: "Passionate about data analytics, SQL, Python, Power BI and building meaningful data-driven solutions.",
+
+  github: "https://github.com/saanisayyad",
+
+  linkedin: "",
+
+  resume: "/Mohammadsaani_Resume.pdf",
+
+  profileImage: "",
+};
+
 const Home = () => {
-  const [profile, setProfile] = useState(null);
+  // Start with fallback data instead of null.
+  //
+  // IMPORTANT:
+  // The page can now render immediately without
+  // waiting for Render.
+  const [profile, setProfile] = useState(FALLBACK_PROFILE);
 
-  const [loading, setLoading] = useState(true);
-
-  const fetchProfile = async () => {
-    try {
-      const data = await getProfile();
-
-      setProfile(data);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
+  // --------------------------------------------------
+  // FETCH PROFILE IN BACKGROUND
+  // --------------------------------------------------
   useEffect(() => {
+    let mounted = true;
+
+    const fetchProfile = async () => {
+      try {
+        const data = await getProfile();
+
+        // Only update state if component still exists.
+        if (mounted && data) {
+          setProfile((previous) => ({
+            ...previous,
+            ...data,
+          }));
+        }
+      } catch (error) {
+        console.error("Profile API unavailable:", error);
+
+        // DO NOTHING.
+        //
+        // The fallback profile is already displayed.
+        // Therefore Render being asleep does not
+        // block the homepage.
+      }
+    };
+
     fetchProfile();
+
+    return () => {
+      mounted = false;
+    };
   }, []);
-
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center min-h-screen">
-        <div className="text-center relative">
-          {/* Glow */}
-          <div className="absolute inset-0 blur-3xl bg-gradient-to-r from-pink-500/20 to-orange-500/20 rounded-full scale-150" />
-
-          <p className="relative text-4xl md:text-6xl font-black tracking-tight bg-gradient-to-r from-white via-pink-200 to-orange-300 bg-clip-text text-transparent">
-            Mohammadsaani Sayyad
-          </p>
-
-          <div className="w-32 h-[2px] mx-auto mt-4 bg-gradient-to-r from-transparent via-pink-500 to-transparent" />
-
-          <p className="mt-5 text-zinc-400 text-sm md:text-base tracking-[0.4em] uppercase animate-pulse">
-            Loading Portfolio...
-          </p>
-        </div>
-      </div>
-    );
-  }
-
-  if (!profile) return null;
 
   return (
     <section className="relative min-h-screen overflow-hidden text-white">
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-screen flex items-center py-16 sm:py-20 md:py-20">
         <div className="grid lg:grid-cols-2 gap-10 md:gap-14 lg:gap-20 items-center w-full">
-          {/* LEFT CONTENT */}
+          {/* ==========================================
+              LEFT CONTENT
+          ========================================== */}
+
           <motion.div
             initial={{
               opacity: 0,
@@ -76,7 +96,10 @@ const Home = () => {
             }}
             className="text-center lg:text-left order-2 lg:order-1 relative z-20"
           >
-            {/* Badge */}
+            {/* ------------------------------------------
+                BADGE
+            ------------------------------------------ */}
+
             <motion.div
               initial={{
                 opacity: 0,
@@ -95,7 +118,10 @@ const Home = () => {
               Personal Portfolio
             </motion.div>
 
-            {/* Name */}
+            {/* ------------------------------------------
+                NAME
+            ------------------------------------------ */}
+
             <motion.h1
               initial={{
                 opacity: 0,
@@ -116,7 +142,10 @@ const Home = () => {
               </span>
             </motion.h1>
 
-            {/* Title */}
+            {/* ------------------------------------------
+                TITLE
+            ------------------------------------------ */}
+
             <motion.h2
               initial={{
                 opacity: 0,
@@ -135,7 +164,10 @@ const Home = () => {
               {profile.title}
             </motion.h2>
 
-            {/* Bio */}
+            {/* ------------------------------------------
+                BIO
+            ------------------------------------------ */}
+
             <motion.p
               initial={{
                 opacity: 0,
@@ -154,7 +186,10 @@ const Home = () => {
               {profile.bio}
             </motion.p>
 
-            {/* Buttons */}
+            {/* ------------------------------------------
+                BUTTONS
+            ------------------------------------------ */}
+
             <motion.div
               initial={{
                 opacity: 0,
@@ -170,6 +205,8 @@ const Home = () => {
               }}
               className="flex flex-col sm:flex-row flex-wrap justify-center lg:justify-start gap-4"
             >
+              {/* GitHub */}
+
               {profile.github && (
                 <a
                   href={profile.github}
@@ -182,6 +219,8 @@ const Home = () => {
                 </a>
               )}
 
+              {/* LinkedIn */}
+
               {profile.linkedin && (
                 <a
                   href={profile.linkedin}
@@ -193,6 +232,8 @@ const Home = () => {
                   LinkedIn
                 </a>
               )}
+
+              {/* Resume */}
 
               {profile.resume && (
                 <a
@@ -208,7 +249,10 @@ const Home = () => {
             </motion.div>
           </motion.div>
 
-          {/* RIGHT IMAGE */}
+          {/* ==========================================
+              RIGHT IMAGE
+          ========================================== */}
+
           <motion.div
             initial={{
               opacity: 0,
@@ -225,27 +269,35 @@ const Home = () => {
           >
             <div className="relative">
               {/* Glow */}
+
               <div className="absolute inset-0 bg-gradient-to-r from-pink-500 via-fuchsia-500 to-orange-500 blur-3xl opacity-20 rounded-full scale-110" />
 
               {/* Ring */}
+
               <div className="absolute inset-0 rounded-full border border-white/10 scale-110" />
 
               {/* Image */}
-              <TiltedCard
-                imageSrc={profile.profileImage}
-                altText={profile.name}
-                captionText={profile.name}
-                containerHeight="min(80vw, 420px)"
-                containerWidth="min(80vw, 420px)"
-                imageHeight="min(80vw, 420px)"
-                imageWidth="min(80vw, 420px)"
-                rotateAmplitude={12}
-                scaleOnHover={1.05}
-                showMobileWarning={false}
-                showTooltip={true}
-                displayOverlayContent={false}
-                overlayContent={null}
-              />
+
+              {profile.profileImage ? (
+                <TiltedCard
+                  imageSrc={profile.profileImage}
+                  altText={profile.name}
+                  captionText={profile.name}
+                  containerHeight="min(80vw, 420px)"
+                  containerWidth="min(80vw, 420px)"
+                  imageHeight="min(80vw, 420px)"
+                  imageWidth="min(80vw, 420px)"
+                  rotateAmplitude={12}
+                  scaleOnHover={1.05}
+                  showMobileWarning={false}
+                  showTooltip={true}
+                  displayOverlayContent={false}
+                  overlayContent={null}
+                  priority={true}
+                />
+              ) : (
+                <div className="w-[min(80vw,420px)] h-[min(80vw,420px)] rounded-full bg-zinc-900/50 border border-zinc-800" />
+              )}
             </div>
           </motion.div>
         </div>

@@ -2,8 +2,9 @@ import { useState } from "react";
 
 const ProgressiveImage = ({
   src,
-  alt,
+  alt = "",
   className = "",
+  priority = false,
 }) => {
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(false);
@@ -29,54 +30,26 @@ const ProgressiveImage = ({
     );
   }
 
-  const isCloudinary = src.includes(
-    "res.cloudinary.com"
-  );
-
-  const blurSrc = isCloudinary
-    ? src.replace(
-        "/upload/",
-        "/upload/w_50,q_10,f_auto/"
-      )
-    : src;
+  const isCloudinary = src.includes("res.cloudinary.com");
 
   const optimizedSrc = isCloudinary
     ? src.replace(
         "/upload/",
-        "/upload/w_800,q_auto:good,f_auto,dpr_auto/"
+        "/upload/w_800,q_auto,f_auto,dpr_auto/"
       )
     : src;
 
   return (
-    <div className="relative overflow-hidden w-full h-full">
-      {/* BLUR PLACEHOLDER */}
-      <img
-        src={blurSrc}
-        alt={alt}
-        aria-hidden="true"
-        className={`
-          absolute
-          inset-0
-          w-full
-          h-full
-          object-cover
-          scale-110
-          blur-2xl
-          transition-opacity
-          duration-500
-          ${
-            loaded
-              ? "opacity-0"
-              : "opacity-100"
-          }
-        `}
-      />
+    <div className="relative overflow-hidden w-full h-full bg-zinc-900">
+      {!loaded && (
+        <div className="absolute inset-0 bg-zinc-900 animate-pulse" />
+      )}
 
-      {/* MAIN IMAGE */}
       <img
         src={optimizedSrc}
         alt={alt}
-        loading="lazy"
+        loading={priority ? "eager" : "lazy"}
+        fetchPriority={priority ? "high" : "auto"}
         decoding="async"
         onLoad={() => setLoaded(true)}
         onError={() => setError(true)}
@@ -84,13 +57,9 @@ const ProgressiveImage = ({
           w-full
           h-full
           object-cover
-          transition-all
-          duration-700
-          ${
-            loaded
-              ? "opacity-100 scale-100"
-              : "opacity-0 scale-105"
-          }
+          transition-opacity
+          duration-500
+          ${loaded ? "opacity-100" : "opacity-0"}
           ${className}
         `}
       />

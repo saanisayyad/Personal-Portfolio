@@ -1,0 +1,641 @@
+
+/* Navbar.css */
+
+.dock-wrapper {
+  position: fixed;
+  top: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: max-content;
+  max-width: calc(100vw - 32px);
+
+  z-index: 1000;
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   MAIN DOCK
+   ========================================================= */
+
+.sable-dock {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  height: 66px;
+  padding: 7px 8px;
+
+  gap: 5px;
+
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(28, 29, 34, 0.78),
+      rgba(10, 11, 14, 0.84)
+    );
+
+  border: 1px solid rgba(255, 255, 255, 0.10);
+
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.40),
+    0 4px 18px rgba(0, 0, 0, 0.20),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+
+  backdrop-filter: blur(26px) saturate(140%);
+  -webkit-backdrop-filter: blur(26px) saturate(140%);
+
+  pointer-events: auto;
+
+  isolation: isolate;
+}
+
+
+/* subtle inner glass reflection */
+
+.sable-dock::before {
+  content: "";
+
+  position: absolute;
+  inset: 1px;
+
+  border-radius: inherit;
+
+  background:
+    linear-gradient(
+      110deg,
+      rgba(255, 255, 255, 0.07),
+      transparent 28%,
+      transparent 72%,
+      rgba(255, 255, 255, 0.025)
+    );
+
+  pointer-events: none;
+
+  z-index: -1;
+}
+
+
+/* Ambient glow */
+
+.dock-highlight {
+  position: absolute;
+
+  left: 15%;
+  right: 15%;
+  bottom: -16px;
+
+  height: 30px;
+
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(80, 120, 255, 0.18),
+      transparent 70%
+    );
+
+  filter: blur(18px);
+
+  opacity: 0.55;
+
+  pointer-events: none;
+
+  z-index: -2;
+}
+
+
+/* =========================================================
+   LOGO
+   ========================================================= */
+
+.dock-logo {
+  position: relative;
+
+  width: 50px;
+  height: 50px;
+
+  flex: 0 0 50px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  text-decoration: none;
+
+  overflow: hidden;
+}
+
+
+.dock-logo img {
+  position: relative;
+
+  width: 38px;
+  height: 38px;
+
+  object-fit: cover;
+
+  border-radius: 50%;
+
+  z-index: 2;
+}
+
+
+/* rotating partial ring */
+
+.dock-logo-ring {
+  position: absolute;
+
+  inset: 3px;
+
+  border-radius: 50%;
+
+  background:
+    conic-gradient(
+      from 20deg,
+      #22d3ee,
+      #3b82f6 35%,
+      #8b5cf6 58%,
+      transparent 65%,
+      transparent 82%,
+      #22d3ee
+    );
+
+  animation:
+    dock-ring-spin 9s linear infinite;
+}
+
+
+.dock-logo-ring::after {
+  content: "";
+
+  position: absolute;
+
+  inset: 2px;
+
+  border-radius: 50%;
+
+  background: #101114;
+}
+
+
+@keyframes dock-ring-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+.dock-navigation {
+  display: flex;
+  align-items: center;
+
+  gap: 2px;
+
+  padding: 0 4px;
+}
+
+
+.dock-item {
+  --dock-influence: 0;
+
+  position: relative;
+
+  width: 78px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 999px;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      calc(
+        0.48 +
+        var(--dock-influence) * 0.52
+      )
+    );
+
+  text-decoration: none;
+
+  transform-origin: center bottom;
+
+  /*
+   * The JS animation loop controls transform.
+   * Do NOT add a CSS transition here.
+   */
+  will-change: transform;
+
+  isolation: isolate;
+}
+
+
+.dock-item-bg {
+  position: absolute;
+
+  inset: 2px;
+
+  border-radius: inherit;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      calc(
+        0.025 +
+        var(--dock-influence) * 0.045
+      )
+    );
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      calc(
+        0.025 +
+        var(--dock-influence) * 0.07
+      )
+    );
+
+  opacity: 0;
+
+  transition:
+    opacity 160ms ease;
+
+  z-index: -1;
+}
+
+
+.dock-item:hover .dock-item-bg,
+.dock-item.is-active .dock-item-bg {
+  opacity: 1;
+}
+
+
+.dock-item-text {
+  position: relative;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  letter-spacing: -0.01em;
+
+  white-space: nowrap;
+
+  z-index: 2;
+
+  user-select: none;
+}
+
+
+/* active indicator */
+
+.dock-active-dot {
+  position: absolute;
+
+  bottom: 6px;
+
+  width: 3px;
+  height: 3px;
+
+  border-radius: 50%;
+
+  background: #67e8f9;
+
+  box-shadow:
+    0 0 8px rgba(34, 211, 238, 0.8);
+}
+
+
+/* =========================================================
+   ADMIN
+   ========================================================= */
+
+.dock-admin {
+  position: relative;
+
+  height: 42px;
+
+  padding: 0 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 999px;
+
+  color: white;
+
+  text-decoration: none;
+
+  font-size: 13px;
+  font-weight: 650;
+
+  background:
+    linear-gradient(
+      120deg,
+      rgba(236, 72, 153, 0.9),
+      rgba(249, 115, 22, 0.9)
+    );
+
+  box-shadow:
+    0 5px 18px rgba(236, 72, 153, 0.12);
+
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+
+.dock-admin:hover {
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 8px 25px rgba(236, 72, 153, 0.22);
+}
+
+
+/* =========================================================
+   MOBILE BUTTON
+   ========================================================= */
+
+.dock-mobile-button {
+  display: none;
+
+  width: 44px;
+  height: 44px;
+
+  border: 0;
+  border-radius: 50%;
+
+  align-items: center;
+  justify-content: center;
+
+  color: white;
+
+  background:
+    rgba(255, 255, 255, 0.07);
+
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+.mobile-backdrop {
+  position: fixed;
+  inset: 0;
+
+  background:
+    rgba(0, 0, 0, 0.58);
+
+  backdrop-filter: blur(9px);
+  -webkit-backdrop-filter: blur(9px);
+
+  z-index: 1001;
+}
+
+
+.mobile-panel {
+  position: fixed;
+
+  top: 16px;
+  right: 16px;
+  bottom: 16px;
+
+  width: min(360px, calc(100vw - 32px));
+
+  padding: 22px;
+
+  border-radius: 28px;
+
+  background:
+    rgba(13, 14, 17, 0.94);
+
+  border:
+    1px solid rgba(255, 255, 255, 0.10);
+
+  box-shadow:
+    0 25px 80px rgba(0, 0, 0, 0.55);
+
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+
+  z-index: 1002;
+
+  animation:
+    mobile-panel-in 220ms
+    cubic-bezier(.22, 1, .36, 1);
+}
+
+
+@keyframes mobile-panel-in {
+  from {
+    opacity: 0;
+    transform: translateX(30px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+
+.mobile-panel-header {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  padding-bottom: 22px;
+
+  border-bottom:
+    1px solid rgba(255, 255, 255, 0.08);
+}
+
+
+.mobile-panel-header div {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+
+.mobile-eyebrow {
+  color: rgba(255, 255, 255, 0.38);
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 0.18em;
+
+  text-transform: uppercase;
+}
+
+
+.mobile-panel-header strong {
+  color: white;
+
+  font-size: 23px;
+}
+
+
+.mobile-panel-header button {
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 0;
+  border-radius: 50%;
+
+  color: white;
+
+  background:
+    rgba(255, 255, 255, 0.07);
+
+  cursor: pointer;
+}
+
+
+.mobile-navigation {
+  display: flex;
+  flex-direction: column;
+
+  gap: 7px;
+
+  margin-top: 24px;
+}
+
+
+.mobile-nav-item {
+  padding: 15px 17px;
+
+  border-radius: 15px;
+
+  color:
+    rgba(255, 255, 255, 0.58);
+
+  text-decoration: none;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  transition:
+    color 160ms ease,
+    background 160ms ease;
+}
+
+
+.mobile-nav-item:hover,
+.mobile-nav-item.active {
+  color: white;
+
+  background:
+    rgba(255, 255, 255, 0.08);
+}
+
+
+.mobile-admin {
+  margin-top: 10px;
+
+  padding: 15px;
+
+  border-radius: 15px;
+
+  text-align: center;
+
+  color: white;
+
+  text-decoration: none;
+
+  font-weight: 700;
+
+  background:
+    linear-gradient(
+      120deg,
+      #ec4899,
+      #f97316
+    );
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 950px) {
+  .dock-navigation,
+  .dock-admin {
+    display: none;
+  }
+
+  .sable-dock {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .dock-mobile-button {
+    display: flex;
+  }
+}
+
+
+@media (max-width: 500px) {
+  .dock-wrapper {
+    top: 12px;
+
+    width: calc(100vw - 24px);
+  }
+
+  .sable-dock {
+    height: 60px;
+
+    padding: 6px 7px;
+  }
+
+  .dock-logo {
+    width: 46px;
+    height: 46px;
+  }
+
+  .dock-logo img {
+    width: 35px;
+    height: 35px;
+  }
+}
+
+
+/* Reduce animation for accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+  .dock-logo-ring {
+    animation: none;
+  }
+}
+
