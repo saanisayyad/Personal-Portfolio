@@ -188,7 +188,7 @@ to-[#948268]
 bg-[length:200%]
 transition-all
 duration-300
-hover:scale-[1.03]
+hover:-translate-y-0.5
 hover:shadow-[0_6px_24px_rgba(0,0,0,0.22)]
 "
               >
@@ -200,9 +200,9 @@ hover:shadow-[0_6px_24px_rgba(0,0,0,0.22)]
     absolute
     inset-0
     bg-gradient-to-r
-    from-cyan-500
-    via-blue-500
-    to-violet-500
+    from-[#c5b18a]
+    via-[#d8c7a5]
+    to-[#948268]
     bg-[length:200%]
   "
                 />
@@ -228,7 +228,7 @@ to-[#948268]
 bg-[length:200%]
 transition-all
 duration-300
-hover:scale-[1.03]
+hover:-translate-y-0.5
 hover:shadow-[0_6px_24px_rgba(0,0,0,0.22)]
 "
               >
@@ -240,9 +240,9 @@ hover:shadow-[0_6px_24px_rgba(0,0,0,0.22)]
     absolute
     inset-0
     bg-gradient-to-r
-    from-cyan-500
-    via-blue-500
-    to-violet-500
+    from-[#c5b18a]
+    via-[#d8c7a5]
+    to-[#948268]
     bg-[length:200%]
   "
                 />
