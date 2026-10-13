@@ -1,107 +1,55 @@
-import { useCallback, useEffect, useState } from "react";
+// pages/public/Gallery.jsx
+
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  X,
-  ImageIcon,
-  ChevronLeft,
-  ChevronRight,
-  RefreshCw,
-} from "lucide-react";
+import { X, ImageIcon } from "lucide-react";
 
 import { getGalleryImages } from "../../services/galleryService";
+
 import PageHeader from "../../components/ui/PageHeader";
+import GlassCard from "../../components/ui/GlassCard";
 import ProgressiveImage from "../../components/ui/ProgressiveImage";
-import CircularCarousel from "../../components/ui/CircularCarousel";
 
 const Gallery = () => {
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [loadError, setLoadError] = useState(false);
-  const [selectedIndex, setSelectedIndex] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
 
-  const fetchImages = useCallback(async () => {
-    setLoading(true);
-    setLoadError(false);
-
+  const fetchImages = async () => {
     try {
       const data = await getGalleryImages();
-      setImages(Array.isArray(data) ? data : []);
+
+      setImages(data);
     } catch (error) {
-      console.error("Unable to load gallery images:", error);
-      setLoadError(true);
+      console.log(error);
     } finally {
       setLoading(false);
     }
-  }, []);
+  };
 
   useEffect(() => {
     fetchImages();
-  }, [fetchImages]);
-
-  const selectedImage =
-    selectedIndex === null ? null : images[selectedIndex] || null;
-
-  const closePreview = useCallback(() => {
-    setSelectedIndex(null);
   }, []);
 
-  const showPreviousImage = useCallback(() => {
-    setSelectedIndex((current) => {
-      if (current === null || images.length < 2) return current;
-      return (current - 1 + images.length) % images.length;
-    });
-  }, [images.length]);
-
-  const showNextImage = useCallback(() => {
-    setSelectedIndex((current) => {
-      if (current === null || images.length < 2) return current;
-      return (current + 1) % images.length;
-    });
-  }, [images.length]);
-
   useEffect(() => {
-    if (selectedIndex === null) return undefined;
+    if (!selectedImage) return;
 
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-
-    const handleKeyDown = (event) => {
-      if (event.key === "Escape") {
-        closePreview();
-      } else if (event.key === "ArrowLeft") {
-        event.preventDefault();
-        showPreviousImage();
-      } else if (event.key === "ArrowRight") {
-        event.preventDefault();
-        showNextImage();
+    const handleEsc = (e) => {
+      if (e.key === "Escape") {
+        setSelectedImage(null);
       }
     };
 
-    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keydown", handleEsc);
 
     return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleEsc);
     };
-  }, [selectedIndex, closePreview, showPreviousImage, showNextImage]);
-
-  const carouselItems = images.map((item, index) => ({
-    src: item.imageUrl,
-    alt: `Gallery image ${index + 1}`,
-  }));
+  }, [selectedImage]);
 
   return (
-    <section className="relative min-h-screen overflow-hidden px-4 py-28 text-white sm:px-6 lg:px-8">
-      <div
-        className="pointer-events-none absolute left-1/2 top-36 h-80 w-[min(80vw,720px)] -translate-x-1/2 rounded-full bg-cyan-500/[0.055] blur-[115px]"
-        aria-hidden="true"
-      />
-      <div
-        className="pointer-events-none absolute bottom-12 right-0 h-72 w-72 rounded-full bg-violet-500/[0.045] blur-[105px]"
-        aria-hidden="true"
-      />
-
-      <div className="relative z-10 mx-auto max-w-7xl">
+    <section className="min-h-screen text-white py-28 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
         <PageHeader
           badge="Visual Collection"
           title="Gallery"
@@ -110,134 +58,146 @@ const Gallery = () => {
         />
 
         {loading ? (
-          <div
-            className="flex h-[420px] items-center justify-center sm:h-[500px] lg:h-[560px]"
-            aria-busy="true"
-            aria-label="Loading gallery images"
-          >
-            <div className="relative flex h-56 w-56 items-center justify-center rounded-full border border-dashed border-cyan-300/20 sm:h-72 sm:w-72">
-              <div className="absolute inset-5 animate-pulse rounded-full border border-violet-300/15" />
-              <div className="h-28 w-20 animate-pulse rounded-xl border border-white/10 bg-zinc-800/65 sm:h-36 sm:w-24" />
-            </div>
-          </div>
-        ) : loadError ? (
-          <div className="flex flex-col items-center justify-center rounded-[2rem] border border-dashed border-zinc-800 px-6 py-20 text-center">
-            <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl border border-cyan-300/15 bg-cyan-300/[0.06] text-cyan-200">
-              <RefreshCw size={22} />
-            </div>
-            <h2 className="text-xl font-semibold text-zinc-100">
-              Gallery couldn’t load
-            </h2>
-            <p className="mt-2 max-w-sm text-sm leading-6 text-zinc-400">
-              There was a problem loading the images. Please try again.
-            </p>
-            <button
-              type="button"
-              onClick={fetchImages}
-              className="mt-6 inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-cyan-300/20 bg-cyan-300/[0.08] px-4 py-2.5 text-sm font-medium text-cyan-100 transition-colors hover:border-cyan-200/40 hover:bg-cyan-300/[0.13] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200"
-            >
-              <RefreshCw size={16} />
-              Try again
-            </button>
+          <div className="columns-1 sm:columns-2 lg:columns-3 gap-5 space-y-5">
+            {[...Array(6)].map((_, i) => (
+              <div
+                key={i}
+                className="w-full h-72 rounded-[2rem] border border-zinc-800 bg-zinc-900/40 animate-pulse"
+              />
+            ))}
           </div>
         ) : images.length === 0 ? (
-          <div className="flex flex-col items-center justify-center rounded-[2rem] border border-dashed border-zinc-800 py-28 text-zinc-500">
-            <ImageIcon size={48} className="mb-5 opacity-35" />
-            <h2 className="mb-2 text-xl font-semibold text-zinc-300">
-              No images yet
-            </h2>
-            <p className="text-sm text-zinc-500">
+          <div className="flex flex-col items-center justify-center py-32 border border-dashed border-zinc-800 rounded-[2rem] text-zinc-500">
+            <ImageIcon size={54} className="mb-5 opacity-30" />
+
+            <h2 className="text-2xl font-bold mb-2">No Images Yet</h2>
+
+            <p className="text-sm text-zinc-600">
               Gallery images will appear here.
             </p>
           </div>
         ) : (
-          <div className="relative h-[420px] w-full sm:h-[500px] lg:h-[560px]">
-            <CircularCarousel
-              items={carouselItems}
-              preset="cylinder"
-              intro="rise"
-              cardWidth={220}
-              aspectRatio={0.78}
-              gap={28}
-              autoplay="drift"
-              speed={7}
-              direction="left"
-              draggable
-              momentum={0.55}
-              snap
-              pauseOnHover
-              focusOnClick
-              parallax={0.16}
-              stretch={0.16}
-              depthFade={0.62}
-              fadeColor="#09090b"
-              innerShade={0.72}
-              cornerRadius={14}
-              captions={false}
-              onItemClick={(_, index) => setSelectedIndex(index)}
-              className="rounded-[2rem]"
-            />
-          </div>
+          <>
+            <div className="columns-2 lg:columns-3 gap-5 space-y-5">
+              {images.map((item, index) => (
+                <motion.div
+                  key={item._id}
+                  initial={{
+                    opacity: 0,
+                    y: 40,
+                  }}
+                  whileInView={{
+                    opacity: 1,
+                    y: 0,
+                  }}
+                  viewport={{
+                    once: true,
+                  }}
+                  transition={{
+                    duration: 0.7,
+                    delay: index * 0.05,
+                  }}
+                  className="break-inside-avoid"
+                >
+                  <GlassCard className="cursor-pointer group">
+                    <div
+                      onClick={() => setSelectedImage(item)}
+                      className="relative"
+                    >
+                      <div className="overflow-hidden rounded-[2rem]">
+                        <ProgressiveImage
+                          src={item.imageUrl}
+                          alt={item.title}
+                          width={600}
+                          priority={index < 2}
+                          className="
+    w-full
+    object-cover
+    transition-transform
+    duration-700
+    group-hover:scale-110
+  "
+                        />
+                      </div>
+
+                      <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-t from-black/80 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end p-6">
+                        <div>
+                          <h2 className="text-xl font-bold mb-1">
+                            {item.title}
+                          </h2>
+
+                          <p className="text-zinc-300 text-sm">
+                            Click to preview
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </GlassCard>
+                </motion.div>
+              ))}
+            </div>
+          </>
         )}
       </div>
 
+      {/* MODAL */}
       <AnimatePresence>
         {selectedImage && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={closePreview}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-3 backdrop-blur-xl sm:p-6"
+            initial={{
+              opacity: 0,
+            }}
+            animate={{
+              opacity: 1,
+            }}
+            exit={{
+              opacity: 0,
+            }}
+            onClick={() => setSelectedImage(null)}
+            className="fixed inset-0 z-50 bg-black/90 backdrop-blur-xl flex items-center justify-center p-4"
           >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.97, y: 8 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.985, y: 6 }}
-              transition={{ duration: 0.22, ease: "easeOut" }}
-              onClick={(event) => event.stopPropagation()}
-              role="dialog"
-              aria-modal="true"
-              aria-label={`Gallery image preview ${selectedIndex + 1} of ${images.length}`}
-              className="relative flex h-full w-full max-w-7xl items-center justify-center"
+            <button
+              onClick={() => setSelectedImage(null)}
+              className="absolute top-6 right-6 text-white bg-white/10 hover:bg-white/20 transition-all p-3 rounded-full z-50"
             >
-              <button
-                type="button"
-                onClick={closePreview}
-                aria-label="Close image preview"
-                className="absolute right-0 top-0 z-20 flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-zinc-950/75 text-white shadow-lg backdrop-blur-md transition-colors hover:border-white/30 hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200 sm:right-1 sm:top-1 sm:h-12 sm:w-12"
-              >
-                <X size={22} />
-              </button>
+              <X size={28} />
+            </button>
 
-              {images.length > 1 && (
-                <>
-                  <button
-                    type="button"
-                    onClick={showPreviousImage}
-                    aria-label="Previous image"
-                    className="absolute left-0 top-1/2 z-20 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-zinc-950/75 text-white shadow-lg backdrop-blur-md transition-colors hover:border-cyan-200/40 hover:bg-cyan-200/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200 sm:left-2 sm:h-12 sm:w-12"
-                  >
-                    <ChevronLeft size={24} />
-                  </button>
-                  <button
-                    type="button"
-                    onClick={showNextImage}
-                    aria-label="Next image"
-                    className="absolute right-0 top-1/2 z-20 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-zinc-950/75 text-white shadow-lg backdrop-blur-md transition-colors hover:border-violet-200/40 hover:bg-violet-200/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-200 sm:right-2 sm:h-12 sm:w-12"
-                  >
-                    <ChevronRight size={24} />
-                  </button>
-                </>
-              )}
-
-              <div className="flex h-[min(86vh,1000px)] w-[calc(100%_-_5.5rem)] items-center justify-center overflow-hidden rounded-2xl border border-white/[0.12] bg-zinc-950/35 shadow-[0_24px_100px_rgba(0,0,0,0.55)] sm:w-[calc(100%_-_8rem)] sm:rounded-3xl">
+            <motion.div
+              initial={{
+                scale: 0.85,
+                opacity: 0,
+              }}
+              animate={{
+                scale: 1,
+                opacity: 1,
+              }}
+              exit={{
+                scale: 0.85,
+                opacity: 0,
+              }}
+              transition={{
+                type: "spring",
+                damping: 20,
+              }}
+              onClick={(e) => e.stopPropagation()}
+              className="
+  w-full
+  max-w-7xl
+  flex
+  justify-center
+"
+            >
+              <div className="overflow-hidden rounded-[2rem] border border-white/10 shadow-2xl">
                 <ProgressiveImage
                   src={selectedImage.imageUrl}
-                  alt={`Gallery image ${selectedIndex + 1}`}
-                  width={1800}
-                  priority
-                  className="h-full w-full object-contain"
+                  alt={selectedImage.title}
+                  width={1600}
+                  className="
+    w-full
+    max-h-[85vh]
+    object-contain
+  "
                 />
               </div>
             </motion.div>
