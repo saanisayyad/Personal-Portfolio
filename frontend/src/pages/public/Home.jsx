@@ -50,10 +50,10 @@ const Home = () => {
 
   const backdrop = (
     <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_40%,rgba(34,211,238,0.07),transparent_55%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_40%,rgba(197,177,138,0.055),transparent_58%)]" />
       <div className="absolute inset-0 opacity-[0.035] [background-image:linear-gradient(rgba(255,255,255,0.18)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.18)_1px,transparent_1px)] [background-size:56px_56px]" />
-      <div className="absolute -left-40 top-[12%] h-80 w-80 rounded-full bg-cyan-500/10 blur-[110px]" />
-      <div className="absolute -right-36 bottom-[6%] h-96 w-96 rounded-full bg-violet-500/10 blur-[120px]" />
+      <div className="absolute -left-40 top-[12%] h-80 w-80 rounded-full bg-[#c5b18a]/[0.055] blur-[110px]" />
+      <div className="absolute -right-36 bottom-[6%] h-96 w-96 rounded-full bg-[#948268]/[0.045] blur-[120px]" />
     </div>
   );
 
@@ -133,7 +133,7 @@ const Home = () => {
                 className="mb-6 inline-flex max-w-full items-center gap-3 rounded-full border border-cyan-300/15 bg-white/[0.035] px-4 py-2.5 text-left text-xs font-medium leading-relaxed tracking-wide text-cyan-100 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] backdrop-blur-xl sm:text-sm"
               >
                 <span className="relative flex h-2 w-2 shrink-0">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-300 opacity-50" />
+                  <span className="absolute inline-flex h-full w-full rounded-full bg-cyan-300 opacity-70" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan-300" />
                 </span>
                 <span>{profile.title}</span>
@@ -223,11 +223,11 @@ const Home = () => {
             className="order-1 flex justify-center lg:order-2"
           >
             <div className="relative mx-auto w-full max-w-[440px]">
-              <div className="absolute inset-[7%] rounded-full bg-gradient-to-br from-cyan-500/20 via-transparent to-violet-500/20 blur-2xl" />
+              <div className="absolute inset-[7%] rounded-full bg-gradient-to-br from-cyan-500/[0.12] via-transparent to-violet-500/[0.09] blur-2xl" />
               <div className="absolute inset-[3%] rounded-full border border-white/[0.08]" />
-              <div className="absolute inset-0 rounded-full border border-dashed border-cyan-200/[0.16] [transform:rotate(-12deg)]" />
-              <div className="absolute right-[13%] top-[8%] h-3 w-3 rounded-full bg-violet-200 shadow-[0_0_24px_rgba(167,139,250,0.65)]" />
-              <div className="absolute bottom-[15%] left-[5%] h-2.5 w-2.5 rounded-full bg-cyan-200 shadow-[0_0_22px_rgba(103,232,249,0.65)]" />
+              <div className="absolute inset-0 rounded-full border border-[#c5b18a]/[0.15] [transform:rotate(-12deg)]" />
+              <div className="absolute right-[13%] top-[8%] h-3 w-3 rounded-full bg-violet-200 shadow-[0_0_18px_rgba(197,177,138,0.24)]" />
+              <div className="absolute bottom-[15%] left-[5%] h-2.5 w-2.5 rounded-full bg-cyan-200 shadow-[0_0_16px_rgba(197,177,138,0.22)]" />
 
               <div className="relative m-[5%] aspect-square overflow-hidden rounded-full border border-white/[0.12] bg-zinc-950/50 p-2 shadow-[0_24px_100px_rgba(0,0,0,0.4)]">
                 {profile.profileImage ? (
