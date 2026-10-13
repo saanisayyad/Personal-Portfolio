@@ -39,11 +39,11 @@ const Footer = () => {
       </div>
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 py-7 sm:px-6 lg:px-8">
-        <div className="rounded-2xl border border-white/[0.08] bg-white/[0.025] px-5 py-5 shadow-[0_18px_60px_rgba(0,0,0,0.14)] backdrop-blur-xl sm:px-7 sm:py-6">
+        <div>
           <div className="flex flex-col items-center justify-between gap-5 sm:flex-row">
             <div className="text-center sm:text-left">
               <p className="text-lg font-semibold tracking-tight text-zinc-100">
-                Portfolio<span className="text-cyan-300">.</span>
+                Portfolio
               </p>
               <p className="mt-1 text-sm text-zinc-500">
                 Turning data into insights.
@@ -89,7 +89,7 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className="my-5 h-px bg-gradient-to-r from-transparent via-white/[0.09] to-transparent" />
+          <div className="my-5 h-px w-full bg-gradient-to-r from-transparent via-white/[0.09] to-transparent" />
 
           <div className="flex flex-col items-center justify-between gap-4 text-center sm:flex-row sm:text-left">
             <p className="inline-flex flex-wrap items-center justify-center gap-1.5 text-xs text-zinc-500 sm:justify-start">
