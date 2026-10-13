@@ -72,9 +72,9 @@ const ProjectDetails = () => {
         >
           <Link
             to="/projects"
-            className="inline-flex items-center gap-3 text-zinc-400 hover:text-white transition-colors duration-300"
+            className="group inline-flex min-h-11 items-center justify-center gap-2.5 rounded-xl border border-white/[0.12] bg-white/[0.035] px-4 py-2.5 text-sm font-medium text-zinc-300 backdrop-blur-xl transition duration-200 hover:-translate-y-0.5 hover:border-cyan-200/35 hover:bg-cyan-200/[0.06] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
           >
-            <ArrowLeft size={18} />
+            <ArrowLeft size={18} className="transition-transform duration-200 group-hover:-translate-x-0.5" />
             Back to Projects
           </Link>
         </motion.div>
@@ -155,10 +155,16 @@ const ProjectDetails = () => {
                           rounded-xl
                           border-2
                           transition-all
+                          hover:scale-[1.02]
+                          focus-visible:outline-none
+                          focus-visible:ring-2
+                          focus-visible:ring-cyan-200
+                          focus-visible:ring-offset-2
+                          focus-visible:ring-offset-zinc-950
                           ${
                             activeImage === index
-                              ? "border-cyan-400"
-                              : "border-zinc-800"
+                              ? "border-cyan-300 shadow-[0_0_0_1px_rgba(103,232,249,0.25)]"
+                              : "border-white/[0.12] hover:border-cyan-200/50"
                           }
                         `}
                     >
@@ -230,21 +236,9 @@ const ProjectDetails = () => {
                 href={project.liveUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="
-                  inline-flex
-                  items-center
-                  gap-2
-                  px-6
-                  py-3
-                  rounded-xl
-                  bg-white
-                  text-black
-                  font-semibold
-                  hover:scale-105
-                  transition-all
-                "
+                className="group inline-flex min-h-12 items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-cyan-300 to-violet-400 px-6 py-3.5 font-semibold text-zinc-950 shadow-lg shadow-cyan-500/[0.12] transition duration-200 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-violet-500/[0.16] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
               >
-                <ExternalLink size={18} />
+                <ExternalLink size={18} className="transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                 Live Demo
               </a>
             )}
@@ -254,20 +248,9 @@ const ProjectDetails = () => {
                 href={project.githubUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="
-                  inline-flex
-                  items-center
-                  gap-2
-                  px-6
-                  py-3
-                  rounded-xl
-                  border
-                  border-zinc-700
-                  hover:bg-zinc-800
-                  transition-all
-                "
+                className="group inline-flex min-h-12 items-center justify-center gap-3 rounded-2xl border border-white/[0.12] bg-white/[0.035] px-6 py-3.5 font-medium text-zinc-100 backdrop-blur-xl transition duration-200 hover:-translate-y-0.5 hover:border-cyan-200/35 hover:bg-cyan-200/[0.06] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
               >
-                <FaGithub size={18} />
+                <FaGithub size={18} className="text-cyan-200" />
                 GitHub
               </a>
             )}
