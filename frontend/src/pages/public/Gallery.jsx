@@ -226,7 +226,7 @@ const Gallery = () => {
                 </>
               )}
 
-              <div className="flex h-full max-h-[85vh] w-full max-w-[calc(100%-5.5rem)] items-center justify-center overflow-hidden rounded-2xl border border-white/[0.12] bg-zinc-950/35 shadow-[0_24px_100px_rgba(0,0,0,0.55)] sm:max-w-[calc(100%-8rem)] sm:rounded-3xl">
+              <div className="flex h-full max-h-[85vh] w-full max-w-[calc(100%_-_5.5rem)] items-center justify-center overflow-hidden rounded-2xl border border-white/[0.12] bg-zinc-950/35 shadow-[0_24px_100px_rgba(0,0,0,0.55)] sm:max-w-[calc(100%_-_8rem)] sm:rounded-3xl">
                 <ProgressiveImage
                   src={selectedImage.imageUrl}
                   alt={`Gallery image ${selectedIndex + 1}`}
