@@ -1,200 +1,128 @@
-// components/layout/Footer.jsx
-
-import {
-  useEffect,
-  useState,
-} from "react"
-
+import { useEffect, useState } from "react";
+import { ArrowUp } from "lucide-react";
 import {
   FaGithub,
   FaLinkedin,
   FaInstagram,
   FaHeart,
-} from "react-icons/fa"
+} from "react-icons/fa";
 
-import {
-  getProfile,
-} from "../services/profileService"
+import { getProfile } from "../services/profileService";
 
 const Footer = () => {
-
-  const currentYear =
-    new Date().getFullYear()
-
-  const [profile,
-    setProfile] =
-    useState(null)
+  const currentYear = new Date().getFullYear();
+  const [profile, setProfile] = useState(null);
 
   useEffect(() => {
-
-    const fetchProfile =
-      async () => {
-
-        try {
-
-          const data =
-            await getProfile()
-
-          setProfile(data)
-
-        } catch (error) {
-
-          console.log(error)
-        }
+    const fetchProfile = async () => {
+      try {
+        const data = await getProfile();
+        setProfile(data);
+      } catch (error) {
+        console.error("Unable to load footer profile links:", error);
       }
+    };
 
-    fetchProfile()
+    fetchProfile();
+  }, []);
 
-  }, [])
-
-  const socialButtonStyles = `
-    w-12 h-12
-    rounded-2xl
-    border border-zinc-800
-    bg-zinc-900/50
-    flex items-center justify-center
-    text-zinc-400
-    hover:text-white
-    hover:border-zinc-700
-    hover:-translate-y-1
-    transition-all duration-300
-    backdrop-blur-xl
-  `
+  const socialButtonStyles =
+    "inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/[0.09] bg-white/[0.035] text-zinc-400 transition-all duration-200 hover:-translate-y-0.5 hover:border-cyan-300/25 hover:bg-cyan-300/[0.07] hover:text-cyan-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/60";
 
   return (
-
     <footer
-    id = "footer"
-    className="
-    relative
-    mt-10
-    border-t border-zinc-800
-    overflow-hidden
-    ">
-
-      {/* BACKGROUND GLOW */}
-      <div className="absolute inset-0 pointer-events-none">
-
-        <div className="
-        absolute
-        left-1/2
-        top-0
-        -translate-x-1/2
-        w-[500px]
-        h-[250px]
-        bg-cyan-500/10
-        blur-[120px]
-        rounded-full
-        " />
-
+      id="footer"
+      className="relative mt-10 overflow-hidden border-t border-white/[0.07]"
+    >
+      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+        <div className="absolute left-1/2 top-0 h-56 w-[min(500px,90vw)] -translate-x-1/2 rounded-full bg-cyan-500/[0.07] blur-[110px]" />
       </div>
 
-      <div className="
-      relative z-10
-      max-w-7xl mx-auto
-      px-4 sm:px-6 lg:px-8
-      py-8
-      ">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 py-7 sm:px-6 lg:px-8">
+        <div className="rounded-2xl border border-white/[0.08] bg-white/[0.025] px-5 py-5 shadow-[0_18px_60px_rgba(0,0,0,0.14)] backdrop-blur-xl sm:px-7 sm:py-6">
+          <div className="flex flex-col items-center justify-between gap-5 sm:flex-row">
+            <div className="text-center sm:text-left">
+              <p className="text-lg font-semibold tracking-tight text-zinc-100">
+                Portfolio<span className="text-cyan-300">.</span>
+              </p>
+              <p className="mt-1 text-sm text-zinc-500">
+                Turning data into insights.
+              </p>
+            </div>
 
-        <div className="
-        flex flex-col lg:flex-row
-        items-center justify-between
-        gap-8
-        ">
+            <div className="flex items-center gap-2.5">
+              {profile?.github && (
+                <a
+                  href={profile.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="GitHub profile"
+                  className={socialButtonStyles}
+                >
+                  <FaGithub size={18} aria-hidden="true" />
+                </a>
+              )}
 
-          {/* LEFT */}
-          <div className="
-          flex items-center gap-2
-          text-sm text-zinc-500
-          ">
+              {profile?.linkedin && (
+                <a
+                  href={profile.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn profile"
+                  className={socialButtonStyles}
+                >
+                  <FaLinkedin size={18} aria-hidden="true" />
+                </a>
+              )}
 
-            Built with
-
-            <FaHeart
-              size={14}
-              className="
-              text-cyan-300
-              animate-pulse
-              "
-            />
-
-            using React & Node.js
-
+              {profile?.instagram && (
+                <a
+                  href={profile.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Instagram profile"
+                  className={socialButtonStyles}
+                >
+                  <FaInstagram size={18} aria-hidden="true" />
+                </a>
+              )}
+            </div>
           </div>
 
-          {/* CENTER */}
-          <div>
+          <div className="my-5 h-px bg-gradient-to-r from-transparent via-white/[0.09] to-transparent" />
 
-            <p className="
-            text-sm
-            text-zinc-600
-            text-center
-            whitespace-nowrap
-            ">
-
-              © {currentYear} Portfolio.
-              All rights reserved.
-
+          <div className="flex flex-col items-center justify-between gap-4 text-center sm:flex-row sm:text-left">
+            <p className="inline-flex flex-wrap items-center justify-center gap-1.5 text-xs text-zinc-500 sm:justify-start">
+              <span>Built with</span>
+              <FaHeart
+                size={12}
+                className="text-cyan-300"
+                aria-label="love"
+                role="img"
+              />
+              <span>using React &amp; Node.js</span>
             </p>
 
+            <p className="text-xs text-zinc-600">
+              © {currentYear} Portfolio. All rights reserved.
+            </p>
+
+            <button
+              type="button"
+              onClick={() =>
+                window.scrollTo({ top: 0, behavior: "smooth" })
+              }
+              aria-label="Back to top"
+              title="Back to top"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/[0.09] bg-white/[0.035] text-zinc-400 transition-all duration-200 hover:-translate-y-0.5 hover:border-cyan-300/25 hover:bg-cyan-300/[0.08] hover:text-cyan-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/60"
+            >
+              <ArrowUp size={16} aria-hidden="true" />
+            </button>
           </div>
-
-          {/* RIGHT */}
-          <div className="flex items-center gap-4">
-
-            {profile?.github && (
-
-              <a
-                href={profile.github}
-                target="_blank"
-                rel="noreferrer"
-                className={socialButtonStyles}
-              >
-
-                <FaGithub size={18} />
-
-              </a>
-
-            )}
-
-            {profile?.linkedin && (
-
-              <a
-                href={profile.linkedin}
-                target="_blank"
-                rel="noreferrer"
-                className={socialButtonStyles}
-              >
-
-                <FaLinkedin size={18} />
-
-              </a>
-
-            )}
-
-            {profile?.instagram && (
-
-              <a
-                href={profile.instagram}
-                target="_blank"
-                rel="noreferrer"
-                className={socialButtonStyles}
-              >
-
-                <FaInstagram size={18} />
-
-              </a>
-
-            )}
-
-          </div>
-
         </div>
-
       </div>
-
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;
