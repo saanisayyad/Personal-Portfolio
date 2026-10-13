@@ -9,7 +9,6 @@ import { getGalleryImages } from "../../services/galleryService";
 import PageHeader from "../../components/ui/PageHeader";
 import GlassCard from "../../components/ui/GlassCard";
 import ProgressiveImage from "../../components/ui/ProgressiveImage";
-import DriftWall from "../../components/ui/DriftWall";
 
 const Gallery = () => {
   const [images, setImages] = useState([]);
@@ -79,35 +78,63 @@ const Gallery = () => {
           </div>
         ) : (
           <>
-            <div className="relative h-[380px] w-full overflow-hidden sm:h-[500px] lg:h-[560px]">
-              <DriftWall
-                items={images.map((item, index) => ({
-                  image: item.imageUrl,
-                  alt: `Gallery image ${index + 1}`,
-                  galleryIndex: index,
-                }))}
-                columns={5}
-                tileWidth={170}
-                tileHeight={124}
-                gap={12}
-                radius={14}
-                tilt={10}
-                turn={-10}
-                perspective={1350}
-                depth={100}
-                speed={16}
-                direction="up"
-                variance={0.22}
-                parallax={0.12}
-                pauseOnHover
-                lift={32}
-                fade={0.48}
-                dim={0.68}
-                grayscale={false}
-                overlayColor="#09090b"
-                onItemClick={(_, index) => setSelectedImage(images[index])}
-                className="rounded-[2rem]"
-              />
+            <div className="columns-2 lg:columns-3 gap-5 space-y-5">
+              {images.map((item, index) => (
+                <motion.div
+                  key={item._id}
+                  initial={{
+                    opacity: 0,
+                    y: 40,
+                  }}
+                  whileInView={{
+                    opacity: 1,
+                    y: 0,
+                  }}
+                  viewport={{
+                    once: true,
+                  }}
+                  transition={{
+                    duration: 0.7,
+                    delay: index * 0.05,
+                  }}
+                  className="break-inside-avoid"
+                >
+                  <GlassCard className="cursor-pointer group">
+                    <div
+                      onClick={() => setSelectedImage(item)}
+                      className="relative"
+                    >
+                      <div className="overflow-hidden rounded-[2rem]">
+                        <ProgressiveImage
+                          src={item.imageUrl}
+                          alt={item.title}
+                          width={600}
+                          priority={index < 2}
+                          className="
+    w-full
+    object-cover
+    transition-transform
+    duration-700
+    group-hover:scale-110
+  "
+                        />
+                      </div>
+
+                      <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-t from-black/80 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end p-6">
+                        <div>
+                          <h2 className="text-xl font-bold mb-1">
+                            {item.title}
+                          </h2>
+
+                          <p className="text-zinc-300 text-sm">
+                            Click to preview
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </GlassCard>
+                </motion.div>
+              ))}
             </div>
           </>
         )}
