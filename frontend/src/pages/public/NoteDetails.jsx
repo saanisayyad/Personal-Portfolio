@@ -100,10 +100,10 @@ const NoteDetails = () => {
 
           <Link
             to="/notes"
-            className="inline-flex items-center gap-3 text-zinc-400 hover:text-white transition-colors duration-300"
+            className="group inline-flex min-h-11 items-center justify-center gap-2.5 rounded-xl border border-white/[0.12] bg-white/[0.035] px-4 py-2.5 text-sm font-medium text-zinc-300 backdrop-blur-xl transition duration-200 hover:-translate-y-0.5 hover:border-cyan-200/35 hover:bg-cyan-200/[0.06] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
           >
 
-            <ArrowLeft size={18} />
+            <ArrowLeft size={18} className="transition-transform duration-200 group-hover:-translate-x-0.5" />
 
             Back to Notes
 
