@@ -154,7 +154,7 @@ const Notes = () => {
                       {/* Top */}
                       <div className="flex items-center justify-between mb-6">
 
-                        <div className="w-14 h-14 rounded-2xl bg-zinc-800/70 border border-zinc-700 flex items-center justify-center text-pink-400">
+                        <div className="w-14 h-14 rounded-2xl bg-zinc-800/70 border border-zinc-700 flex items-center justify-center text-cyan-300">
 
                           <FileText size={20} />
 
@@ -169,7 +169,7 @@ const Notes = () => {
                       </div>
 
                       {/* Title */}
-                      <h2 className="text-2xl font-bold text-white leading-tight mb-4 group-hover:text-pink-200 transition-colors duration-300">
+                      <h2 className="text-2xl font-bold text-white leading-tight mb-4 group-hover:text-cyan-100 transition-colors duration-300">
 
                         {note.title}
 
