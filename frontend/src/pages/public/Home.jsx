@@ -125,40 +125,36 @@ const Home = () => {
             transition={{ duration: 0.65, ease: "easeOut" }}
             className="relative z-20 order-2 text-center lg:order-1 lg:text-left"
           >
-            {profile.title && (
-              <motion.div
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1, duration: 0.55 }}
-                className="mb-6 inline-flex max-w-full items-center gap-3 rounded-full border border-cyan-300/15 bg-white/[0.035] px-4 py-2.5 text-left text-xs font-medium leading-relaxed tracking-wide text-cyan-100 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] backdrop-blur-xl sm:text-sm"
-              >
-                <span className="relative flex h-2 w-2 shrink-0">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-300 opacity-50" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan-300" />
-                </span>
-                <span>{profile.title}</span>
-              </motion.div>
-            )}
-
             {profile.name && (
               <motion.h1
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.16, duration: 0.65, ease: "easeOut" }}
-                className="mx-auto mb-6 max-w-[15ch] break-words text-[clamp(2.65rem,6.2vw,5.6rem)] font-bold leading-[0.98] tracking-[-0.055em] lg:mx-0"
+                className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight leading-none mb-6"
               >
-                <span className="bg-gradient-to-br from-white via-cyan-50 to-violet-200 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-white via-cyan-100 to-violet-300 bg-clip-text text-transparent break-words">
                   {profile.name}
                 </span>
               </motion.h1>
+            )}
+
+            {profile.title && (
+              <motion.h2
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.22, duration: 0.65 }}
+                className="text-lg sm:text-xl md:text-2xl lg:text-2xl text-zinc-300 font-medium max-w-xl md:max-w-2xl mx-auto lg:mx-0 mb-8 leading-relaxed text-justify"
+              >
+                {profile.title}
+              </motion.h2>
             )}
 
             {profile.bio && (
               <motion.p
                 initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.24, duration: 0.6 }}
-                className="mx-auto mb-9 max-w-2xl text-pretty text-base leading-8 text-zinc-300 sm:text-lg lg:mx-0 lg:text-[1.1rem]"
+                transition={{ delay: 0.3, duration: 0.6 }}
+                className="text-zinc-400 text-sm sm:text-base md:text-lg leading-relaxed max-w-xl md:max-w-2xl mx-auto lg:mx-0 mb-10 text-justify"
               >
                 {profile.bio}
               </motion.p>
