@@ -143,15 +143,17 @@ const Notes = () => {
                     delay:
                       index * 0.05,
                   }}
+                  className="h-full"
                 >
 
                   <Link
                     to={`/notes/${note.slug}`}
-                    className="block rounded-[2rem] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200 focus-visible:ring-offset-4 focus-visible:ring-offset-zinc-950"
+                    className="group block h-full rounded-[2rem] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200 focus-visible:ring-offset-4 focus-visible:ring-offset-zinc-950"
                   >
 
-                    <GlassCard className="h-full p-7">
+                    <GlassCard className="h-[380px] p-7 sm:h-[400px]">
 
+                      <div className="flex h-full flex-col">
                       {/* Top */}
                       <div className="flex items-center justify-between mb-6">
 
@@ -170,14 +172,14 @@ const Notes = () => {
                       </div>
 
                       {/* Title */}
-                      <h2 className="text-2xl font-bold text-white leading-tight mb-4 group-hover:text-cyan-100 transition-colors duration-300">
+                      <h2 className="line-clamp-2 min-h-[3.5rem] text-2xl font-bold leading-tight text-white transition-colors duration-300 group-hover:text-cyan-100">
 
                         {note.title}
 
                       </h2>
 
                       {/* Content */}
-                      <p className="text-zinc-500 leading-relaxed text-sm line-clamp-4 mb-8 text-justify">
+                      <p className="mb-6 line-clamp-4 min-h-[5rem] text-justify text-sm leading-relaxed text-zinc-500">
 
                         {note.content}
 
@@ -200,6 +202,7 @@ const Notes = () => {
 
                         </span>
 
+                      </div>
                       </div>
 
                     </GlassCard>
