@@ -95,7 +95,7 @@ const ProjectDetails = () => {
           className="relative overflow-hidden rounded-[2.5rem] border border-zinc-800 bg-zinc-900/40 backdrop-blur-xl p-6 sm:p-10 lg:p-14"
         >
           {/* Glow */}
-          <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-transparent to-blue-500/5 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-transparent to-violet-500/5 pointer-events-none" />
 
           {/* Top Meta */}
           <div className="relative z-10 flex flex-wrap items-center gap-4 mb-8">
@@ -119,7 +119,7 @@ const ProjectDetails = () => {
           </div>
 
           {/* Title */}
-          <h1 className="relative z-10 text-4xl sm:text-5xl lg:text-6xl font-black leading-tight tracking-tight bg-gradient-to-r from-white via-cyan-200 to-blue-300 bg-clip-text text-transparent mb-6">
+          <h1 className="relative z-10 text-4xl sm:text-5xl lg:text-6xl font-black leading-tight tracking-tight bg-gradient-to-r from-white via-cyan-200 to-violet-300 bg-clip-text text-transparent mb-6">
             {project.title}
           </h1>
 
@@ -175,7 +175,7 @@ const ProjectDetails = () => {
           )}
 
           {/* Divider */}
-          <div className="relative z-10 h-px w-full bg-gradient-to-r from-cyan-500/30 via-zinc-800 to-blue-500/30 mb-10" />
+          <div className="relative z-10 h-px w-full bg-gradient-to-r from-cyan-500/30 via-zinc-800 to-violet-500/30 mb-10" />
 
           {/* Tech Stack */}
           {project.techStack?.length > 0 && (
