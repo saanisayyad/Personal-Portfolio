@@ -163,7 +163,7 @@ const ProjectDetails = () => {
                           focus-visible:ring-offset-zinc-950
                           ${
                             activeImage === index
-                              ? "border-cyan-300 shadow-[0_0_0_1px_rgba(103,232,249,0.25)]"
+                              ? "border-cyan-300 shadow-[0_0_0_1px_rgba(197,177,138,0.22)]"
                               : "border-white/[0.12] hover:border-cyan-200/50"
                           }
                         `}
