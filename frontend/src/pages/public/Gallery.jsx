@@ -1,5 +1,6 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { ImageIcon, RefreshCw } from "lucide-react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { ImageIcon, RefreshCw, X } from "lucide-react";
 
 import { getGalleryImages } from "../../services/galleryService";
 import PageHeader from "../../components/ui/PageHeader";
@@ -12,6 +13,8 @@ const Gallery = () => {
   const [galleryWidth, setGalleryWidth] = useState(1000);
   const [imageDimensions, setImageDimensions] = useState({});
   const [galleryNode, setGalleryNode] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const previewTriggerRef = useRef(null);
 
   const galleryRef = useCallback((node) => {
     setGalleryNode(node);
@@ -131,6 +134,31 @@ const Gallery = () => {
     });
   }, []);
 
+  const closePreview = useCallback(() => {
+    setSelectedImage(null);
+  }, []);
+
+  useEffect(() => {
+    if (!selectedImage) return undefined;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        closePreview();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = previousOverflow;
+      previewTriggerRef.current?.focus?.();
+    };
+  }, [selectedImage, closePreview]);
+
   return (
     <section className="min-h-screen px-4 py-28 text-white sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
@@ -199,16 +227,26 @@ const Gallery = () => {
                       className="group relative m-0 min-w-0 overflow-hidden rounded-xl border border-white/[0.07] bg-zinc-900/50 transition-[border-color,box-shadow] duration-300 hover:border-cyan-200/25 hover:shadow-[0_12px_32px_rgba(0,0,0,0.22)] sm:rounded-2xl"
                       style={{ flex: `0 0 ${width}px`, height: row.height }}
                     >
-                      <ProgressiveImage
-                        src={item.imageUrl}
-                        alt={`Gallery image ${index + 1}`}
-                        width={900}
-                        priority={index < 3}
-                        onImageLoad={(dimensions) =>
-                          handleImageLoad(item._id, dimensions)
-                        }
-                        className="h-full w-full transition-transform duration-500 ease-out group-hover:scale-[1.025]"
-                      />
+                      <button
+                        type="button"
+                        onClick={(event) => {
+                          previewTriggerRef.current = event.currentTarget;
+                          setSelectedImage(item);
+                        }}
+                        aria-label={`Preview gallery image ${index + 1}`}
+                        className="block h-full w-full cursor-zoom-in text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-cyan-200"
+                      >
+                        <ProgressiveImage
+                          src={item.imageUrl}
+                          alt={`Gallery image ${index + 1}`}
+                          width={900}
+                          priority={index < 3}
+                          onImageLoad={(dimensions) =>
+                            handleImageLoad(item._id, dimensions)
+                          }
+                          className="h-full w-full transition-transform duration-300 ease-out group-hover:scale-[1.025]"
+                        />
+                      </button>
                     </figure>
                   ))}
                 </div>
@@ -217,6 +255,49 @@ const Gallery = () => {
           </div>
         )}
       </div>
+
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onMouseDown={(event) => {
+              if (event.target === event.currentTarget) closePreview();
+            }}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 px-4 py-8 backdrop-blur-md sm:px-6"
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.98, y: 6 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.99, y: 4 }}
+              transition={{ duration: 0.18, ease: "easeOut" }}
+              role="dialog"
+              aria-modal="true"
+              aria-label={`Preview gallery image ${images.findIndex((image) => image._id === selectedImage._id) + 1}`}
+              className="relative flex h-[58vh] max-h-[620px] w-[86vw] max-w-[960px] items-center justify-center overflow-hidden rounded-2xl border border-white/[0.12] bg-[#09090b]/90 p-2 shadow-[0_28px_100px_rgba(0,0,0,0.55)] sm:h-[70vh] sm:w-[76vw] sm:rounded-3xl sm:p-3"
+            >
+              <button
+                type="button"
+                onClick={closePreview}
+                aria-label="Close image preview"
+                className="absolute right-3 top-3 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-black/65 text-white backdrop-blur-md transition-colors hover:border-cyan-200/30 hover:bg-black/85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200 sm:right-4 sm:top-4"
+              >
+                <X size={20} />
+              </button>
+
+              <ProgressiveImage
+                src={selectedImage.imageUrl}
+                alt={`Gallery image ${images.findIndex((image) => image._id === selectedImage._id) + 1}`}
+                width={1600}
+                priority
+                objectFit="contain"
+                className="h-full w-full rounded-xl"
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };
