@@ -91,7 +91,7 @@ const Projects = () => {
                   >
                     <Link
                       to={`/projects/${project.slug}`}
-                      className="block h-full"
+                      className="block h-full rounded-[2rem] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200 focus-visible:ring-offset-4 focus-visible:ring-offset-zinc-950"
                     >
                       {/* IMAGE */}
                       <div className="relative overflow-hidden aspect-[16/10]">
