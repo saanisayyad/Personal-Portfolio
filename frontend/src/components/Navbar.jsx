@@ -79,7 +79,7 @@ const Navbar = () => {
             <div className="relative w-14 h-14 flex items-center justify-center">
               {/* Analytics Ring */}
               <svg
-                className="absolute inset-0"
+                className="absolute inset-0 animate-spin"
                 viewBox="0 0 100 100"
                 style={{
                   animationDuration: "10s",
@@ -122,8 +122,41 @@ const Navbar = () => {
             </div>
 
             {/* Portfolio descriptor */}
-            <div className="flex flex-col justify-center gap-2">
-              <span className="h-px w-9 bg-[#c5b18a]/70" aria-hidden="true" />
+            <div className="flex flex-col justify-center gap-1.5">
+              <svg
+                width="55"
+                height="18"
+                viewBox="0 0 55 18"
+                className="overflow-visible"
+                aria-hidden="true"
+              >
+                <polyline
+                  fill="none"
+                  stroke="#c5b18a"
+                  strokeWidth="1.7"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  points="2,14 12,10 22,12.5 34,5 52,8"
+                >
+                  <animate
+                    attributeName="points"
+                    dur="4.5s"
+                    repeatCount="indefinite"
+                    values="
+                      2,14 12,10 22,12.5 34,5 52,8;
+                      2,13 12,8.5 22,11.5 34,4.5 52,7;
+                      2,14 12,10 22,12.5 34,5 52,8"
+                  />
+                </polyline>
+                <circle cx="52" cy="8" r="2" fill="#d8c7a5">
+                  <animate
+                    attributeName="r"
+                    values="2;2.7;2"
+                    dur="3.2s"
+                    repeatCount="indefinite"
+                  />
+                </circle>
+              </svg>
               <span className="text-[9px] uppercase tracking-[0.24em] text-[#b8b0a2] sm:text-[10px]">
                 Data Analyst
               </span>
