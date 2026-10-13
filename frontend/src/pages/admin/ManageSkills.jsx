@@ -12,8 +12,8 @@ const ManageSkills = () => {
 
   const [formData, setFormData] = useState({
     name: "",
-
     description: "",
+    isFeatured: false,
   });
 
   const [editingId, setEditingId] = useState(null);
@@ -33,18 +33,19 @@ const ManageSkills = () => {
   }, []);
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
+    const { name, value, type, checked } = e.target;
 
-      [e.target.name]: e.target.value,
-    });
+    setFormData((previous) => ({
+      ...previous,
+      [name]: type === "checkbox" ? checked : value,
+    }));
   };
 
   const resetForm = () => {
     setFormData({
       name: "",
-
       description: "",
+      isFeatured: false,
     });
 
     setEditingId(null);
@@ -77,8 +78,8 @@ const ManageSkills = () => {
 
     setFormData({
       name: skill.name,
-
       description: skill.description,
+      isFeatured: Boolean(skill.isFeatured),
     });
 
     window.scrollTo({
@@ -155,6 +156,24 @@ const ManageSkills = () => {
               />
             </div>
 
+            <label className="flex items-start gap-3 rounded-xl border border-zinc-800 bg-zinc-950/60 p-4 cursor-pointer">
+              <input
+                type="checkbox"
+                name="isFeatured"
+                checked={Boolean(formData.isFeatured)}
+                onChange={handleChange}
+                className="mt-1 h-4 w-4 accent-blue-500"
+              />
+              <span>
+                <span className="block text-sm font-semibold text-white">
+                  Show this skill first
+                </span>
+                <span className="mt-1 block text-xs leading-relaxed text-zinc-500">
+                  Featured skills appear before other skills on your public portfolio.
+                </span>
+              </span>
+            </label>
+
             <div className="flex gap-3">
               <button
                 disabled={!formData.name.trim() || !formData.description.trim()}
@@ -210,10 +229,17 @@ const ManageSkills = () => {
               className="bg-zinc-900/40 border border-zinc-800 p-6 rounded-2xl"
             >
               <div className="flex items-start justify-between gap-6">
-                <div>
-                  <h2 className="text-2xl font-bold text-white mb-3">
-                    {skill.name}
-                  </h2>
+                <div className="min-w-0">
+                  <div className="mb-3 flex flex-wrap items-center gap-3">
+                    <h2 className="text-2xl font-bold text-white">
+                      {skill.name}
+                    </h2>
+                    {skill.isFeatured && (
+                      <span className="rounded-full border border-blue-400/20 bg-blue-400/10 px-3 py-1 text-xs font-semibold text-blue-300">
+                        Shown first
+                      </span>
+                    )}
+                  </div>
 
                   <p className="text-zinc-400 leading-relaxed">
                     {skill.description}
