@@ -30,7 +30,7 @@ const PageHeader = ({
     >
 
       {/* Badge */}
-      <div className="inline-flex items-center gap-3 px-5 py-2 rounded-full border border-pink-500/20 bg-white/5 backdrop-blur-md text-pink-400 text-xs uppercase tracking-[0.25em] mb-8">
+      <div className="inline-flex items-center gap-3 px-5 py-2 rounded-full border border-cyan-500/20 bg-white/5 backdrop-blur-md text-cyan-300 text-xs uppercase tracking-[0.25em] mb-8">
 
         {Icon && (
           <Icon size={14} />
@@ -41,7 +41,7 @@ const PageHeader = ({
       </div>
 
       {/* Title */}
-      <h1 className="text-5xl sm:text-6xl md:text-7xl font-black tracking-tight bg-gradient-to-r from-white via-pink-200 to-orange-300 bg-clip-text text-transparent mb-8">
+      <h1 className="text-5xl sm:text-6xl md:text-7xl font-black tracking-tight bg-gradient-to-r from-white via-cyan-100 to-violet-300 bg-clip-text text-transparent mb-8">
 
         {title}
 
