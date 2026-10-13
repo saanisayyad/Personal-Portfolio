@@ -67,7 +67,7 @@ const NoteDetails = () => {
 
       <div className="min-h-screen flex justify-center items-center text-white">
 
-        <div className="w-14 h-14 border-4 border-t-pink-500 border-zinc-800 rounded-full animate-spin" />
+        <div className="w-14 h-14 border-4 border-t-cyan-400 border-zinc-800 rounded-full animate-spin" />
 
       </div>
 
@@ -128,12 +128,12 @@ const NoteDetails = () => {
         >
 
           {/* Glow */}
-          <div className="absolute inset-0 bg-gradient-to-br from-pink-500/5 via-transparent to-orange-500/5 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-transparent to-violet-500/5 pointer-events-none" />
 
           {/* Top Meta */}
           <div className="relative z-10 flex flex-wrap items-center gap-4 mb-8">
 
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-800/70 border border-zinc-700 text-pink-400 text-xs uppercase tracking-[0.2em]">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-800/70 border border-zinc-700 text-cyan-300 text-xs uppercase tracking-[0.2em]">
 
               <FileText size={14} />
 
@@ -154,14 +154,14 @@ const NoteDetails = () => {
           </div>
 
           {/* Title */}
-          <h1 className="relative z-10 text-4xl sm:text-5xl lg:text-6xl font-black leading-tight tracking-tight bg-gradient-to-r from-white via-pink-200 to-orange-300 bg-clip-text text-transparent mb-10">
+          <h1 className="relative z-10 text-4xl sm:text-5xl lg:text-6xl font-black leading-tight tracking-tight bg-gradient-to-r from-white via-cyan-100 to-violet-300 bg-clip-text text-transparent mb-10">
 
             {note.title}
 
           </h1>
 
           {/* Divider */}
-          <div className="relative z-10 h-px w-full bg-gradient-to-r from-pink-500/30 via-zinc-800 to-orange-500/30 mb-10" />
+          <div className="relative z-10 h-px w-full bg-gradient-to-r from-cyan-500/30 via-zinc-800 to-violet-500/30 mb-10" />
 
           {/* Content */}
           <div className="relative z-10">
