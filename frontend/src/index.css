@@ -9,13 +9,13 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  background: #090909;
+  background: #09090b;
 }
 
 ::-webkit-scrollbar-thumb {
   background: linear-gradient(
-      #ec4899,
-      #f97316
+      #22d3ee,
+      #8b5cf6
   );
 
   border-radius: 999px;
@@ -23,8 +23,8 @@ html {
 
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(
-      #ff4d94,
-      #fb923c
+      #67e8f9,
+      #a78bfa
   );
 }
 
@@ -34,12 +34,12 @@ html {
 }
 
 ::selection {
-  background: #ec4899;
+  background: #22d3ee;
   color: white;
 }
 
 ::-moz-selection {
-  background: #ec4899;
+  background: #22d3ee;
   color: white;
 }
 
