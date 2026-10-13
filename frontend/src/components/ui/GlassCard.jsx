@@ -17,14 +17,14 @@ const GlassCard = ({
       backdrop-blur-xl
       transition-all
       duration-500
-      hover:border-pink-500/30
+      hover:border-cyan-400/30
       hover:-translate-y-1
       ${className}
       `}
     >
 
       {/* Glow */}
-      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-pink-500/10 via-transparent to-orange-500/10" />
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-cyan-500/10 via-transparent to-violet-500/10" />
 
       <div className="relative z-10 h-full">
 
