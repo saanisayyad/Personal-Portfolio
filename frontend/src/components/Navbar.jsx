@@ -193,7 +193,7 @@ const Navbar = () => {
                           bg-white/10
                           border
                           border-white/20
-                          shadow-[0_0_25px_rgba(236,72,153,.25)]
+                          shadow-[0_0_25px_rgba(34,211,238,.22)]
                           "
                       />
                     )}
@@ -387,7 +387,7 @@ hover:scale-105
                     className={({ isActive }) =>
                       `px-5 py-4 rounded-2xl font-semibold transition-all duration-300 ${
                         isActive
-                          ? "bg-white text-black"
+                          ? "bg-cyan-300 text-zinc-950"
                           : "bg-zinc-900 text-zinc-300 hover:bg-zinc-800"
                       }`
                     }
@@ -400,7 +400,7 @@ hover:scale-105
                   <NavLink
                     to="/admin/dashboard"
                     onClick={() => setMenuOpen(false)}
-                    className="mt-4 px-5 py-4 rounded-2xl bg-gradient-to-r from-pink-500 to-orange-500 text-white font-bold text-center"
+                    className="mt-4 px-5 py-4 rounded-2xl bg-gradient-to-r from-cyan-500 to-violet-500 text-white font-bold text-center"
                   >
                     Dashboard
                   </NavLink>
@@ -408,7 +408,7 @@ hover:scale-105
                   <Link
                     to="/admin/login"
                     onClick={() => setMenuOpen(false)}
-                    className="mt-4 px-5 py-4 rounded-2xl bg-gradient-to-r from-pink-500 to-orange-500 text-white font-bold text-center"
+                    className="mt-4 px-5 py-4 rounded-2xl bg-gradient-to-r from-cyan-500 to-violet-500 text-white font-bold text-center"
                   >
                     Admin Login
                   </Link>
