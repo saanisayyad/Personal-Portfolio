@@ -147,6 +147,7 @@ const Notes = () => {
 
                   <Link
                     to={`/notes/${note.slug}`}
+                    className="block rounded-[2rem] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200 focus-visible:ring-offset-4 focus-visible:ring-offset-zinc-950"
                   >
 
                     <GlassCard className="h-full p-7">
@@ -160,9 +161,9 @@ const Notes = () => {
 
                         </div>
 
-                        <div className="text-zinc-600 group-hover:text-white transition-colors duration-300">
+                        <div className="text-zinc-600 transition-colors duration-300 group-hover:text-cyan-100">
 
-                          <ArrowUpRight size={20} />
+                          <ArrowUpRight size={20} className="transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
 
                         </div>
 
@@ -185,7 +186,7 @@ const Notes = () => {
                       {/* Footer */}
                       <div className="mt-auto pt-6 border-t border-zinc-800 flex items-center justify-between">
 
-                        <span className="text-xs uppercase tracking-[0.2em] text-zinc-600">
+                        <span className="text-xs uppercase tracking-[0.2em] text-zinc-500 transition-colors duration-200 group-hover:text-cyan-100">
 
                           Read Article
 
