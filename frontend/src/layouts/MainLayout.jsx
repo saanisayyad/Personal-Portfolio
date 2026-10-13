@@ -4,7 +4,7 @@ import Footer from "../components/Footer"
 
 const MainLayout = () => {
   return (
-    <div className="relative min-h-screen bg-[#09090b] text-white overflow-hidden">
+    <div className="public-portfolio relative min-h-screen bg-[#09090b] text-white overflow-hidden">
 
   {/* Global Glow */}
   <div className="absolute inset-0 pointer-events-none">
