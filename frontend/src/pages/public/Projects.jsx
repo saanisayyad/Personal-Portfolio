@@ -84,9 +84,12 @@ const Projects = () => {
       group
       h-full
       overflow-hidden
+      border-white/[0.08]
+      bg-zinc-900/45
       transition-all
       duration-300
-      hover:border-cyan-500/30
+      hover:border-cyan-300/25
+      hover:bg-zinc-900/70
     "
                   >
                     <Link
@@ -111,19 +114,19 @@ const Projects = () => {
                         />
 
                         {project.featured && (
-                          <div className="absolute top-4 right-4 bg-yellow-500 text-black p-2 rounded-full shadow-lg">
-                            <Star size={16} />
+                          <div className="absolute right-4 top-4 flex items-center gap-2 rounded-full border border-cyan-200/20 bg-zinc-950/80 px-3 py-2 text-cyan-200 shadow-lg backdrop-blur-md">
+                            <Star size={15} fill="currentColor" />
                           </div>
                         )}
                       </div>
 
                       {/* CONTENT */}
                       <div className="p-5 flex flex-col h-full">
-                        <h3 className="text-xl font-bold mb-3 line-clamp-1">
+                        <h3 className="mb-3 line-clamp-1 text-xl font-semibold tracking-tight text-zinc-100 transition-colors duration-200 group-hover:text-cyan-100">
                           {project.title}
                         </h3>
 
-                        <p className="text-zinc-400 text-sm text-justify leading-relaxed line-clamp-3 mb-4">
+                        <p className="mb-5 line-clamp-3 text-left text-sm leading-6 text-zinc-400">
                           {project.shortDescription}
                         </p>
 
@@ -133,12 +136,11 @@ const Projects = () => {
                               <span
                                 key={tech}
                                 className="
-                    px-3
-                    py-1
                     rounded-full
-                    bg-zinc-800
-                    text-cyan-400
-                    text-xs
+                    border border-cyan-300/10
+                    bg-cyan-300/[0.055]
+                    px-3 py-1.5
+                    text-xs font-medium text-cyan-200
                   "
                               >
                                 {tech}
