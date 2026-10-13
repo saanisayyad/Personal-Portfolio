@@ -7,8 +7,6 @@ import { Menu, X } from "lucide-react";
 import {
   motion,
   AnimatePresence,
-  useScroll,
-  useMotionValueEvent,
 } from "framer-motion";
 
 const Navbar = () => {
@@ -54,13 +52,13 @@ const Navbar = () => {
     justify-between
     rounded-full
     border
-    border-white/[0.09]
-    bg-[#0b0c10]/75
-    backdrop-blur-3xl
-    shadow-[0_16px_50px_rgba(0,0,0,0.36)]
-    transition-all
+    border-[#c5b18a]/[0.17]
+    bg-[#15140f]/90
+    backdrop-blur-2xl
+    shadow-[0_14px_44px_rgba(0,0,0,0.34)]
+    transition-[border-color,background-color,box-shadow]
     duration-300
-    hover:border-white/[0.14]"
+    hover:border-[#c5b18a]/[0.28]"
         >
           <div
             className="
@@ -81,7 +79,7 @@ const Navbar = () => {
             <div className="relative w-14 h-14 flex items-center justify-center">
               {/* Analytics Ring */}
               <svg
-                className="absolute inset-0 animate-spin"
+                className="absolute inset-0"
                 viewBox="0 0 100 100"
                 style={{
                   animationDuration: "10s",
@@ -96,9 +94,9 @@ const Navbar = () => {
                     x2="100%"
                     y2="100%"
                   >
-                    <stop offset="0%" stopColor="#06B6D4" />
-                    <stop offset="50%" stopColor="#3B82F6" />
-                    <stop offset="100%" stopColor="#8B5CF6" />
+                    <stop offset="0%" stopColor="#c5b18a" />
+                    <stop offset="50%" stopColor="#948268" />
+                    <stop offset="100%" stopColor="#e4d6b9" />
                   </linearGradient>
                 </defs>
 
@@ -123,47 +121,10 @@ const Navbar = () => {
               />
             </div>
 
-            {/* Right Side */}
-            <div className="flex flex-col justify-center">
-              {/* Animated Line Chart */}
-              <svg
-                width="55"
-                height="18"
-                viewBox="0 0 55 18"
-                className="overflow-visible"
-              >
-                <polyline
-                  fill="none"
-                  stroke="#22d3ee"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  points="2,14 12,10 22,13 34,5 52,8"
-                >
-                  <animate
-                    attributeName="points"
-                    dur="2.5s"
-                    repeatCount="indefinite"
-                    values="
-            2,14 12,10 22,13 34,5 52,8;
-            2,13 12,7 22,11 34,3 52,6;
-            2,14 12,10 22,13 34,5 52,8"
-                  />
-                </polyline>
-
-                {/* Pulsing Last Point */}
-                <circle cx="52" cy="8" r="2.5" fill="#22d3ee">
-                  <animate
-                    attributeName="r"
-                    values="2.5;4;2.5"
-                    dur="2s"
-                    repeatCount="indefinite"
-                  />
-                </circle>
-              </svg>
-
-              {/* Subtitle */}
-              <span className="mt-1 text-[10px] md:text-xs uppercase tracking-[0.35em] text-gray-400">
+            {/* Portfolio descriptor */}
+            <div className="flex flex-col justify-center gap-2">
+              <span className="h-px w-9 bg-[#c5b18a]/70" aria-hidden="true" />
+              <span className="text-[9px] uppercase tracking-[0.24em] text-[#b8b0a2] sm:text-[10px]">
                 Data Analyst
               </span>
             </div>
@@ -177,7 +138,7 @@ const Navbar = () => {
                 to={link.path}
                 className={({ isActive }) =>
                   `relative rounded-full px-4 py-3 text-sm font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/60 ${
-                    isActive ? "text-white" : "text-zinc-400 hover:text-zinc-100"
+                    isActive ? "text-[#e5d2a8]" : "text-[#a39b8e] hover:text-[#f0eadf]"
                   }`
                 }
               >
@@ -190,10 +151,9 @@ const Navbar = () => {
                           absolute
                           inset-0
                           rounded-full
-                          bg-cyan-300/[0.08]
+                          bg-[#c5b18a]/[0.07]
                           border
-                          border-cyan-300/[0.18]
-                          shadow-[0_0_20px_rgba(34,211,238,0.08)]
+                          border-[#c5b18a]/[0.14]
                           "
                       />
                     )}
@@ -219,29 +179,23 @@ py-2.5
 rounded-full
 font-semibold
 text-sm
-text-white
-shadow-[0_4px_18px_rgba(59,130,246,0.12)]
+text-[#171510]
+shadow-[0_4px_18px_rgba(0,0,0,0.14)]
 bg-gradient-to-r
-from-cyan-500
-via-blue-500
-to-violet-500
+from-[#c5b18a]
+via-[#d8c7a5]
+to-[#948268]
 bg-[length:200%]
 transition-all
 duration-300
 hover:scale-[1.03]
-hover:shadow-[0_6px_24px_rgba(34,211,238,0.16)]
+hover:shadow-[0_6px_24px_rgba(0,0,0,0.22)]
 "
               >
                 <span className="relative z-10">Dashboard</span>
 
                 <motion.div
-                  animate={{
-                    backgroundPosition: ["0%", "100%", "0%"],
-                  }}
-                  transition={{
-                    repeat: Infinity,
-                    duration: 5,
-                  }}
+                  initial={false}
                   className="
     absolute
     inset-0
@@ -265,29 +219,23 @@ py-2.5
 rounded-full
 font-semibold
 text-sm
-text-white
-shadow-[0_4px_18px_rgba(59,130,246,0.12)]
+text-[#171510]
+shadow-[0_4px_18px_rgba(0,0,0,0.14)]
 bg-gradient-to-r
-from-cyan-500
-via-blue-500
-to-violet-500
+from-[#c5b18a]
+via-[#d8c7a5]
+to-[#948268]
 bg-[length:200%]
 transition-all
 duration-300
 hover:scale-[1.03]
-hover:shadow-[0_6px_24px_rgba(34,211,238,0.16)]
+hover:shadow-[0_6px_24px_rgba(0,0,0,0.22)]
 "
               >
                 <span className="relative z-10">Admin</span>
 
                 <motion.div
-                  animate={{
-                    backgroundPosition: ["0%", "100%", "0%"],
-                  }}
-                  transition={{
-                    repeat: Infinity,
-                    duration: 5,
-                  }}
+                  initial={false}
                   className="
     absolute
     inset-0
@@ -304,11 +252,12 @@ hover:shadow-[0_6px_24px_rgba(34,211,238,0.16)]
 
           {/* Mobile Button */}
           <motion.button
-            whileTap={{
-              scale: 0.9,
-            }}
+            whileTap={{ scale: 0.97 }}
+            type="button"
+            aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={menuOpen}
             onClick={() => setMenuOpen(!menuOpen)}
-            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/[0.09] bg-white/[0.045] text-white transition-colors hover:border-cyan-300/25 hover:bg-cyan-300/[0.07] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/60 md:hidden"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#c5b18a]/[0.18] bg-[#c5b18a]/[0.045] text-[#f0eadf] transition-colors hover:border-[#c5b18a]/35 hover:bg-[#c5b18a]/[0.08] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c5b18a]/70 md:hidden"
           >
             {menuOpen ? (
               <motion.div
@@ -346,7 +295,7 @@ hover:shadow-[0_6px_24px_rgba(34,211,238,0.16)]
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setMenuOpen(false)}
-              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 md:hidden"
+              className="fixed inset-0 z-40 bg-[#080806]/70 backdrop-blur-sm md:hidden"
             />
 
             <motion.div
@@ -358,15 +307,20 @@ hover:shadow-[0_6px_24px_rgba(34,211,238,0.16)]
                 damping: 25,
                 stiffness: 200,
               }}
-              className="fixed top-0 right-0 w-[85%] max-w-sm h-screen bg-[#0c0d12]/95 backdrop-blur-3xl border-l border-white/[0.10] shadow-[-20px_0_70px_rgba(0,0,0,0.32)] z-50 md:hidden"
+              className="fixed top-0 right-0 z-50 h-screen w-[85%] max-w-sm border-l border-[#c5b18a]/[0.16] bg-[#15140f]/[0.98] shadow-[-20px_0_70px_rgba(0,0,0,0.38)] backdrop-blur-2xl md:hidden"
             >
               <div className="flex items-center justify-between p-6 border-b border-zinc-800">
                 <h2 className="text-2xl font-black bg-gradient-to-r from-white to-zinc-500 bg-clip-text text-transparent">
                   Navigation
                 </h2>
 
-                <button onClick={() => setMenuOpen(false)}>
-                  <X size={30} />
+                <button
+                  type="button"
+                  onClick={() => setMenuOpen(false)}
+                  aria-label="Close navigation menu"
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#c5b18a]/20 text-[#d2cabb] transition-colors hover:bg-[#c5b18a]/[0.08] hover:text-[#f0eadf] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c5b18a]/70"
+                >
+                  <X size={24} />
                 </button>
               </div>
 
@@ -404,7 +358,7 @@ hover:shadow-[0_6px_24px_rgba(34,211,238,0.16)]
                   <NavLink
                     to="/admin/dashboard"
                     onClick={() => setMenuOpen(false)}
-                    className="mt-4 px-5 py-4 rounded-2xl border border-cyan-300/20 bg-gradient-to-r from-cyan-500/90 to-violet-500/90 text-white font-semibold text-center shadow-[0_6px_24px_rgba(34,211,238,0.08)]"
+                    className="mt-4 px-5 py-4 rounded-2xl border border-[#c5b18a]/30 bg-gradient-to-r from-[#c5b18a] to-[#948268] text-[#171510] font-semibold text-center shadow-[0_6px_24px_rgba(0,0,0,0.14)]"
                   >
                     Dashboard
                   </NavLink>
@@ -412,7 +366,7 @@ hover:shadow-[0_6px_24px_rgba(34,211,238,0.16)]
                   <Link
                     to="/admin/login"
                     onClick={() => setMenuOpen(false)}
-                    className="mt-4 px-5 py-4 rounded-2xl border border-cyan-300/20 bg-gradient-to-r from-cyan-500/90 to-violet-500/90 text-white font-semibold text-center shadow-[0_6px_24px_rgba(34,211,238,0.08)]"
+                    className="mt-4 px-5 py-4 rounded-2xl border border-[#c5b18a]/30 bg-gradient-to-r from-[#c5b18a] to-[#948268] text-[#171510] font-semibold text-center shadow-[0_6px_24px_rgba(0,0,0,0.14)]"
                   >
                     Admin Login
                   </Link>
