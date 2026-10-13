@@ -221,9 +221,9 @@ font-semibold
 text-sm
 text-white
 bg-gradient-to-r
-from-pink-500
-via-orange-500
-to-pink-500
+from-cyan-500
+via-blue-500
+to-violet-500
 bg-[length:200%]
 transition-all
 duration-500
@@ -244,9 +244,9 @@ hover:scale-105
     absolute
     inset-0
     bg-gradient-to-r
-    from-pink-500
-    via-orange-500
-    to-pink-500
+    from-cyan-500
+    via-blue-500
+    to-violet-500
     bg-[length:200%]
   "
                 />
@@ -265,9 +265,9 @@ font-semibold
 text-sm
 text-white
 bg-gradient-to-r
-from-pink-500
-via-orange-500
-to-pink-500
+from-cyan-500
+via-blue-500
+to-violet-500
 bg-[length:200%]
 transition-all
 duration-500
@@ -288,9 +288,9 @@ hover:scale-105
     absolute
     inset-0
     bg-gradient-to-r
-    from-pink-500
-    via-orange-500
-    to-pink-500
+    from-cyan-500
+    via-blue-500
+    to-violet-500
     bg-[length:200%]
   "
                 />
