@@ -34,6 +34,7 @@ export const getSkills =
       const skills =
         await Skill.find()
         .sort({
+          isFeatured: -1,
           createdAt: -1,
         })
 
