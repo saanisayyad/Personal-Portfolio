@@ -209,16 +209,15 @@ const ManageGallery = () => {
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
 
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
-                      <button
-                        onClick={() =>
-                          handleDelete(item._id)
-                        }
-                        className="bg-red-500/10 hover:bg-red-500 text-red-500 hover:text-white p-3 rounded-2xl transition-all"
-                      >
-                        <Trash2 size={20} />
-                      </button>
-                    </div>
+                    <button
+                      type="button"
+                      onClick={() => handleDelete(item._id)}
+                      aria-label={`Delete ${item.title || "gallery image"}`}
+                      title="Delete image"
+                      className="absolute top-3 right-3 z-10 flex h-11 w-11 items-center justify-center rounded-xl border border-red-400/30 bg-zinc-950/85 text-red-400 shadow-lg backdrop-blur-sm transition-colors hover:bg-red-500 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-400 touch-manipulation md:opacity-0 md:group-hover:opacity-100 md:group-focus-within:opacity-100"
+                    >
+                      <Trash2 size={20} aria-hidden="true" />
+                    </button>
                   </div>
 
                   <div className="p-4 text-sm text-zinc-500">
