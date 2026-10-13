@@ -72,7 +72,7 @@ const Qualifications = () => {
         -translate-x-1/2
         w-[500px]
         h-[500px]
-        bg-pink-500/10
+        bg-cyan-500/10
         blur-[140px]
         rounded-full
         pointer-events-none
@@ -86,7 +86,7 @@ const Qualifications = () => {
         right-0
         w-[400px]
         h-[400px]
-        bg-orange-500/10
+        bg-violet-500/10
         blur-[140px]
         rounded-full
         pointer-events-none
@@ -194,7 +194,7 @@ const Qualifications = () => {
                     }}
                   >
                     <GlassCard className={cardStyles}>
-                      <div className={`${iconStyles} text-blue-400`}>
+                      <div className={`${iconStyles} text-cyan-300`}>
                         <Code2 size={24} />
                       </div>
 
@@ -202,7 +202,7 @@ const Qualifications = () => {
                         {skill.name}
                       </h3>
 
-                      <div className="w-16 h-1 rounded-full bg-blue-500/50 mb-5" />
+                      <div className="w-16 h-1 rounded-full bg-cyan-400/50 mb-5" />
 
                       <p className="text-zinc-400 leading-relaxed text-sm mt-auto">
                         {skill.description}
@@ -221,7 +221,7 @@ const Qualifications = () => {
                 My academic journey and educational background.
               </p>
 
-              <div className="relative border-l border-pink-500/20 ml-4 space-y-14">
+              <div className="relative border-l border-violet-500/20 ml-4 space-y-14">
                 {education.map((item, index) => (
                   <motion.div
                     key={item._id}
@@ -242,10 +242,10 @@ const Qualifications = () => {
                     }}
                     className="relative pl-10"
                   >
-                    <div className="absolute left-[-12px] top-2 w-6 h-6 rounded-full bg-gradient-to-r from-pink-500 to-orange-500 shadow-lg shadow-pink-500/40" />
+                    <div className="absolute left-[-12px] top-2 w-6 h-6 rounded-full bg-gradient-to-r from-violet-500 to-cyan-500 shadow-lg shadow-violet-500/30" />
 
                     <GlassCard className="p-6 sm:p-8">
-                      <h3 className="text-3xl font-black bg-gradient-to-r from-white via-pink-200 to-orange-300 bg-clip-text text-transparent mb-3">
+                      <h3 className="text-3xl font-black bg-gradient-to-r from-white via-violet-200 to-cyan-300 bg-clip-text text-transparent mb-3">
                         {item.degree}
                       </h3>
 
@@ -258,7 +258,7 @@ const Qualifications = () => {
                           {item.year}
                         </span>
 
-                        <span className="px-4 py-2 rounded-full bg-pink-500/10 border border-pink-500/20 text-sm text-pink-300">
+                        <span className="px-4 py-2 rounded-full bg-cyan-500/10 border border-violet-500/20 text-sm text-violet-300">
                           {item.score}
                         </span>
                       </div>
@@ -297,7 +297,7 @@ const Qualifications = () => {
                     }}
                   >
                     <GlassCard className={cardStyles}>
-                      <div className={`${iconStyles} text-emerald-400`}>
+                      <div className={`${iconStyles} text-cyan-300`}>
                         <Languages size={24} />
                       </div>
 
@@ -306,8 +306,8 @@ const Qualifications = () => {
                       </h3>
 
                       <div className="mt-auto">
-                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-sm text-emerald-300">
-                          <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-sm text-cyan-200">
+                          <div className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
                           {language.proficiency}
                         </div>
                       </div>
@@ -347,7 +347,7 @@ const Qualifications = () => {
                     }}
                   >
                     <GlassCard className={cardStyles}>
-                      <div className={`${iconStyles} text-orange-400`}>
+                      <div className={`${iconStyles} text-violet-300`}>
                         <Sparkles size={24} />
                       </div>
 
