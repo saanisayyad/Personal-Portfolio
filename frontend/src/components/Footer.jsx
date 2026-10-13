@@ -82,7 +82,7 @@ const Footer = () => {
         -translate-x-1/2
         w-[500px]
         h-[250px]
-        bg-pink-500/10
+        bg-cyan-500/10
         blur-[120px]
         rounded-full
         " />
@@ -113,7 +113,7 @@ const Footer = () => {
             <FaHeart
               size={14}
               className="
-              text-pink-500
+              text-cyan-300
               animate-pulse
               "
             />
