@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { ArrowUpRight } from "lucide-react";
 
 import { getProfile } from "../../services/profileService";
 
@@ -75,9 +77,9 @@ const Home = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen overflow-hidden text-white">
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-screen flex items-center py-16 sm:py-20 md:py-20">
-        <div className="grid lg:grid-cols-2 gap-10 md:gap-14 lg:gap-20 items-center w-full">
+    <section className="relative isolate min-h-[calc(100svh-5rem)] overflow-hidden text-white">
+      <div className="relative z-10 mx-auto flex min-h-[calc(100svh-5rem)] max-w-7xl items-center px-5 py-24 sm:px-6 sm:py-28 lg:px-8 lg:py-32">
+        <div className="grid w-full grid-cols-1 items-center gap-14 md:gap-16 lg:grid-cols-[1.08fr_0.92fr] lg:gap-16 xl:gap-24">
           {/* ==========================================
               LEFT CONTENT
           ========================================== */}
@@ -94,7 +96,7 @@ const Home = () => {
             transition={{
               duration: 0.8,
             }}
-            className="text-center lg:text-left order-2 lg:order-1 relative z-20"
+            className="relative z-20 order-2 mx-auto w-full max-w-2xl text-center lg:order-1 lg:mx-0 lg:text-left"
           >
             {/* ------------------------------------------
                 BADGE
@@ -112,7 +114,7 @@ const Home = () => {
               transition={{
                 delay: 0.1,
               }}
-              className="inline-flex items-center gap-3 px-5 py-2 rounded-full border border-cyan-500/20 bg-white/5 backdrop-blur-md text-cyan-300 text-xs uppercase tracking-[0.25em] mb-8"
+              className="mb-7 inline-flex items-center gap-3 rounded-full border border-cyan-300/20 bg-cyan-300/[0.055] px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-cyan-200 shadow-[0_0_32px_rgba(34,211,238,0.045)] sm:text-[11px]"
             >
               <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
               Personal Portfolio
@@ -135,9 +137,9 @@ const Home = () => {
                 delay: 0.2,
                 duration: 0.7,
               }}
-              className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight leading-none mb-6"
+              className="mb-6 text-4xl font-semibold leading-[1.04] tracking-[-0.055em] text-white sm:text-5xl md:text-6xl lg:text-[4.1rem] xl:text-[4.65rem]"
             >
-              <span className="bg-gradient-to-r from-white via-cyan-100 to-violet-300 bg-clip-text text-transparent break-words">
+              <span className="break-words bg-gradient-to-r from-white via-cyan-100 to-white bg-clip-text text-transparent">
                 {profile.name}
               </span>
             </motion.h1>
@@ -159,7 +161,7 @@ const Home = () => {
                 delay: 0.3,
                 duration: 0.7,
               }}
-              className="text-lg sm:text-xl md:text-2xl lg:text-2xl text-zinc-300 font-medium max-w-xl md:max-w-2xl mx-auto lg:mx-0 mb-8 leading-relaxed text-justify"
+              className="mx-auto mb-6 max-w-xl text-base font-medium leading-7 text-zinc-200 sm:text-lg sm:leading-8 md:text-xl lg:mx-0"
             >
               {profile.title}
             </motion.h2>
@@ -181,7 +183,7 @@ const Home = () => {
                 delay: 0.4,
                 duration: 0.7,
               }}
-              className="text-zinc-400 text-sm sm:text-base md:text-lg leading-relaxed max-w-xl md:max-w-2xl mx-auto lg:mx-0 mb-10 text-justify"
+              className="mx-auto mb-9 max-w-xl text-sm leading-7 text-zinc-400 sm:text-base sm:leading-8 lg:mx-0"
             >
               {profile.bio}
             </motion.p>
@@ -203,47 +205,50 @@ const Home = () => {
                 delay: 0.5,
                 duration: 0.7,
               }}
-              className="flex flex-col sm:flex-row flex-wrap justify-center lg:justify-start gap-4"
+              className="flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap lg:justify-start"
             >
-              {/* GitHub */}
-
-              {profile.github && (
-                <a
-                  href={profile.github}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="group inline-flex items-center justify-center gap-3 px-7 py-4 rounded-full bg-white text-black font-semibold hover:scale-105 transition-all duration-300"
-                >
-                  <FaGithub size={20} />
-                  GitHub
-                </a>
-              )}
-
-              {/* LinkedIn */}
-
-              {profile.linkedin && (
-                <a
-                  href={profile.linkedin}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="group inline-flex items-center justify-center gap-3 px-7 py-4 rounded-full border border-zinc-700 bg-zinc-900/70 hover:scale-105 transition-all duration-300"
-                >
-                  <FaLinkedin size={20} className="text-cyan-300" />
-                  LinkedIn
-                </a>
-              )}
-
-              {/* Resume */}
+              <Link
+                to="/projects"
+                className="group inline-flex min-h-12 items-center justify-center gap-3 rounded-full bg-cyan-300 px-6 py-3.5 text-sm font-semibold text-zinc-950 shadow-[0_8px_32px_rgba(34,211,238,0.12)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-cyan-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200 focus-visible:ring-offset-2 focus-visible:ring-offset-[#09090b]"
+              >
+                Explore projects
+                <ArrowUpRight size={17} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </Link>
 
               {profile.resume && (
                 <a
                   href={profile.resume}
                   target="_blank"
                   rel="noreferrer"
-                  className="group inline-flex items-center justify-center gap-3 px-7 py-4 rounded-full bg-gradient-to-r from-cyan-500 to-violet-500 font-semibold hover:scale-105 transition-all duration-300 shadow-lg shadow-cyan-500/20"
+                  className="inline-flex min-h-12 items-center justify-center gap-2.5 rounded-full border border-white/10 bg-white/[0.035] px-6 py-3.5 text-sm font-semibold text-zinc-100 transition-all duration-200 hover:-translate-y-0.5 hover:border-cyan-300/30 hover:bg-white/[0.07] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200"
                 >
-                  <FaFile size={18} />
-                  Resume
+                  <FaFile size={15} className="text-cyan-200" />
+                  View résumé
+                </a>
+              )}
+
+              {profile.github && (
+                <a
+                  href={profile.github}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Open GitHub profile"
+                  className="inline-flex min-h-12 items-center justify-center gap-2.5 rounded-full px-5 py-3.5 text-sm font-medium text-zinc-400 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200"
+                >
+                  <FaGithub size={18} />
+                  GitHub
+                </a>
+              )}
+
+              {profile.linkedin && (
+                <a
+                  href={profile.linkedin}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex min-h-12 items-center justify-center gap-2.5 rounded-full px-5 py-3.5 text-sm font-medium text-zinc-400 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200"
+                >
+                  <FaLinkedin size={18} />
+                  LinkedIn
                 </a>
               )}
             </motion.div>
@@ -265,16 +270,16 @@ const Home = () => {
             transition={{
               duration: 0.9,
             }}
-            className="flex justify-center order-1 lg:order-2"
+            className="order-1 flex justify-center lg:order-2"
           >
-            <div className="relative">
+            <div className="relative isolate">
               {/* Glow */}
 
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-violet-500 to-violet-500 blur-3xl opacity-20 rounded-full scale-110" />
+              <div aria-hidden="true" className="absolute -inset-5 -z-10 rounded-full bg-gradient-to-br from-cyan-400/15 via-transparent to-violet-500/15 blur-2xl sm:-inset-8" />
 
               {/* Ring */}
 
-              <div className="absolute inset-0 rounded-full border border-white/10 scale-110" />
+              <div aria-hidden="true" className="absolute -inset-3 rounded-full border border-white/[0.09] sm:-inset-5" />
 
               {/* Image */}
 
@@ -296,7 +301,7 @@ const Home = () => {
                   priority={true}
                 />
               ) : (
-                <div className="w-[min(80vw,420px)] h-[min(80vw,420px)] rounded-full bg-zinc-900/50 border border-zinc-800" />
+                <div className="h-[min(72vw,390px)] w-[min(72vw,390px)] rounded-full border border-white/[0.08] bg-gradient-to-br from-zinc-800/70 to-zinc-950 shadow-[0_30px_100px_rgba(0,0,0,0.35)] sm:h-[min(58vw,420px)] sm:w-[min(58vw,420px)]" />
               )}
             </div>
           </motion.div>
