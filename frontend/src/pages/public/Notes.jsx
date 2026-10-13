@@ -88,7 +88,7 @@ const Notes = () => {
 
               <div
                 key={i}
-                className="h-72 rounded-3xl border border-zinc-800 bg-zinc-900/40 animate-pulse"
+                className="h-80 rounded-3xl border border-zinc-800 bg-zinc-900/40 animate-pulse sm:h-[340px]"
               />
 
             ))}
@@ -151,7 +151,7 @@ const Notes = () => {
                     className="group block h-full rounded-[2rem] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200 focus-visible:ring-offset-4 focus-visible:ring-offset-zinc-950"
                   >
 
-                    <GlassCard className="h-[380px] p-7 sm:h-[400px]">
+                    <GlassCard className="h-[320px] p-6 sm:h-[340px] sm:p-7">
 
                       <div className="flex h-full flex-col">
                       {/* Top */}
