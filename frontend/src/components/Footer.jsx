@@ -60,7 +60,7 @@ const Footer = () => {
                   rel="noreferrer"
                   aria-label={label}
                   title={label}
-                  className="group inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-white/[0.09] bg-white/[0.035] text-zinc-400 transition-all duration-200 hover:-translate-y-0.5 hover:border-cyan-300/30 hover:bg-cyan-300/[0.07] hover:text-cyan-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200"
+                  className="group relative inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-white/[0.09] bg-white/[0.035] text-zinc-400 transition-all duration-200 hover:-translate-y-0.5 hover:border-cyan-300/30 hover:bg-cyan-300/[0.07] hover:text-cyan-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200"
                 >
                   <Icon size={18} />
                   <ArrowUpRight size={11} className="absolute translate-x-3 -translate-y-3 opacity-0 transition-opacity group-hover:opacity-70" />
