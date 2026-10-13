@@ -54,13 +54,13 @@ const Navbar = () => {
     justify-between
     rounded-full
     border
-    border-white/10
-    bg-black/50
+    border-white/[0.09]
+    bg-[#0b0c10]/75
     backdrop-blur-3xl
-    shadow-2xl
-    shadow-black/40
+    shadow-[0_16px_50px_rgba(0,0,0,0.36)]
     transition-all
-    duration-500"
+    duration-300
+    hover:border-white/[0.14]"
         >
           <div
             className="
@@ -176,8 +176,8 @@ const Navbar = () => {
                 key={link.name}
                 to={link.path}
                 className={({ isActive }) =>
-                  `relative px-5 py-3 rounded-full text-sm font-semibold transition-all duration-300 ${
-                    isActive ? "text-white" : "text-zinc-400 hover:text-white"
+                  `relative rounded-full px-4 py-3 text-sm font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/60 ${
+                    isActive ? "text-white" : "text-zinc-400 hover:text-zinc-100"
                   }`
                 }
               >
@@ -190,10 +190,10 @@ const Navbar = () => {
                           absolute
                           inset-0
                           rounded-full
-                          bg-white/10
+                          bg-cyan-300/[0.08]
                           border
-                          border-white/20
-                          shadow-[0_0_25px_rgba(34,211,238,.22)]
+                          border-cyan-300/[0.18]
+                          shadow-[0_0_20px_rgba(34,211,238,0.08)]
                           "
                       />
                     )}
@@ -214,20 +214,22 @@ const Navbar = () => {
 group
 relative
 overflow-hidden
-px-6
-py-3
+px-5
+py-2.5
 rounded-full
 font-semibold
 text-sm
 text-white
+shadow-[0_4px_18px_rgba(59,130,246,0.12)]
 bg-gradient-to-r
 from-cyan-500
 via-blue-500
 to-violet-500
 bg-[length:200%]
 transition-all
-duration-500
-hover:scale-105
+duration-300
+hover:scale-[1.03]
+hover:shadow-[0_6px_24px_rgba(34,211,238,0.16)]
 "
               >
                 <span className="relative z-10">Dashboard</span>
@@ -258,20 +260,22 @@ hover:scale-105
 group
 relative
 overflow-hidden
-px-6
-py-3
+px-5
+py-2.5
 rounded-full
 font-semibold
 text-sm
 text-white
+shadow-[0_4px_18px_rgba(59,130,246,0.12)]
 bg-gradient-to-r
 from-cyan-500
 via-blue-500
 to-violet-500
 bg-[length:200%]
 transition-all
-duration-500
-hover:scale-105
+duration-300
+hover:scale-[1.03]
+hover:shadow-[0_6px_24px_rgba(34,211,238,0.16)]
 "
               >
                 <span className="relative z-10">Admin</span>
@@ -304,7 +308,7 @@ hover:scale-105
               scale: 0.9,
             }}
             onClick={() => setMenuOpen(!menuOpen)}
-            className="md:hidden text-white"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/[0.09] bg-white/[0.045] text-white transition-colors hover:border-cyan-300/25 hover:bg-cyan-300/[0.07] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/60 md:hidden"
           >
             {menuOpen ? (
               <motion.div
@@ -354,7 +358,7 @@ hover:scale-105
                 damping: 25,
                 stiffness: 200,
               }}
-              className="fixed top-0 right-0 w-[85%] max-w-sm h-screen bg-black/70 backdrop-blur-3xl border-l border-white/10 z-50 md:hidden"
+              className="fixed top-0 right-0 w-[85%] max-w-sm h-screen bg-[#0c0d12]/95 backdrop-blur-3xl border-l border-white/[0.10] shadow-[-20px_0_70px_rgba(0,0,0,0.32)] z-50 md:hidden"
             >
               <div className="flex items-center justify-between p-6 border-b border-zinc-800">
                 <h2 className="text-2xl font-black bg-gradient-to-r from-white to-zinc-500 bg-clip-text text-transparent">
@@ -387,8 +391,8 @@ hover:scale-105
                     className={({ isActive }) =>
                       `px-5 py-4 rounded-2xl font-semibold transition-all duration-300 ${
                         isActive
-                          ? "bg-cyan-300 text-zinc-950"
-                          : "bg-zinc-900 text-zinc-300 hover:bg-zinc-800"
+                          ? "bg-cyan-300/[0.12] text-cyan-100 border border-cyan-300/20"
+                          : "bg-white/[0.035] text-zinc-300 border border-white/[0.04] hover:bg-white/[0.07] hover:border-white/[0.08]"
                       }`
                     }
                   >
@@ -400,7 +404,7 @@ hover:scale-105
                   <NavLink
                     to="/admin/dashboard"
                     onClick={() => setMenuOpen(false)}
-                    className="mt-4 px-5 py-4 rounded-2xl bg-gradient-to-r from-cyan-500 to-violet-500 text-white font-bold text-center"
+                    className="mt-4 px-5 py-4 rounded-2xl border border-cyan-300/20 bg-gradient-to-r from-cyan-500/90 to-violet-500/90 text-white font-semibold text-center shadow-[0_6px_24px_rgba(34,211,238,0.08)]"
                   >
                     Dashboard
                   </NavLink>
@@ -408,7 +412,7 @@ hover:scale-105
                   <Link
                     to="/admin/login"
                     onClick={() => setMenuOpen(false)}
-                    className="mt-4 px-5 py-4 rounded-2xl bg-gradient-to-r from-cyan-500 to-violet-500 text-white font-bold text-center"
+                    className="mt-4 px-5 py-4 rounded-2xl border border-cyan-300/20 bg-gradient-to-r from-cyan-500/90 to-violet-500/90 text-white font-semibold text-center shadow-[0_6px_24px_rgba(34,211,238,0.08)]"
                   >
                     Admin Login
                   </Link>
