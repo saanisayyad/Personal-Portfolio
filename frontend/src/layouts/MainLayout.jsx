@@ -9,11 +9,11 @@ const MainLayout = () => {
   {/* Global Glow */}
   <div className="absolute inset-0 pointer-events-none">
 
-    <div className="absolute top-[-10%] left-[-10%] w-[400px] h-[400px] bg-pink-500/10 blur-3xl rounded-full" />
+    <div className="absolute top-[-10%] left-[-10%] w-[400px] h-[400px] bg-cyan-500/10 blur-3xl rounded-full" />
 
-    <div className="absolute bottom-[-10%] right-[-10%] w-[400px] h-[400px] bg-orange-500/10 blur-3xl rounded-full" />
+    <div className="absolute bottom-[-10%] right-[-10%] w-[400px] h-[400px] bg-violet-500/10 blur-3xl rounded-full" />
 
-    <div className="absolute top-[40%] left-[50%] -translate-x-1/2 w-[300px] h-[300px] bg-fuchsia-500/5 blur-3xl rounded-full" />
+    <div className="absolute top-[40%] left-[50%] -translate-x-1/2 w-[300px] h-[300px] bg-cyan-400/5 blur-3xl rounded-full" />
 
   </div>
 
