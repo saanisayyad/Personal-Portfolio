@@ -1,107 +1,61 @@
 import { useState } from "react";
-
 import { Link, NavLink } from "react-router-dom";
-
 import { Menu, X } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
 
-import {
-  motion,
-  AnimatePresence,
-  useScroll,
-  useMotionValueEvent,
-} from "framer-motion";
+const NAV_LINKS = [
+  { name: "Home", path: "/" },
+  { name: "Projects", path: "/projects" },
+  { name: "Qualifications", path: "/qualifications" },
+  { name: "Notes", path: "/notes" },
+  { name: "Gallery", path: "/gallery" },
+];
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-
   const token = localStorage.getItem("token");
 
-  const navLinks = [
-    {
-      name: "Home",
-      path: "/",
-    },
-    {
-      name: "Projects",
-      path: "/projects",
-    },
-    {
-      name: "Qualifications",
-      path: "/qualifications",
-    },
-    {
-      name: "Notes",
-      path: "/notes",
-    },
-    {
-      name: "Gallery",
-      path: "/gallery",
-    },
-  ];
+  const adminPath = token ? "/admin/dashboard" : "/admin/login";
+  const adminLabel = token ? "Dashboard" : "Admin";
+
+  const closeMenu = () => setMenuOpen(false);
+
+  const desktopLinkClass = ({ isActive }) =>
+    `relative isolate rounded-full px-3 py-2.5 text-[13px] font-medium transition-colors duration-200 lg:px-3.5 lg:text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200 ${
+      isActive ? "text-white" : "text-zinc-400 hover:text-zinc-100"
+    }`;
 
   return (
     <>
-      {/* Navbar */}
-      <header className="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl z-50">
+      <header className="fixed left-1/2 top-3 z-50 w-[calc(100%-24px)] max-w-7xl -translate-x-1/2 sm:top-4 sm:w-[95%]">
         <nav
-          className=" 
-    group
-    relative
-    h-18
-    px-6
-    flex
-    items-center
-    justify-between
-    rounded-full
-    border
-    border-white/10
-    bg-black/50
-    backdrop-blur-3xl
-    shadow-2xl
-    shadow-black/40
-    transition-all
-    duration-500"
+          aria-label="Main navigation"
+          className="relative flex h-[64px] items-center justify-between rounded-full border border-white/[0.10] bg-[#0b0c10]/80 px-3 shadow-[0_14px_45px_rgba(0,0,0,0.32)] backdrop-blur-2xl transition-colors duration-300 hover:border-white/[0.14] sm:h-[68px] sm:px-5 lg:px-6"
         >
-          <div
-            className="
-    absolute
-    inset-0
-    rounded-full
-    blur-xl
-    opacity-0
-    transition-opacity
-    duration-500
-    group-hover:opacity-100
-    -z-10
-  "
-          />
-          {/* Logo */}
-          <div className="flex items-center gap-3 select-none">
-            {/* Logo */}
-            <div className="relative w-14 h-14 flex items-center justify-center">
-              {/* Analytics Ring */}
+          {/* Brand */}
+          <Link
+            to="/"
+            aria-label="Mohammadsaani Sayyad — home"
+            onClick={closeMenu}
+            className="group/brand flex min-w-0 shrink-0 items-center gap-2.5 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200 sm:gap-3"
+          >
+            <span className="relative flex h-11 w-11 shrink-0 items-center justify-center sm:h-12 sm:w-12">
               <svg
-                className="absolute inset-0 animate-spin"
+                aria-hidden="true"
+                className="absolute inset-0 animate-spin opacity-80 motion-reduce:animate-none"
                 viewBox="0 0 100 100"
                 style={{
-                  animationDuration: "10s",
+                  animationDuration: "16s",
                   animationTimingFunction: "linear",
                 }}
               >
                 <defs>
-                  <linearGradient
-                    id="analyticsRing"
-                    x1="0%"
-                    y1="0%"
-                    x2="100%"
-                    y2="100%"
-                  >
-                    <stop offset="0%" stopColor="#06B6D4" />
-                    <stop offset="50%" stopColor="#3B82F6" />
+                  <linearGradient id="analyticsRing" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#22D3EE" />
+                    <stop offset="55%" stopColor="#3B82F6" />
                     <stop offset="100%" stopColor="#8B5CF6" />
                   </linearGradient>
                 </defs>
-
                 <circle
                   cx="50"
                   cy="50"
@@ -113,91 +67,39 @@ const Navbar = () => {
                   strokeDasharray="42 260"
                 />
               </svg>
-
-              {/* Logo */}
               <img
-              src="/logo.webp"
-              alt="Logo"
-              width="48"
-              height="48"
+                src="/logo.webp"
+                alt=""
+                width="40"
+                height="40"
+                className="relative h-9 w-9 rounded-full object-cover sm:h-10 sm:w-10"
               />
-            </div>
+            </span>
 
-            {/* Right Side */}
-            <div className="flex flex-col justify-center">
-              {/* Animated Line Chart */}
-              <svg
-                width="55"
-                height="18"
-                viewBox="0 0 55 18"
-                className="overflow-visible"
-              >
-                <polyline
-                  fill="none"
-                  stroke="#22d3ee"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  points="2,14 12,10 22,13 34,5 52,8"
-                >
-                  <animate
-                    attributeName="points"
-                    dur="2.5s"
-                    repeatCount="indefinite"
-                    values="
-            2,14 12,10 22,13 34,5 52,8;
-            2,13 12,7 22,11 34,3 52,6;
-            2,14 12,10 22,13 34,5 52,8"
-                  />
-                </polyline>
-
-                {/* Pulsing Last Point */}
-                <circle cx="52" cy="8" r="2.5" fill="#22d3ee">
-                  <animate
-                    attributeName="r"
-                    values="2.5;4;2.5"
-                    dur="2s"
-                    repeatCount="indefinite"
-                  />
-                </circle>
-              </svg>
-
-              {/* Subtitle */}
-              <span className="mt-1 text-[10px] md:text-xs uppercase tracking-[0.35em] text-gray-400">
+            <span className="flex flex-col justify-center">
+              <span className="whitespace-nowrap text-[13px] font-semibold tracking-[-0.025em] text-zinc-100 sm:text-sm">
+                Saani Sayyad
+              </span>
+              <span className="mt-0.5 flex items-center gap-1.5 text-[9px] font-medium uppercase tracking-[0.17em] text-zinc-400 sm:text-[10px] sm:tracking-[0.20em]">
+                <span className="h-1.5 w-1.5 rounded-full bg-cyan-300 shadow-[0_0_8px_rgba(34,211,238,0.5)]" />
                 Data Analyst
               </span>
-            </div>
-          </div>
+            </span>
+          </Link>
 
-          {/* Desktop Links */}
-          <div className="hidden md:flex items-center gap-2">
-            {navLinks.map((link) => (
-              <NavLink
-                key={link.name}
-                to={link.path}
-                className={({ isActive }) =>
-                  `relative px-5 py-3 rounded-full text-sm font-semibold transition-all duration-300 ${
-                    isActive ? "text-white" : "text-zinc-400 hover:text-white"
-                  }`
-                }
-              >
+          {/* Desktop navigation */}
+          <div className="hidden items-center gap-0.5 lg:flex xl:gap-1">
+            {NAV_LINKS.map((link) => (
+              <NavLink key={link.name} to={link.path} end={link.path === "/"} className={desktopLinkClass}>
                 {({ isActive }) => (
                   <>
                     {isActive && (
-                      <motion.div
-                        layoutId="active"
-                        className="
-                          absolute
-                          inset-0
-                          rounded-full
-                          bg-white/10
-                          border
-                          border-white/20
-                          shadow-[0_0_25px_rgba(34,211,238,.22)]
-                          "
+                      <motion.span
+                        layoutId="navbar-active-link"
+                        transition={{ type: "spring", stiffness: 380, damping: 32 }}
+                        className="absolute inset-0 -z-10 rounded-full border border-cyan-300/[0.16] bg-cyan-300/[0.085] shadow-[inset_0_1px_rgba(255,255,255,0.035)]"
                       />
                     )}
-
                     <span className="relative z-10">{link.name}</span>
                   </>
                 )}
@@ -205,222 +107,140 @@ const Navbar = () => {
             ))}
           </div>
 
-          {/* Right Side */}
-          <div className="hidden md:flex items-center gap-4">
-            {token ? (
-              <NavLink
-                to="/admin/dashboard"
-                className="
-group
-relative
-overflow-hidden
-px-6
-py-3
-rounded-full
-font-semibold
-text-sm
-text-white
-bg-gradient-to-r
-from-cyan-500
-via-blue-500
-to-violet-500
-bg-[length:200%]
-transition-all
-duration-500
-hover:scale-105
-"
-              >
-                <span className="relative z-10">Dashboard</span>
-
-                <motion.div
-                  animate={{
-                    backgroundPosition: ["0%", "100%", "0%"],
-                  }}
-                  transition={{
-                    repeat: Infinity,
-                    duration: 5,
-                  }}
-                  className="
-    absolute
-    inset-0
-    bg-gradient-to-r
-    from-cyan-500
-    via-blue-500
-    to-violet-500
-    bg-[length:200%]
-  "
-                />
-              </NavLink>
-            ) : (
-              <NavLink
-                to="/admin/login"
-                className="
-group
-relative
-overflow-hidden
-px-6
-py-3
-rounded-full
-font-semibold
-text-sm
-text-white
-bg-gradient-to-r
-from-cyan-500
-via-blue-500
-to-violet-500
-bg-[length:200%]
-transition-all
-duration-500
-hover:scale-105
-"
-              >
-                <span className="relative z-10">Admin</span>
-
-                <motion.div
-                  animate={{
-                    backgroundPosition: ["0%", "100%", "0%"],
-                  }}
-                  transition={{
-                    repeat: Infinity,
-                    duration: 5,
-                  }}
-                  className="
-    absolute
-    inset-0
-    bg-gradient-to-r
-    from-cyan-500
-    via-blue-500
-    to-violet-500
-    bg-[length:200%]
-  "
-                />
-              </NavLink>
-            )}
+          {/* Quiet, non-looping admin action */}
+          <div className="hidden shrink-0 lg:block">
+            <NavLink
+              to={adminPath}
+              className="inline-flex min-h-10 items-center justify-center rounded-full border border-cyan-300/20 bg-gradient-to-r from-cyan-300/[0.12] to-violet-400/[0.12] px-4 text-[13px] font-semibold text-zinc-100 shadow-sm transition-all duration-200 hover:-translate-y-px hover:border-cyan-200/35 hover:from-cyan-300/[0.18] hover:to-violet-400/[0.18] hover:shadow-[0_5px_22px_rgba(34,211,238,0.08)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200 lg:px-5 lg:text-sm"
+            >
+              {adminLabel}
+            </NavLink>
           </div>
 
-          {/* Mobile Button */}
-          <motion.button
-            whileTap={{
-              scale: 0.9,
-            }}
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="md:hidden text-white"
+          {/* Tablet and mobile menu toggle */}
+          <button
+            type="button"
+            aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-navigation-panel"
+            onClick={() => setMenuOpen((open) => !open)}
+            className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/[0.08] bg-white/[0.04] text-zinc-100 transition-colors hover:border-cyan-300/25 hover:bg-cyan-300/[0.07] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200 lg:hidden"
           >
-            {menuOpen ? (
-              <motion.div
-                animate={{
-                  rotate: 180,
-                }}
-                transition={{
-                  duration: 0.3,
-                }}
-              >
-                <X size={30} />
-              </motion.div>
-            ) : (
-              <motion.div
-                animate={{
-                  rotate: menuOpen ? 90 : 0,
-                }}
-                transition={{
-                  duration: 0.3,
-                }}
-              >
-                <Menu size={30} />
-              </motion.div>
-            )}
-          </motion.button>
+            <AnimatePresence mode="wait" initial={false}>
+              {menuOpen ? (
+                <motion.span
+                  key="close"
+                  initial={{ opacity: 0, rotate: -45, scale: 0.85 }}
+                  animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                  exit={{ opacity: 0, rotate: 45, scale: 0.85 }}
+                  transition={{ duration: 0.15 }}
+                  className="flex"
+                >
+                  <X size={20} />
+                </motion.span>
+              ) : (
+                <motion.span
+                  key="menu"
+                  initial={{ opacity: 0, rotate: 45, scale: 0.85 }}
+                  animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                  exit={{ opacity: 0, rotate: -45, scale: 0.85 }}
+                  transition={{ duration: 0.15 }}
+                  className="flex"
+                >
+                  <Menu size={20} />
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </button>
         </nav>
       </header>
 
-      {/* Mobile Overlay */}
+      {/* Mobile / tablet navigation */}
       <AnimatePresence>
         {menuOpen && (
           <>
-            <motion.div
+            <motion.button
+              type="button"
+              aria-label="Close navigation menu"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              onClick={() => setMenuOpen(false)}
-              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 md:hidden"
+              onClick={closeMenu}
+              className="fixed inset-0 z-[60] cursor-default bg-black/65 backdrop-blur-sm lg:hidden"
             />
 
-            <motion.div
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{
-                type: "spring",
-                damping: 25,
-                stiffness: 200,
-              }}
-              className="fixed top-0 right-0 w-[85%] max-w-sm h-screen bg-black/70 backdrop-blur-3xl border-l border-white/10 z-50 md:hidden"
+            <motion.aside
+              id="mobile-navigation-panel"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Navigation menu"
+              initial={{ opacity: 0, x: 24, scale: 0.985 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              exit={{ opacity: 0, x: 20, scale: 0.985 }}
+              transition={{ type: "spring", damping: 28, stiffness: 260 }}
+              className="fixed right-3 top-3 z-[70] flex max-h-[calc(100dvh-24px)] w-[min(360px,calc(100vw-24px))] flex-col overflow-y-auto rounded-[28px] border border-white/[0.10] bg-[#0d0e12]/95 p-5 shadow-[0_28px_90px_rgba(0,0,0,0.55)] backdrop-blur-3xl sm:right-4 sm:top-4 sm:max-h-[calc(100dvh-32px)] lg:hidden"
             >
-              <div className="flex items-center justify-between p-6 border-b border-zinc-800">
-                <h2 className="text-2xl font-black bg-gradient-to-r from-white to-zinc-500 bg-clip-text text-transparent">
-                  Navigation
-                </h2>
-
-                <button onClick={() => setMenuOpen(false)}>
-                  <X size={30} />
+              <div className="flex items-center justify-between border-b border-white/[0.08] pb-5">
+                <div>
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-cyan-200/80">
+                    Portfolio
+                  </p>
+                  <h2 className="mt-1 text-xl font-semibold tracking-tight text-white">
+                    Navigation
+                  </h2>
+                </div>
+                <button
+                  type="button"
+                  onClick={closeMenu}
+                  aria-label="Close navigation menu"
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/[0.08] bg-white/[0.04] text-zinc-300 transition-colors hover:bg-white/[0.09] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200"
+                >
+                  <X size={19} />
                 </button>
               </div>
 
-              <div
-                initial="hidden"
-                animate="show"
-                variants={{
-                  hidden: {},
-                  show: {
-                    transition: {
-                      staggerChildren: 0.08,
-                    },
-                  },
-                }}
-                className="flex flex-col p-6 gap-3"
-              >
-                {navLinks.map((link) => (
+              <nav aria-label="Mobile navigation" className="flex flex-col gap-2 py-5">
+                {NAV_LINKS.map((link) => (
                   <NavLink
                     key={link.name}
                     to={link.path}
-                    onClick={() => setMenuOpen(false)}
+                    end={link.path === "/"}
+                    onClick={closeMenu}
                     className={({ isActive }) =>
-                      `px-5 py-4 rounded-2xl font-semibold transition-all duration-300 ${
+                      `flex min-h-12 items-center justify-between rounded-2xl border px-4 py-3 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200 ${
                         isActive
-                          ? "bg-cyan-300 text-zinc-950"
-                          : "bg-zinc-900 text-zinc-300 hover:bg-zinc-800"
+                          ? "border-cyan-300/20 bg-cyan-300/[0.09] text-cyan-100"
+                          : "border-transparent bg-white/[0.025] text-zinc-300 hover:border-white/[0.07] hover:bg-white/[0.055] hover:text-white"
                       }`
                     }
                   >
-                    {link.name}
+                    {({ isActive }) => (
+                      <>
+                        <span>{link.name}</span>
+                        {isActive && <span className="h-1.5 w-1.5 rounded-full bg-cyan-300" />}
+                      </>
+                    )}
                   </NavLink>
                 ))}
 
-                {token ? (
-                  <NavLink
-                    to="/admin/dashboard"
-                    onClick={() => setMenuOpen(false)}
-                    className="mt-4 px-5 py-4 rounded-2xl bg-gradient-to-r from-cyan-500 to-violet-500 text-white font-bold text-center"
-                  >
-                    Dashboard
-                  </NavLink>
-                ) : (
-                  <Link
-                    to="/admin/login"
-                    onClick={() => setMenuOpen(false)}
-                    className="mt-4 px-5 py-4 rounded-2xl bg-gradient-to-r from-cyan-500 to-violet-500 text-white font-bold text-center"
-                  >
-                    Admin Login
-                  </Link>
-                )}
-              </div>
-            </motion.div>
+                <NavLink
+                  to={adminPath}
+                  onClick={closeMenu}
+                  className="mt-2 inline-flex min-h-12 items-center justify-center rounded-2xl border border-cyan-300/20 bg-gradient-to-r from-cyan-300/[0.12] to-violet-400/[0.12] px-4 py-3 text-sm font-semibold text-white transition-colors hover:border-cyan-200/35 hover:from-cyan-300/[0.18] hover:to-violet-400/[0.18] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200"
+                >
+                  {token ? "Open dashboard" : "Admin login"}
+                </NavLink>
+              </nav>
+
+              <p className="mt-auto border-t border-white/[0.07] pt-4 text-xs text-zinc-500">
+                Mohammadsaani Sayyad <span className="px-1 text-zinc-700">·</span> Data Analyst
+              </p>
+            </motion.aside>
           </>
         )}
       </AnimatePresence>
 
-      {/* Spacer */}
-      <div className="h-20" />
+      <div className="h-20" aria-hidden="true" />
     </>
   );
 };
