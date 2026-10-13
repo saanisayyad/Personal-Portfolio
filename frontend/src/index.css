@@ -11,18 +11,101 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Scope the typography refresh to the public site only. */
+/*
+ * Obsidian & Champagne
+ * The palette is scoped to the public portfolio so the admin UI keeps
+ * its existing colors and contrast.
+ */
 .public-portfolio {
+  --color-white: #f0eadf;
+  --color-black: #11110f;
+
+  --color-zinc-50: #f9f7f2;
+  --color-zinc-100: #f0eadf;
+  --color-zinc-200: #e4ddcf;
+  --color-zinc-300: #d2cabb;
+  --color-zinc-400: #b8b0a2;
+  --color-zinc-500: #a39b8e;
+  --color-zinc-600: #777065;
+  --color-zinc-700: #4a463c;
+  --color-zinc-800: #302d25;
+  --color-zinc-900: #1b1a16;
+  --color-zinc-950: #11110f;
+
+  /* Champagne — replaces the old bright cyan accent. */
+  --color-cyan-50: #fbf7ed;
+  --color-cyan-100: #f6eedc;
+  --color-cyan-200: #eddfc0;
+  --color-cyan-300: #c5b18a;
+  --color-cyan-400: #b49a6d;
+  --color-cyan-500: #a18555;
+  --color-cyan-600: #866a42;
+  --color-cyan-700: #6d5538;
+  --color-cyan-800: #53422e;
+  --color-cyan-900: #392e20;
+  --color-cyan-950: #21190f;
+
+  /* Muted taupe — replaces the old saturated violet. */
+  --color-violet-50: #f8f5f0;
+  --color-violet-100: #eee8dd;
+  --color-violet-200: #dfd5c4;
+  --color-violet-300: #c8bca7;
+  --color-violet-400: #b2a186;
+  --color-violet-500: #948268;
+  --color-violet-600: #75664f;
+  --color-violet-700: #594d3c;
+  --color-violet-800: #40382d;
+  --color-violet-900: #29241d;
+  --color-violet-950: #17140f;
+
+  /* A quiet warm neutral for any existing blue gradients. */
+  --color-blue-50: #f8f6f0;
+  --color-blue-100: #ede8dc;
+  --color-blue-200: #dcd2bd;
+  --color-blue-300: #c1b393;
+  --color-blue-400: #aa9978;
+  --color-blue-500: #918062;
+  --color-blue-600: #75664d;
+  --color-blue-700: #5a4e3b;
+  --color-blue-800: #40372a;
+  --color-blue-900: #29231a;
+  --color-blue-950: #17140f;
+
+  --color-gray-50: #f9f7f2;
+  --color-gray-100: #f0eadf;
+  --color-gray-200: #e4ddcf;
+  --color-gray-300: #d2cabb;
+  --color-gray-400: #a39b8e;
+  --color-gray-500: #8d8578;
+  --color-gray-600: #777065;
+  --color-gray-700: #4a463c;
+  --color-gray-800: #302d25;
+  --color-gray-900: #1b1a16;
+  --color-gray-950: #11110f;
+
+  /* Keep featured labels in the same restrained accent family. */
+  --color-yellow-200: #eddfc0;
+  --color-yellow-300: #c5b18a;
+  --color-yellow-400: #b49a6d;
+  --color-yellow-500: #a18555;
+  --color-yellow-600: #866a42;
+  --color-yellow-700: #6d5538;
+
+  color-scheme: dark;
+  background: #11110f;
+  color: #f0eadf;
   font-family: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
+/* Editorial serif headlines add contrast without changing page structure. */
 .public-portfolio h1,
 .public-portfolio h2,
 .public-portfolio h3,
 .public-portfolio h4,
 .public-portfolio h5,
 .public-portfolio h6 {
-  font-family: "Space Grotesk", "Inter", ui-sans-serif, system-ui, sans-serif;
+  font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  letter-spacing: -0.025em;
 }
 
 .public-portfolio button,
@@ -33,20 +116,20 @@ html {
 }
 
 ::-webkit-scrollbar {
-  width: 2px;
+  width: 5px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #09090b;
+  background: #11110f;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(#22d3ee, #8b5cf6);
+  background: linear-gradient(#c5b18a, #948268);
   border-radius: 999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(#67e8f9, #a78bfa);
+  background: linear-gradient(#dfd0aa, #b2a186);
 }
 
 .no-scrollbar {
@@ -55,11 +138,11 @@ html {
 }
 
 ::selection {
-  background: #22d3ee;
-  color: white;
+  background: #c5b18a;
+  color: #171510;
 }
 
 ::-moz-selection {
-  background: #22d3ee;
-  color: white;
+  background: #c5b18a;
+  color: #171510;
 }
