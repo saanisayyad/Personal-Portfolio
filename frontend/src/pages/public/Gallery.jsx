@@ -224,7 +224,7 @@ const Gallery = () => {
                   {row.items.map(({ item, index, width }) => (
                     <figure
                       key={item._id}
-                      className="group relative m-0 min-w-0 overflow-hidden rounded-xl border border-white/[0.07] bg-zinc-900/50 transition-[border-color,box-shadow] duration-300 hover:border-cyan-200/25 hover:shadow-[0_12px_32px_rgba(0,0,0,0.22)] sm:rounded-2xl"
+                      className="group relative m-0 min-w-0 overflow-hidden rounded-xl border border-white/[0.07] bg-zinc-900/50 transition-[border-color,box-shadow] duration-300 hover:border-cyan-200/25 hover:shadow-[0_12px_32px_rgba(0,0,0,0.2)] sm:rounded-2xl"
                       style={{ flex: `0 0 ${width}px`, height: row.height }}
                     >
                       <button
@@ -275,7 +275,7 @@ const Gallery = () => {
               role="dialog"
               aria-modal="true"
               aria-label={`Preview gallery image ${images.findIndex((image) => image._id === selectedImage._id) + 1}`}
-              className="relative flex h-[58vh] max-h-[620px] w-[86vw] max-w-[960px] items-center justify-center overflow-hidden rounded-2xl border border-white/[0.12] bg-[#09090b]/90 p-2 shadow-[0_28px_100px_rgba(0,0,0,0.55)] sm:h-[70vh] sm:w-[76vw] sm:rounded-3xl sm:p-3"
+              className="relative flex h-[58vh] max-h-[620px] w-[86vw] max-w-[960px] items-center justify-center overflow-hidden rounded-2xl border border-white/[0.12] bg-[#11110f]/95 p-2 shadow-[0_28px_100px_rgba(0,0,0,0.55)] sm:h-[70vh] sm:w-[76vw] sm:rounded-3xl sm:p-3"
             >
               <button
                 type="button"
