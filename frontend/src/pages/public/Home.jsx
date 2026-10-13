@@ -112,9 +112,9 @@ const Home = () => {
               transition={{
                 delay: 0.1,
               }}
-              className="inline-flex items-center gap-3 px-5 py-2 rounded-full border border-pink-500/20 bg-white/5 backdrop-blur-md text-pink-400 text-xs uppercase tracking-[0.25em] mb-8"
+              className="inline-flex items-center gap-3 px-5 py-2 rounded-full border border-cyan-500/20 bg-white/5 backdrop-blur-md text-cyan-300 text-xs uppercase tracking-[0.25em] mb-8"
             >
-              <span className="w-2 h-2 rounded-full bg-pink-500 animate-pulse" />
+              <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
               Personal Portfolio
             </motion.div>
 
@@ -137,7 +137,7 @@ const Home = () => {
               }}
               className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight leading-none mb-6"
             >
-              <span className="bg-gradient-to-r from-white via-pink-200 to-orange-300 bg-clip-text text-transparent break-words">
+              <span className="bg-gradient-to-r from-white via-cyan-100 to-violet-300 bg-clip-text text-transparent break-words">
                 {profile.name}
               </span>
             </motion.h1>
@@ -228,7 +228,7 @@ const Home = () => {
                   rel="noreferrer"
                   className="group inline-flex items-center justify-center gap-3 px-7 py-4 rounded-full border border-zinc-700 bg-zinc-900/70 hover:scale-105 transition-all duration-300"
                 >
-                  <FaLinkedin size={20} className="text-pink-400" />
+                  <FaLinkedin size={20} className="text-cyan-300" />
                   LinkedIn
                 </a>
               )}
@@ -240,7 +240,7 @@ const Home = () => {
                   href={profile.resume}
                   target="_blank"
                   rel="noreferrer"
-                  className="group inline-flex items-center justify-center gap-3 px-7 py-4 rounded-full bg-gradient-to-r from-pink-500 to-orange-500 font-semibold hover:scale-105 transition-all duration-300 shadow-lg shadow-pink-500/20"
+                  className="group inline-flex items-center justify-center gap-3 px-7 py-4 rounded-full bg-gradient-to-r from-cyan-500 to-violet-500 font-semibold hover:scale-105 transition-all duration-300 shadow-lg shadow-cyan-500/20"
                 >
                   <FaFile size={18} />
                   Resume
@@ -270,7 +270,7 @@ const Home = () => {
             <div className="relative">
               {/* Glow */}
 
-              <div className="absolute inset-0 bg-gradient-to-r from-pink-500 via-fuchsia-500 to-orange-500 blur-3xl opacity-20 rounded-full scale-110" />
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-violet-500 to-violet-500 blur-3xl opacity-20 rounded-full scale-110" />
 
               {/* Ring */}
 
