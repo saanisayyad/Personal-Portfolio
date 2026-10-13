@@ -196,9 +196,9 @@ const Gallery = () => {
             <button
               type="button"
               onClick={fetchImages}
-              className="mt-6 inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-cyan-300/20 bg-cyan-300/[0.08] px-4 py-2.5 text-sm font-medium text-cyan-100 transition-colors hover:border-cyan-200/40 hover:bg-cyan-300/[0.13] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200"
+              className="group mt-6 inline-flex min-h-11 items-center justify-center gap-2.5 rounded-xl bg-gradient-to-r from-cyan-300 to-violet-400 px-5 py-3 text-sm font-semibold text-zinc-950 shadow-lg shadow-cyan-500/[0.10] transition duration-200 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-violet-500/[0.14] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
             >
-              <RefreshCw size={16} />
+              <RefreshCw size={16} className="transition-transform duration-300 group-hover:rotate-[-35deg]" />
               Try again
             </button>
           </div>
