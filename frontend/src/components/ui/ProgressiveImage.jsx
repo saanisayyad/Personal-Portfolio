@@ -61,6 +61,8 @@ const ProgressiveImage = ({
   className = "",
   priority = false,
   width = 600,
+  objectFit = "cover",
+  onImageLoad,
 }) => {
 
   const [loaded, setLoaded] =
@@ -144,9 +146,13 @@ const ProgressiveImage = ({
 
         decoding="async"
 
-        onLoad={() =>
-          setLoaded(true)
-        }
+        onLoad={(event) => {
+          setLoaded(true);
+          onImageLoad?.({
+            naturalWidth: event.currentTarget.naturalWidth,
+            naturalHeight: event.currentTarget.naturalHeight,
+          });
+        }}
 
         onError={() =>
           setError(true)
@@ -155,7 +161,7 @@ const ProgressiveImage = ({
         className={`
           w-full
           h-full
-          object-cover
+          ${objectFit === "contain" ? "object-contain" : "object-cover"}
           transition-opacity
           duration-500
           ${loaded
