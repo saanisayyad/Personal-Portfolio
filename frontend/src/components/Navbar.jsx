@@ -185,7 +185,7 @@ bg-gradient-to-r
 from-[#c5b18a]
 via-[#d8c7a5]
 to-[#948268]
-bg-[length:200%]
+bg-[length:100%]
 transition-all
 duration-300
 hover:-translate-y-0.5
@@ -194,18 +194,7 @@ hover:shadow-[0_6px_24px_rgba(0,0,0,0.22)]
               >
                 <span className="relative z-10">Dashboard</span>
 
-                <motion.div
-                  initial={false}
-                  className="
-    absolute
-    inset-0
-    bg-gradient-to-r
-    from-[#c5b18a]
-    via-[#d8c7a5]
-    to-[#948268]
-    bg-[length:200%]
-  "
-                />
+
               </NavLink>
             ) : (
               <NavLink
@@ -225,7 +214,7 @@ bg-gradient-to-r
 from-[#c5b18a]
 via-[#d8c7a5]
 to-[#948268]
-bg-[length:200%]
+bg-[length:100%]
 transition-all
 duration-300
 hover:-translate-y-0.5
@@ -234,18 +223,7 @@ hover:shadow-[0_6px_24px_rgba(0,0,0,0.22)]
               >
                 <span className="relative z-10">Admin</span>
 
-                <motion.div
-                  initial={false}
-                  className="
-    absolute
-    inset-0
-    bg-gradient-to-r
-    from-[#c5b18a]
-    via-[#d8c7a5]
-    to-[#948268]
-    bg-[length:200%]
-  "
-                />
+
               </NavLink>
             )}
           </div>
