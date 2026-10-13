@@ -125,6 +125,21 @@ const Home = () => {
             transition={{ duration: 0.65, ease: "easeOut" }}
             className="relative z-20 order-2 text-center lg:order-1 lg:text-left"
           >
+            {profile.title && (
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1, duration: 0.55 }}
+                className="mb-6 inline-flex max-w-full items-center gap-3 rounded-full border border-cyan-300/15 bg-white/[0.035] px-4 py-2.5 text-left text-xs font-medium leading-relaxed tracking-wide text-cyan-100 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] backdrop-blur-xl sm:text-sm"
+              >
+                <span className="relative flex h-2 w-2 shrink-0">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-300 opacity-50" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan-300" />
+                </span>
+                <span>{profile.title}</span>
+              </motion.div>
+            )}
+
             {profile.name && (
               <motion.h1
                 initial={{ opacity: 0, y: 16 }}
@@ -138,16 +153,6 @@ const Home = () => {
               </motion.h1>
             )}
 
-            {profile.title && (
-              <motion.h2
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.22, duration: 0.65 }}
-                className="text-lg sm:text-xl md:text-2xl lg:text-2xl text-zinc-300 font-medium max-w-xl md:max-w-2xl mx-auto lg:mx-0 mb-8 leading-relaxed text-justify"
-              >
-                {profile.title}
-              </motion.h2>
-            )}
 
             {profile.bio && (
               <motion.p
