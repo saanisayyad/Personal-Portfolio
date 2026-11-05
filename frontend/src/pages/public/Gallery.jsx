@@ -139,7 +139,7 @@ const Gallery = () => {
   }, []);
 
 
-  const ect(() => {
+  useEffect(() => {
     if (!selectedImage) return undefined;
 
     const previousOverflow = document.body.style.overflow;
