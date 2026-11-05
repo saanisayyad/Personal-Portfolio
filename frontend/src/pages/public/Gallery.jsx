@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ImageIcon, RefreshCw, X } from "lucide-react";
+import { Download, ImageIcon, RefreshCw, X } from "lucide-react";
 
 import { getGalleryImages } from "../../services/galleryService";
 import PageHeader from "../../components/ui/PageHeader";
@@ -137,6 +137,33 @@ const Gallery = () => {
   const closePreview = useCallback(() => {
     setSelectedImage(null);
   }, []);
+
+
+  const handleSaveImage = useCallback(async () => {
+    if (!selectedImage?.imageUrl) return;
+
+    try {
+      const response = await fetch(selectedImage.imageUrl);
+      if (!response.ok) {
+        throw new Error(`Image download failed: ${response.status}`);
+      }
+
+      const imageBlob = await response.blob();
+      const objectUrl = URL.createObjectURL(imageBlob);
+      const link = document.createElement("a");
+      const extension = imageBlob.type.split("/")[1]?.split(";")[0] || "jpg";
+
+      link.href = objectUrl;
+      link.download = `gallery-image-${selectedImage._id || "download" }.${extension}`;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(objectUrl);
+    } catch (error) {
+      console.error("Unable to download gallery image:", error);
+      window.open(selectedImage.imageUrl, "_blank", "noopener,noreferrer");
+    }
+  }, [selectedImage]);
 
   useEffect(() => {
     if (!selectedImage) return undefined;
@@ -277,6 +304,16 @@ const Gallery = () => {
               aria-label={`Preview gallery image ${images.findIndex((image) => image._id === selectedImage._id) + 1}`}
               className="relative flex h-[58vh] max-h-[620px] w-[86vw] max-w-[960px] items-center justify-center overflow-hidden rounded-2xl border border-white/[0.12] bg-[#11110f]/95 p-2 shadow-[0_28px_100px_rgba(0,0,0,0.55)] sm:h-[70vh] sm:w-[76vw] sm:rounded-3xl sm:p-3"
             >
+              <button
+                type="button"
+                onClick={handleSaveImage}
+                aria-label="Save original image"
+                title="Save original image"
+                className="absolute right-16 top-3 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-black/65 text-white backdrop-blur-md transition-colors hover:border-cyan-200/30 hover:bg-black/85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200 sm:right-16 sm:top-4"
+              >
+                <Download size={19} />
+              </button>
+
               <button
                 type="button"
                 onClick={closePreview}
