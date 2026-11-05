@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Download, ImageIcon, RefreshCw, X } from "lucide-react";
+import { ImageIcon, RefreshCw, X } from "lucide-react";
 
 import { getGalleryImages } from "../../services/galleryService";
 import PageHeader from "../../components/ui/PageHeader";
@@ -139,33 +139,7 @@ const Gallery = () => {
   }, []);
 
 
-  const handleSaveImage = useCallback(async () => {
-    if (!selectedImage?.imageUrl) return;
-
-    try {
-      const response = await fetch(selectedImage.imageUrl);
-      if (!response.ok) {
-        throw new Error(`Image download failed: ${response.status}`);
-      }
-
-      const imageBlob = await response.blob();
-      const objectUrl = URL.createObjectURL(imageBlob);
-      const link = document.createElement("a");
-      const extension = imageBlob.type.split("/")[1]?.split(";")[0] || "jpg";
-
-      link.href = objectUrl;
-      link.download = `gallery-image-${selectedImage._id || "download" }.${extension}`;
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-      URL.revokeObjectURL(objectUrl);
-    } catch (error) {
-      console.error("Unable to download gallery image:", error);
-      window.open(selectedImage.imageUrl, "_blank", "noopener,noreferrer");
-    }
-  }, [selectedImage]);
-
-  useEffect(() => {
+  const ect(() => {
     if (!selectedImage) return undefined;
 
     const previousOverflow = document.body.style.overflow;
@@ -306,16 +280,6 @@ const Gallery = () => {
             >
               <button
                 type="button"
-                onClick={handleSaveImage}
-                aria-label="Save original image"
-                title="Save original image"
-                className="absolute right-16 top-3 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-black/65 text-white backdrop-blur-md transition-colors hover:border-cyan-200/30 hover:bg-black/85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200 sm:right-16 sm:top-4"
-              >
-                <Download size={19} />
-              </button>
-
-              <button
-                type="button"
                 onClick={closePreview}
                 aria-label="Close image preview"
                 className="absolute right-3 top-3 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-black/65 text-white backdrop-blur-md transition-colors hover:border-cyan-200/30 hover:bg-black/85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200 sm:right-4 sm:top-4"
@@ -323,13 +287,13 @@ const Gallery = () => {
                 <X size={20} />
               </button>
 
-              <ProgressiveImage
+              <img
                 src={selectedImage.imageUrl}
                 alt={`Gallery image ${images.findIndex((image) => image._id === selectedImage._id) + 1}`}
-                width={1600}
-                priority
-                objectFit="contain"
-                className="h-full w-full rounded-xl"
+                loading="eager"
+                fetchPriority="high"
+                decoding="async"
+                className="h-full w-full rounded-xl object-contain"
               />
             </motion.div>
           </motion.div>
